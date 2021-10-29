@@ -3,19 +3,23 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 
+import AuthStackNavigator from './auth';
+
 const RootStack = createStackNavigator();
 const RootStackScreen = ({userToken}) => {
-  <RootStack.Navigator headerMode="none">
-    {userToken ? (
-      <RootStack.Screen name="App" />
-    ) : (
-      <RootStack.Screen name="Auth" />
-    )}
-  </RootStack.Navigator>;
+  return (
+    <RootStack.Navigator screenOptions={{headerShown: false}}>
+      {userToken ? (
+        <RootStack.Screen name="App" />
+      ) : (
+        <RootStack.Screen name="Auth" component={AuthStackNavigator} />
+      )}
+    </RootStack.Navigator>
+  );
 };
 
 const RootNavigator = () => {
-  const userToken = useSelector(state => state.useSignIn.userToken);
+  const userToken = useSelector(state => state.useAuth.userToken);
 
   return (
     <NavigationContainer>
