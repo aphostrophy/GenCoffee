@@ -1,0 +1,26 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "cwd": "babelrc",
+        "root": ["./src"],
+        "extensions": [".js", ".ios.js", ".android.js"],
+        "alias": {
+          "actions": "./src/actions",
+          "assets": "./src/assets",
+          "components": "./src/components",
+          "constants": "./src/constants",
+          "hooks": "./src/hooks",
+          "navigations": "./src/navigations",
+          "reducers": "./src/reducers",
+          "scenes": "./src/scenes",
+          "services": "./src/services",
+          "stores": "./src/stores",
+          "styles": "./src/styles",
+          "utils": "./src/utils"
+        }
+      }
+    ]
+  ]
+}
