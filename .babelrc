@@ -14,7 +14,7 @@
           "hooks": "./src/hooks",
           "navigations": "./src/navigations",
           "reducers": "./src/reducers",
-          "scenes": "./src/scenes",
+          "screens": "./src/screens",
           "services": "./src/services",
           "stores": "./src/stores",
           "styles": "./src/styles",

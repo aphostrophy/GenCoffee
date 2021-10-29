@@ -6,6 +6,9 @@
  * @flow strict-local
  */
 
+/* Default import for RN Navigation v6 */
+import 'react-native-gesture-handler';
+
 import React from 'react';
 import {StatusBar, Text} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
