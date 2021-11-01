@@ -11,7 +11,9 @@ const AuthStackNavigator = () => {
   };
 
   return (
-    <AuthStack.Navigator screenOptions={{headerShown: false}}>
+    <AuthStack.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName={screenNames.SignIn}>
       <AuthStack.Screen name={screenNames.SignIn} component={SignInScreen} />
       <AuthStack.Screen name={screenNames.SignUp} component={SignInScreen} />
     </AuthStack.Navigator>
