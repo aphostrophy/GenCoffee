@@ -9,9 +9,10 @@
 /* Default import for RN Navigation v6 */
 import 'react-native-gesture-handler';
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import auth from '@react-native-firebase/auth';
 
 import {Provider} from 'react-redux';
 import configureStore from './src/stores/configureStore';
