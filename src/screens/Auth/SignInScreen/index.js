@@ -1,33 +1,38 @@
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Text, Button, TextInput} from 'react-native';
+import {Text, Button} from 'react-native';
 
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 
+import {Input} from 'components';
+
 const SignInScreen = ({navigation}) => {
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [confirm, setConfirm] = useState(null);
 
   const [code, setCode] = useState('');
+
   async function onGoogleButtonPress() {
     // Get the users ID token
-    const { idToken } = await GoogleSignin.signIn();
-  
+    const {idToken} = await GoogleSignin.signIn();
+
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-  
+
     // Sign-in the user with the credential
     return auth().signInWithCredential(googleCredential);
   }
 
-  async function signInWithPhoneNumber(phoneNumber) {
-    const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+  async function signInWithPhoneNumber(number) {
+    const confirmation = await auth().signInWithPhoneNumber(number);
     setConfirm(confirmation);
   }
 
   async function confirmCode() {
     try {
       await confirm.confirm(code);
+      console.log('Phone authenticated');
     } catch (error) {
       console.log('Invalid code.');
     }
@@ -36,15 +41,24 @@ const SignInScreen = ({navigation}) => {
   return (
     <SafeAreaView>
       <Text>SignIn Screen</Text>
+      <Input
+        value={phoneNumber}
+        onChangeText={text => setPhoneNumber(text)}
+        keyboardType="phone-pad"
+      />
       <Button
         title="Phone Number Sign In"
-        onPress={() => signInWithPhoneNumber('')} //Format : +62XXXXXXXXXX
+        onPress={() => signInWithPhoneNumber('+62' + phoneNumber)} //Format : +62XXXXXXXXXX
       />
-      <TextInput value={code} onChangeText={text => setCode(text)} />
+      <Input value={code} onChangeText={text => setCode(text)} />
       <Button title="Confirm Code" onPress={() => confirmCode()} />
       <Button
         title="Google Sign-In"
-        onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
+        onPress={() =>
+          onGoogleButtonPress().then(() =>
+            console.log('Signed in with Google!'),
+          )
+        }
       />
     </SafeAreaView>
   );
