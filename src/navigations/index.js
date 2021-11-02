@@ -3,14 +3,16 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 
+import AppStackNavigator from './app';
 import AuthStackNavigator from './auth';
 
 const RootStack = createStackNavigator();
 const RootStackScreen = ({userToken}) => {
+  console.log('USER TOKEN', userToken);
   return (
     <RootStack.Navigator screenOptions={{headerShown: false}}>
       {userToken ? (
-        <RootStack.Screen name="App" />
+        <RootStack.Screen name="App" component={AppStackNavigator} />
       ) : (
         <RootStack.Screen name="Auth" component={AuthStackNavigator} />
       )}

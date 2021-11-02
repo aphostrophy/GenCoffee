@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Text, Button} from 'react-native';
 
@@ -7,7 +7,10 @@ import auth from '@react-native-firebase/auth';
 
 import {Input} from 'components';
 
+import useSignIn from './useSignIn';
+
 const SignInScreen = ({navigation}) => {
+  useSignIn();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [confirm, setConfirm] = useState(null);
 
@@ -32,7 +35,6 @@ const SignInScreen = ({navigation}) => {
   async function confirmCode() {
     try {
       await confirm.confirm(code);
-      console.log('Phone authenticated');
     } catch (error) {
       console.log('Invalid code.');
     }
