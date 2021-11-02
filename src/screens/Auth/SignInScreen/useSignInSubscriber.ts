@@ -1,19 +1,10 @@
 import {useEffect, useCallback} from 'react';
 import auth from '@react-native-firebase/auth';
 import {useDispatch} from 'react-redux';
-import {signIn} from 'actions';
-import firestore from '@react-native-firebase/firestore';
-import storage from '@react-native-firebase/storage';
+import {signIn} from '@actions';
 
-const useSignInSubscriber = navigation => {
+const useSignInSubscriber = () => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(token =>
-      onAuthStateChanged(token),
-    );
-    return subscriber;
-  }, [onAuthStateChanged]);
 
   const onAuthStateChanged = useCallback(
     token => {
@@ -23,6 +14,13 @@ const useSignInSubscriber = navigation => {
     },
     [dispatch],
   );
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(token =>
+      onAuthStateChanged(token),
+    );
+    return subscriber;
+  }, [onAuthStateChanged]);
 
   return {};
 };

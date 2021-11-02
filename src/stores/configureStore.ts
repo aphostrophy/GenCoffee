@@ -5,7 +5,7 @@ import {persistStore, persistReducer} from 'redux-persist';
 import thunk from 'redux-thunk';
 import {name as appName} from '../../app.json';
 
-import rootReducer from 'reducers';
+import rootReducer from '@reducers';
 
 const persistConfig = {
   key: 'root',

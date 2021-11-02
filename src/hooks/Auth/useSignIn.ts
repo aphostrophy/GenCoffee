@@ -1,10 +1,8 @@
 import {useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import firestore from '@react-native-firebase/firestore';
-import storage from '@react-native-firebase/storage';
 
-const useSignIn = navigation => {
+const useSignIn = () => {
   const [confirm, setConfirm] = useState(null);
 
   async function onGoogleButtonPress() {

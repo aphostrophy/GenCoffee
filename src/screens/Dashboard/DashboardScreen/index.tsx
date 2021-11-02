@@ -3,7 +3,7 @@ import {Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-import {useSignOut} from 'hooks';
+import {useSignOut} from '@hooks';
 
 const DashboardScreen = ({navigation}) => {
   const {onSignOut} = useSignOut();

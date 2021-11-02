@@ -2,18 +2,18 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "actions": ["src/actions/*"],
-      "assets": ["src/assets/*"],
-      "components": ["src/components/*"],
-      "constants": ["src/constants/*"],
-      "hooks": ["src/hooks/*"],
-      "navigations": ["src/navigations/*"],
-      "reducers": ["src/reducers/*"],
-      "screens": ["src/screens/*"],
-      "services": ["src/services/*"],
-      "stores": ["src/stores/*"],
-      "styles": ["src/styles/*"],
-      "utils": ["src/utils/*"]
+      "@actions": ["src/actions/*"],
+      "@assets": ["src/assets/*"],
+      "@components": ["src/components/*"],
+      "@constants": ["src/constants/*"],
+      "@hooks": ["src/hooks/*"],
+      "@navigations": ["src/navigations/*"],
+      "@reducers": ["src/reducers/*"],
+      "@screens": ["src/screens/*"],
+      "@services": ["src/services/*"],
+      "@stores": ["src/stores/*"],
+      "@styles": ["src/styles/*"],
+      "@utils": ["src/utils/*"]
     }
   }
 }

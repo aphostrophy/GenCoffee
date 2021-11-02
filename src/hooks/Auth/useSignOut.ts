@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import {useDispatch} from 'react-redux';
 
-import {signOut} from 'actions';
+import {signOut} from '@actions/index';
 
 const useSignOut = () => {
   const dispatch = useDispatch();

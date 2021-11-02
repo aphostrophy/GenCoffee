@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {SIGN_OUT} from 'constants/ActionTypes';
+import {SIGN_OUT} from '@constants/ActionTypes';
 
 import AuthReducer from './AuthReducer';
 
