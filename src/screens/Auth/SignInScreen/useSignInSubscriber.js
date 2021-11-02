@@ -5,7 +5,7 @@ import {signIn} from 'actions';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
-const useSignIn = navigation => {
+const useSignInSubscriber = navigation => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,11 +24,7 @@ const useSignIn = navigation => {
     [dispatch],
   );
 
-  const getUserProfile = () => {
-    console.log('Feature not implemented');
-  };
-
   return {};
 };
 
-export default useSignIn;
+export default useSignInSubscriber;
