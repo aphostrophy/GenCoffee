@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1076770428896:android:36651abdf692cb5a793d85",
+        "mobilesdk_app_id": "1:1076770428896:android:7b2578fa31e376d3793d85",
         "android_client_info": {
           "package_name": "com.gencoffee"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1076770428896-4rgo022ofrg8impj0spdukb8o838cdn7.apps.googleusercontent.com",
+          "client_id": "1076770428896-tbcd3i2h4fus564lc73lr9kcv5vsd9r4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gencoffee",
-            "certificate_hash": "60de278d29211da4ad9c3cedb531e1e92e3f1632"
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
           }
         },
         {
