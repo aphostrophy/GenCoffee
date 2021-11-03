@@ -1,18 +1,17 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {useSelector} from 'react-redux';
+import {useAppSelector} from '@hooks/hooks';
 
 import AppStackNavigator from './app';
 import AuthStackNavigator from './auth';
 
-interface RootStackProps {
+interface RootStackNavigatorProps {
   userToken: string;
 }
 
 const RootStack = createStackNavigator();
-const RootStackScreen: React.FC<RootStackProps> = ({userToken}) => {
-  console.log('USER TOKEN', userToken);
+const RootStackNavigator: React.FC<RootStackNavigatorProps> = ({userToken}) => {
   return (
     <RootStack.Navigator screenOptions={{headerShown: false}}>
       {userToken ? (
@@ -25,11 +24,11 @@ const RootStackScreen: React.FC<RootStackProps> = ({userToken}) => {
 };
 
 const RootNavigator = () => {
-  const userToken = useSelector(state => state.useAuth.userToken);
+  const userToken = useAppSelector(state => state.useAuth.userToken);
 
   return (
     <NavigationContainer>
-      <RootStackScreen userToken={userToken} />
+      <RootStackNavigator userToken={userToken} />
     </NavigationContainer>
   );
 };

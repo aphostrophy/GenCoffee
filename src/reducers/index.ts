@@ -12,7 +12,6 @@ const rootReducer = (state, action) => {
   if (action.type === ActionType.LOGOUT_SUCCEDED) {
     AsyncStorage.removeItem('persist:root');
     state = {};
-    return state;
   }
   return appReducer(state, action);
 };

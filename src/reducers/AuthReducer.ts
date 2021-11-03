@@ -10,6 +10,9 @@ export default (state = initialState, action) => {
     case ActionType.LOGIN_SUCCEDED:
       newState.userToken = action.payload.data;
       return newState;
+    case ActionType.LOGOUT_SUCCEDED:
+      newState.userToken = null;
+      return newState;
     default:
       return state;
   }
