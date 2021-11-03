@@ -11,6 +11,7 @@
     "noEmit": true,
     "strict": true,
     "target": "esnext",
+    "skipLibCheck": true, // This also ignores *.d.ts outside of node_modules
     "baseUrl": ".",
     "paths": {
       "@action-creators/*": ["./src/action-creators/*"],

@@ -1,9 +1,10 @@
 import {useState} from 'react';
-import auth from '@react-native-firebase/auth';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const useSignIn = () => {
-  const [confirm, setConfirm] = useState(null);
+  const [confirm, setConfirm] =
+    useState<null | FirebaseAuthTypes.ConfirmationResult>(null);
 
   async function onGoogleButtonPress() {
     // Get the users ID token
@@ -16,16 +17,18 @@ const useSignIn = () => {
     return auth().signInWithCredential(googleCredential);
   }
 
-  async function signInWithPhoneNumber(number) {
+  async function signInWithPhoneNumber(number: string) {
     const confirmation = await auth().signInWithPhoneNumber(number);
     setConfirm(confirmation);
   }
 
-  async function confirmCode(code) {
-    try {
-      await confirm.confirm(code);
-    } catch (error) {
-      console.log('Invalid code.');
+  async function confirmCode(code: string) {
+    if (confirm) {
+      try {
+        await confirm.confirm(code);
+      } catch (error) {
+        console.log('Invalid code.');
+      }
     }
   }
 

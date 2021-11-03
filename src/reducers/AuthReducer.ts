@@ -1,19 +1,23 @@
-import {ActionType} from '@constants/ActionTypes';
+import {createReducer} from '@reduxjs/toolkit';
 
-const initialState = {
+import {signIn, signOut} from '@action-creators/AuthActionCreator';
+
+interface AuthState {
+  userToken: null | string;
+}
+
+const initialState: AuthState = {
   userToken: null,
 };
 
-export default (state = initialState, action) => {
-  const newState = {...state};
-  switch (action.type) {
-    case ActionType.LOGIN_SUCCEDED:
-      newState.userToken = action.payload.data;
-      return newState;
-    case ActionType.LOGOUT_SUCCEDED:
-      newState.userToken = null;
-      return newState;
-    default:
-      return state;
-  }
-};
+const authReducer = createReducer(initialState, builder => {
+  builder
+    .addCase(signIn, (state, action) => {
+      state.userToken = action.payload;
+    })
+    .addCase(signOut, state => {
+      state.userToken = null;
+    });
+});
+
+export default authReducer;

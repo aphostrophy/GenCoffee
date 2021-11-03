@@ -7,7 +7,7 @@ import AppStackNavigator from './app';
 import AuthStackNavigator from './auth';
 
 interface RootStackNavigatorProps {
-  userToken: string;
+  userToken: string | null;
 }
 
 const RootStack = createStackNavigator();
