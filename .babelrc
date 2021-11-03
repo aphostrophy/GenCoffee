@@ -6,6 +6,7 @@
         "root": ["./"],
         "extensions": [".js", ".jsx", ".ts", ".tsx"],
         "alias": {
+          "@action-creators": "./src/action-creators",
           "@actions": "./src/actions",
           "@assets": "./src/assets",
           "@components": "./src/components",

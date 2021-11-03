@@ -6,8 +6,12 @@ import {useSelector} from 'react-redux';
 import AppStackNavigator from './app';
 import AuthStackNavigator from './auth';
 
+interface RootStackProps {
+  userToken: string;
+}
+
 const RootStack = createStackNavigator();
-const RootStackScreen = ({userToken}) => {
+const RootStackScreen: React.FC<RootStackProps> = ({userToken}) => {
   console.log('USER TOKEN', userToken);
   return (
     <RootStack.Navigator screenOptions={{headerShown: false}}>

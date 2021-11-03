@@ -1,9 +1,21 @@
 import React, {useState, useRef} from 'react';
-import {View, TextInput, Text} from 'react-native';
+import {View, TextInput, Text, KeyboardTypeOptions} from 'react-native';
 import styles from './styles';
 
-const Regular = ({value, onChangeText, placeHolder, keyboardType}) => {
-  const textInputRef = useRef(null);
+interface Props {
+  value: string;
+  onChangeText: (text: string) => void;
+  placeHolder?: string;
+  keyboardType?: KeyboardTypeOptions;
+}
+
+const Regular: React.FC<Props> = ({
+  value,
+  onChangeText,
+  placeHolder,
+  keyboardType,
+}) => {
+  const textInputRef = useRef<TextInput>(null);
   const [renderer, setRenderer] = useState(0);
   return (
     <View style={styles.container}>

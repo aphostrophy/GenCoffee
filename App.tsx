@@ -25,7 +25,7 @@ GoogleSignin.configure({
     '1076770428896-0k91knqmarr8h84dn7k6cfohdnvene20.apps.googleusercontent.com', // client/oauth_client/client_id
 });
 
-const App = () => {
+const App: React.FC = () => {
   const {persistor, store} = configureStore();
 
   return (

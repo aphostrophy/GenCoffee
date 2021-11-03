@@ -20,14 +20,17 @@ const SignInScreen = ({navigation}) => {
       <Text>SignIn Screen</Text>
       <Input
         value={phoneNumber}
-        onChangeText={text => setPhoneNumber(text)}
+        onChangeText={(text: string): void => setPhoneNumber(text)}
         keyboardType="phone-pad"
+        placeHolder="Nomor Handphone kamu"
       />
       <Button
         title="Phone Number Sign In"
-        onPress={() => signInWithPhoneNumber('+62' + phoneNumber)} //Format : +62XXXXXXXXXX
+        onPress={(): Promise<void> =>
+          signInWithPhoneNumber('+62' + phoneNumber)
+        }
       />
-      <Input value={code} onChangeText={text => setCode(text)} />
+      <Input value={code} onChangeText={(text: string) => setCode(text)} />
       <Button title="Confirm Code" onPress={() => confirmCode(code)} />
       <Button
         title="Google Sign-In"

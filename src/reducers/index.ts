@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {SIGN_OUT} from '@constants/ActionTypes';
+import {ActionType} from '@constants/ActionTypes';
 
 import AuthReducer from './AuthReducer';
 
@@ -9,9 +9,10 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-  if (action.type === SIGN_OUT) {
+  if (action.type === ActionType.LOGOUT_SUCCEDED) {
     AsyncStorage.removeItem('persist:root');
     state = {};
+    return state;
   }
   return appReducer(state, action);
 };

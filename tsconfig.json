@@ -13,6 +13,7 @@
     "target": "esnext",
     "baseUrl": ".",
     "paths": {
+      "@action-creators/*": ["./src/action-creators/*"],
       "@actions/*": ["./src/actions/*"],
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
@@ -26,6 +27,7 @@
       "@styles/*": ["./src/styles/*"],
       "@utils/*": ["./src/utils/*"],
 
+      "@action-creators": ["./src/action-creators"],
       "@actions": ["./src/actions"],
       "@assets": ["./src/assets"],
       "@components": ["./src/components"],
