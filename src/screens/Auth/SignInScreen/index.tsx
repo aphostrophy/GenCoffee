@@ -1,19 +1,22 @@
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Text, Button} from 'react-native';
+import {StackScreenProps} from '@react-navigation/stack';
 
 import {useSignIn} from '@hooks';
 import {Input} from '@components';
+import {AuthStackParamList} from '@types';
 
 import useSignInSubscriber from './useSignInSubscriber';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const SignInScreen = ({navigation}) => {
+type Props = StackScreenProps<AuthStackParamList, 'SignIn'>;
+
+const SignInScreen: React.FC = () => {
   useSignInSubscriber();
   const {onGoogleButtonPress, signInWithPhoneNumber, confirmCode} = useSignIn();
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
 
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState<string>('');
 
   return (
     <SafeAreaView>

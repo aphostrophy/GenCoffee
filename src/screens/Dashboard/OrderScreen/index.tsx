@@ -6,21 +6,21 @@ import {CompositeScreenProps} from '@react-navigation/native';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {StackScreenProps} from '@react-navigation/stack';
 
-import {ProfileStackParamList, AppTabParamList} from '@types';
+import {OrderStackParamList, AppTabParamList} from '@types';
 
 type Props = CompositeScreenProps<
-  StackScreenProps<ProfileStackParamList, 'Profile'>,
+  StackScreenProps<OrderStackParamList, 'Order'>,
   BottomTabScreenProps<AppTabParamList>
 >;
 
-const ProfileScreen: React.FC = () => {
+const OrderScreen: React.FC = () => {
   return (
     <SafeAreaView>
       <View>
-        <Text>Menu</Text>
+        <Text>Order</Text>
       </View>
     </SafeAreaView>
   );
 };
 
-export default ProfileScreen;
+export default OrderScreen;

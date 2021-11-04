@@ -1,24 +1,23 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import {DashboardScreen} from '@screens/index';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {AppTabParamList} from '@types';
 
-const AppStack = createStackNavigator();
+import MenuStack from './menuStack';
+import OrderStack from './orderStack';
+import ProfileStack from './profileStack';
 
-const AppStackNavigator = () => {
-  const screenNames = {
-    Dashboard: 'Dashboard',
-  };
+const AppTab = createBottomTabNavigator<AppTabParamList>();
 
+const AppTabNavigator: React.FC = () => {
   return (
-    <AppStack.Navigator
+    <AppTab.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={screenNames.Dashboard}>
-      <AppStack.Screen
-        name={screenNames.Dashboard}
-        component={DashboardScreen}
-      />
-    </AppStack.Navigator>
+      initialRouteName="Menu">
+      <AppTab.Screen name="Order" component={OrderStack} />
+      <AppTab.Screen name="Menu" component={MenuStack} />
+      <AppTab.Screen name="Profile" component={ProfileStack} />
+    </AppTab.Navigator>
   );
 };
 
-export default AppStackNavigator;
+export default AppTabNavigator;

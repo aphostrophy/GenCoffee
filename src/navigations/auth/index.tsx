@@ -1,20 +1,16 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {SignInScreen} from '@screens';
+import {AuthStackParamList} from '@types';
 
-const AuthStack = createStackNavigator();
+const AuthStack = createStackNavigator<AuthStackParamList>();
 
-const AuthStackNavigator = () => {
-  const screenNames = {
-    SignIn: 'SignIn',
-    SignUp: 'SignUp',
-  };
-
+const AuthStackNavigator: React.FC = () => {
   return (
     <AuthStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={screenNames.SignIn}>
-      <AuthStack.Screen name={screenNames.SignIn} component={SignInScreen} />
+      initialRouteName="SignIn">
+      <AuthStack.Screen name="SignIn" component={SignInScreen} />
     </AuthStack.Navigator>
   );
 };

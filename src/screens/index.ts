@@ -1,4 +1,6 @@
 import SignInScreen from './Auth/SignInScreen';
-import DashboardScreen from './Dashboard/DashboardScreen';
+import MenuScreen from './Dashboard/MenuScreen';
+import ProfileScreen from './Dashboard/ProfileScreen';
+import OrderScreen from './Dashboard/OrderScreen';
 
-export {SignInScreen, DashboardScreen};
+export {SignInScreen, MenuScreen, ProfileScreen, OrderScreen};
