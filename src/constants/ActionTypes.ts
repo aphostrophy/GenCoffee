@@ -1,0 +1,4 @@
+export enum ActionType {
+  LOGIN_SUCCEDED = 'LOGIN_SUCCEDED',
+  LOGOUT_SUCCEDED = 'LOGOUT_SUCCEDED',
+}
