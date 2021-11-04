@@ -12,10 +12,10 @@ const AppTabNavigator: React.FC = () => {
   return (
     <AppTab.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="Menu">
-      <AppTab.Screen name="Order" component={OrderStack} />
-      <AppTab.Screen name="Menu" component={MenuStack} />
-      <AppTab.Screen name="Profile" component={ProfileStack} />
+      initialRouteName="MenuStack">
+      <AppTab.Screen name="OrderStack" component={OrderStack} />
+      <AppTab.Screen name="MenuStack" component={MenuStack} />
+      <AppTab.Screen name="ProfileStack" component={ProfileStack} />
     </AppTab.Navigator>
   );
 };

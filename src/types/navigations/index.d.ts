@@ -8,9 +8,9 @@ export type AuthStackParamList = {
 };
 
 export type AppTabParamList = {
-  Menu: undefined;
-  Order: undefined;
-  Profile: undefined;
+  MenuStack: undefined;
+  OrderStack: undefined;
+  ProfileStack: undefined;
 };
 
 export type MenuStackParamList = {
