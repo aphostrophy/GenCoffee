@@ -19,4 +19,9 @@ export default StyleSheet.create({
     color: '#222',
     textAlign: 'center',
   },
+  icon: {
+    fontSize: RFValue(24),
+    color: '#673ab7',
+    textAlign: 'center',
+  },
 });

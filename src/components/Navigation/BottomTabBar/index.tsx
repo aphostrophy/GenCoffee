@@ -3,6 +3,8 @@ import {View, TouchableOpacity, Text} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 
 import styles from './styles';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import IconFactory, {IconTypes} from '@components/IconFactory';
 
 const BottomTabBar: React.FC<BottomTabBarProps> = ({
   state,
@@ -51,6 +53,11 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
             onLongPress={onLongPress}
             key={label + index.toString()}
             style={styles.container}>
+            <IconFactory
+              type={IconTypes.fontAwesome}
+              name="glass"
+              style={styles.icon}
+            />
             <Text
               style={isFocused ? styles.activeButton : styles.inactiveButton}>
               {label}
