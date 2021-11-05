@@ -1,3 +1,4 @@
 import Input from './Input';
+import {BottomTabBar} from './Navigation';
 
-export {Input};
+export {Input, BottomTabBar};
