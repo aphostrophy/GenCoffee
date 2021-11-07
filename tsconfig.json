@@ -29,7 +29,6 @@
       "@utils/*": ["./src/utils/*"],
 
       "@action-creators": ["./src/action-creators"],
-      "@assets": ["./src/assets"],
       "@components": ["./src/components"],
       "@constants": ["./src/constants"],
       "@hooks": ["./src/hooks"],

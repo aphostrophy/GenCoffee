@@ -1,10 +1,10 @@
 import auth from '@react-native-firebase/auth';
-import {useDispatch} from 'react-redux';
 
 import {signOut} from '@action-creators';
+import {useAppDispatch} from '@hooks/hooks';
 
 const useSignOut = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   async function onSignOut() {
     try {
       await auth().signOut();
