@@ -4,7 +4,7 @@
       "module-resolver",
       {
         "root": ["./"],
-        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "extensions": [".ios.js", ".android.js", ".js", ".jsx", ".ts", ".tsx"],
         "alias": {
           "@action-creators": "./src/action-creators",
           "@assets": "./src/assets",
@@ -26,6 +26,7 @@
   "presets": [
     "@babel/preset-env",
     "@babel/preset-react",
-    "@babel/preset-typescript"
+    "@babel/preset-typescript",
+    "@babel/preset-flow"
   ]
 }
