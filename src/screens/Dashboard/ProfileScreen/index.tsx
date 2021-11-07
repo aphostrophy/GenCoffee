@@ -17,7 +17,7 @@ const ProfileScreen: React.FC = () => {
   return (
     <SafeAreaView>
       <View>
-        <Text>Menu</Text>
+        <Text>Profile</Text>
       </View>
     </SafeAreaView>
   );
