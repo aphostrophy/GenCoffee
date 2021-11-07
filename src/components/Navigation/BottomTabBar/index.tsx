@@ -52,11 +52,11 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
             onLongPress={onLongPress}
             key={label + index.toString()}
             style={styles.container}>
-            <BottomTabIcon routeName={route.name} isFocused={isFocused} />
-            <Text
-              style={isFocused ? styles.activeButton : styles.inactiveButton}>
-              {label}
-            </Text>
+            <BottomTabIcon
+              routeName={route.name}
+              isFocused={isFocused}
+              label={label.toString()}
+            />
           </TouchableOpacity>
         );
       })}
@@ -67,11 +67,13 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
 interface BottomTabIconProps {
   routeName: string;
   isFocused: boolean;
+  label: string;
 }
 
 const BottomTabIcon: React.FC<BottomTabIconProps> = ({
   routeName,
   isFocused,
+  label,
 }: BottomTabIconProps) => {
   switch (routeName) {
     case 'ProfileStack':
@@ -81,21 +83,27 @@ const BottomTabIcon: React.FC<BottomTabIconProps> = ({
             <IconFactory
               type={IconTypes.fontAwesome5}
               name="user-alt"
-              style={isFocused ? styles.activeIcon : styles.inactiveIcon}
+              style={[styles.icon]}
             />
           </View>
+          <Text style={isFocused ? styles.activeButton : styles.inactiveButton}>
+            {label}
+          </Text>
         </View>
       );
     case 'MenuStack':
       return (
-        <View style={[styles.column, styles.middleIcon]}>
-          <View style={styles.iconContainer}>
+        <View style={[styles.column, styles.middleColumn]}>
+          <View style={styles.middleIconContainer}>
             <IconFactory
               type={IconTypes.materialCommunityIcons}
               name="food-fork-drink"
-              style={[isFocused ? styles.activeIcon : styles.inactiveIcon]}
+              style={[styles.middleIcon]}
             />
           </View>
+          <Text style={isFocused ? styles.activeButton : styles.inactiveButton}>
+            {label}
+          </Text>
         </View>
       );
     case 'OrderStack':
@@ -105,9 +113,12 @@ const BottomTabIcon: React.FC<BottomTabIconProps> = ({
             <IconFactory
               type={IconTypes.fontAwesome5}
               name="box"
-              style={isFocused ? styles.activeIcon : styles.inactiveIcon}
+              style={[styles.icon]}
             />
           </View>
+          <Text style={isFocused ? styles.activeButton : styles.inactiveButton}>
+            {label}
+          </Text>
         </View>
       );
   }

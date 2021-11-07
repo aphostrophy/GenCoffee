@@ -9,20 +9,23 @@ export default StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: BLUE,
     justifyContent: 'center',
-    height: height * 0.08,
+    height: height * 0.09,
   },
   container: {
     justifyContent: 'space-between',
     alignitems: 'center',
     width: 0.2 * width,
     marginHorizontal: 0.02 * width,
-    backgroundColor: 'red',
-    paddingVertical: 5,
+    paddingTop: 5,
+    paddingBottom: 15,
   },
   column: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  middleColumn: {
+    top: -height * 0.029,
   },
   activeButton: {
     color: WHITE,
@@ -32,30 +35,33 @@ export default StyleSheet.create({
     color: WHITE,
     textAlign: 'center',
   },
-  inactiveIcon: {
+  icon: {
     fontSize: RFValue(26),
     color: WHITE,
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  activeIcon: {
+  middleIcon: {
     fontSize: RFValue(26),
     color: BLUE,
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  middleIcon: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  middleIconContainer: {
+    width: 0.18 * width,
+    height: 0.18 * width,
+    borderRadius: width * 0.5,
+    borderColor: BLUE,
     backgroundColor: WHITE,
+    borderWidth: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   iconContainer: {
     width: 0.1 * width,
     height: 0.1 * width,
-    backgroundColor: 'green',
-    borderRadius: width * 0.5,
     alignItems: 'center',
     justifyContent: 'center',
   },
