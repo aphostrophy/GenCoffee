@@ -3,7 +3,6 @@ import {View, TouchableOpacity, Text} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 
 import styles from './styles';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconFactory, {IconTypes} from '@components/IconFactory';
 
 const BottomTabBar: React.FC<BottomTabBarProps> = ({
@@ -53,11 +52,7 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
             onLongPress={onLongPress}
             key={label + index.toString()}
             style={styles.container}>
-            <IconFactory
-              type={IconTypes.fontAwesome}
-              name="glass"
-              style={styles.icon}
-            />
+            <BottomTabIcon routeName={route.name} isFocused={isFocused} />
             <Text
               style={isFocused ? styles.activeButton : styles.inactiveButton}>
               {label}
@@ -67,6 +62,56 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
       })}
     </View>
   );
+};
+
+interface BottomTabIconProps {
+  routeName: string;
+  isFocused: boolean;
+}
+
+const BottomTabIcon: React.FC<BottomTabIconProps> = ({
+  routeName,
+  isFocused,
+}: BottomTabIconProps) => {
+  switch (routeName) {
+    case 'ProfileStack':
+      return (
+        <View style={styles.column}>
+          <View style={styles.iconContainer}>
+            <IconFactory
+              type={IconTypes.fontAwesome5}
+              name="user-alt"
+              style={isFocused ? styles.activeIcon : styles.inactiveIcon}
+            />
+          </View>
+        </View>
+      );
+    case 'MenuStack':
+      return (
+        <View style={[styles.column, styles.middleIcon]}>
+          <View style={styles.iconContainer}>
+            <IconFactory
+              type={IconTypes.materialCommunityIcons}
+              name="food-fork-drink"
+              style={[isFocused ? styles.activeIcon : styles.inactiveIcon]}
+            />
+          </View>
+        </View>
+      );
+    case 'OrderStack':
+      return (
+        <View style={styles.column}>
+          <View style={styles.iconContainer}>
+            <IconFactory
+              type={IconTypes.fontAwesome5}
+              name="box"
+              style={isFocused ? styles.activeIcon : styles.inactiveIcon}
+            />
+          </View>
+        </View>
+      );
+  }
+  return null;
 };
 
 export default BottomTabBar;
