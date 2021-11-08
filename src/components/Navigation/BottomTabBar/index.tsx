@@ -3,7 +3,6 @@ import {View, TouchableOpacity, Text} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 
 import {IconFactory} from '@components';
-import {IconTypes} from '@types';
 
 import styles from './styles';
 
@@ -83,7 +82,7 @@ const BottomTabIcon: React.FC<BottomTabIconProps> = ({
         <View style={styles.column}>
           <View style={styles.iconContainer}>
             <IconFactory
-              type={IconTypes.fontAwesome5}
+              type="FontAwesome5"
               name="user-alt"
               style={[styles.icon]}
             />
@@ -98,7 +97,7 @@ const BottomTabIcon: React.FC<BottomTabIconProps> = ({
         <View style={[styles.column, styles.middleColumn]}>
           <View style={styles.middleIconContainer}>
             <IconFactory
-              type={IconTypes.materialCommunityIcons}
+              type="MaterialCommunityIcons"
               name="food-fork-drink"
               style={[styles.middleIcon]}
             />
@@ -112,11 +111,7 @@ const BottomTabIcon: React.FC<BottomTabIconProps> = ({
       return (
         <View style={styles.column}>
           <View style={styles.iconContainer}>
-            <IconFactory
-              type={IconTypes.fontAwesome5}
-              name="box"
-              style={[styles.icon]}
-            />
+            <IconFactory type="FontAwesome5" name="box" style={[styles.icon]} />
           </View>
           <Text style={isFocused ? styles.activeButton : styles.inactiveButton}>
             {label}
