@@ -19,4 +19,4 @@ const useSignOut = () => {
   return {onSignOut};
 };
 
-export default useSignOut;
+export {useSignOut};

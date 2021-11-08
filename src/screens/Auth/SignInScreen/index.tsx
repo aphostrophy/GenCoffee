@@ -13,7 +13,7 @@ type Props = StackScreenProps<AuthStackParamList, 'SignIn'>;
 
 const SignInScreen: React.FC = () => {
   useSignInSubscriber();
-  const {onGoogleButtonPress, signInWithPhoneNumber, confirmCode} = useSignIn();
+  const {googleSignIn, signInWithPhoneNumber, confirmCode} = useSignIn();
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   const [code, setCode] = useState<string>('');
@@ -38,9 +38,7 @@ const SignInScreen: React.FC = () => {
       <Button
         title="Google Sign-In"
         onPress={() =>
-          onGoogleButtonPress().then(() =>
-            console.log('Signed in with Google!'),
-          )
+          googleSignIn().then(() => console.log('Signed in with Google!'))
         }
       />
     </SafeAreaView>
