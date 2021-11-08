@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useAppSelector} from '@hooks/hooks';
 import {RootStackParamList} from '@types';
 
-import { Linking } from 'react-native';
-import VersionCheck from 'react-native-version-check';
+// import {Linking} from 'react-native';
+// import VersionCheck from 'react-native-version-check';
 
 import AppStackNavigator from './app';
 import AuthStackNavigator from './auth';
@@ -27,11 +28,12 @@ const RootStackNavigator: React.FC<RootStackNavigatorProps> = ({userToken}) => {
   );
 };
 
-const RootNavigator = () => {
+const RootNavigator: React.FC = () => {
   const userToken = useAppSelector(state => state.useAuth.userToken);
-  console.log(VersionCheck.getPackageName());
-  console.log(VersionCheck.getCurrentBuildNumber());
-  console.log(VersionCheck.getCurrentVersion());
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   return (
     <NavigationContainer>
