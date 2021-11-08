@@ -10,6 +10,7 @@ import {RootStackParamList} from '@types';
 
 import AppStackNavigator from './app';
 import AuthStackNavigator from './auth';
+import {useSignInSubscriber} from '@hooks';
 
 interface RootStackNavigatorProps {
   userToken: string | null;
@@ -17,6 +18,7 @@ interface RootStackNavigatorProps {
 
 const RootStack = createStackNavigator<RootStackParamList>();
 const RootStackNavigator: React.FC<RootStackNavigatorProps> = ({userToken}) => {
+  useSignInSubscriber();
   return (
     <RootStack.Navigator screenOptions={{headerShown: false}}>
       {userToken ? (

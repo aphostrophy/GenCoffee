@@ -1,0 +1,15 @@
+export enum IconTypes {
+  antDesign = 'AntDesign',
+  entypo = 'Entypo',
+  evilIcons = 'EvilIcons',
+  feather = 'Feather',
+  fontAwesome = 'FontAwesome',
+  fontAwesome5 = 'FontAwesome5',
+  foundation = 'Foundation',
+  ionicons = 'Ionicons',
+  materialCommunityIcons = 'MaterialCommunityIcons',
+  materialIcons = 'MaterialIcons',
+  octicons = 'Octicons',
+  simpleLineIcons = 'SimpleLineIcons',
+  zocial = 'Zocial',
+}

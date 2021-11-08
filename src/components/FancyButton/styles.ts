@@ -4,6 +4,7 @@ const {width} = Dimensions.get('window');
 
 export default StyleSheet.create({
   row: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',

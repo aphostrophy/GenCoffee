@@ -16,21 +16,7 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Zocial from 'react-native-vector-icons/Zocial';
 
-export enum IconTypes {
-  antDesign = 'AntDesign',
-  entypo = 'Entypo',
-  evilIcons = 'EvilIcons',
-  feather = 'Feather',
-  fontAwesome = 'FontAwesome',
-  fontAwesome5 = 'FontAwesome5',
-  foundation = 'Foundation',
-  ionicons = 'Ionicons',
-  materialCommunityIcons = 'MaterialCommunityIcons',
-  materialIcons = 'MaterialIcons',
-  octicons = 'Octicons',
-  simpleLineIcons = 'SimpleLineIcons',
-  zocial = 'Zocial',
-}
+import {IconTypes} from '@types';
 
 interface IconFactoryProps {
   type: IconTypes;

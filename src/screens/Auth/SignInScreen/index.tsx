@@ -1,26 +1,31 @@
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Text, Button} from 'react-native';
+import {Button, View} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 
 import {useSignIn} from '@hooks';
-import {Input} from '@components';
-import {AuthStackParamList} from '@types';
+import {Input, IconFactory} from '@components';
+import {AuthStackParamList, IconTypes} from '@types';
 
-import useSignInSubscriber from './useSignInSubscriber';
+import styles from './styles';
 
 type Props = StackScreenProps<AuthStackParamList, 'SignIn'>;
 
 const SignInScreen: React.FC = () => {
-  useSignInSubscriber();
-  const {googleSignIn, signInWithPhoneNumber, confirmCode} = useSignIn();
+  const {signInWithPhoneNumber, confirmCode} = useSignIn();
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   const [code, setCode] = useState<string>('');
 
   return (
-    <SafeAreaView>
-      <Text>SignIn Screen</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.row}>
+        <IconFactory
+          type={IconTypes.fontAwesome5}
+          name="user-alt"
+          style={[styles.icon]}
+        />
+      </View>
       <Input
         value={phoneNumber}
         onChangeText={(text: string): void => setPhoneNumber(text)}
@@ -35,12 +40,6 @@ const SignInScreen: React.FC = () => {
       />
       <Input value={code} onChangeText={(text: string) => setCode(text)} />
       <Button title="Confirm Code" onPress={() => confirmCode(code)} />
-      <Button
-        title="Google Sign-In"
-        onPress={() =>
-          googleSignIn().then(() => console.log('Signed in with Google!'))
-        }
-      />
     </SafeAreaView>
   );
 };

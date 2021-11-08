@@ -2,5 +2,6 @@ import Input from './Input';
 import {BottomTabBar} from './Navigation';
 import IconFactory from './IconFactory';
 import FancyButton from './FancyButton';
+import Spacer from './Spacer';
 
-export {Input, BottomTabBar, IconFactory, FancyButton};
+export {Input, BottomTabBar, IconFactory, FancyButton, Spacer};

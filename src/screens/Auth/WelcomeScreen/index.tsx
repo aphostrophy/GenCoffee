@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, Image} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StackScreenProps} from '@react-navigation/stack';
 
-import {FancyButton} from '@components';
+import {FancyButton, Spacer} from '@components';
 import {AuthStackParamList} from '@types';
 import {useSignIn} from '@hooks';
 
@@ -21,10 +21,19 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({navigation}) => {
   const onGoogleButtonPress = async () => {
     try {
       await googleSignIn();
-      navigation.navigate('SignIn');
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.log('Error during google auth', err.message);
+      }
+    }
+  };
+
+  const onPhoneButtonPress = async () => {
+    try {
+      await navigation.navigate('SignIn');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.log('Error during phone auth', err.message);
       }
     }
   };
@@ -34,12 +43,20 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({navigation}) => {
       <FancyButton
         onPress={() => onGoogleButtonPress()}
         containerStyle={[styles.buttonContainer, styles.googleButtonContainer]}>
-        <Text style={styles.googleButtonText}>Daftar dengan Google</Text>
+        <Image
+          style={styles.icon}
+          source={require('@assets/icons/google.png')}
+        />
+        <Spacer width={10} />
+        <Text style={styles.googleButtonText}>Masuk dengan Google</Text>
       </FancyButton>
+      <Spacer height={16} />
       <FancyButton
-        onPress={() => onGoogleButtonPress()}
+        onPress={() => onPhoneButtonPress()}
         containerStyle={[styles.buttonContainer, styles.phoneButtonContainer]}>
-        <Text style={styles.phoneButtonText}>Daftar dengan No. Ponsel</Text>
+        <Image style={styles.icon} source={require('@assets/icons/mail.png')} />
+        <Spacer width={10} />
+        <Text style={styles.phoneButtonText}>Masuk dengan No. Ponsel</Text>
       </FancyButton>
     </SafeAreaView>
   );

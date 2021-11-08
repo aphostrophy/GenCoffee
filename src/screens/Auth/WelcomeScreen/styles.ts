@@ -10,6 +10,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     paddingBottom: height * 0.1,
+    backgroundColor: WHITE,
   },
   buttonContainer: {
     width: width * 0.7,
@@ -29,9 +30,16 @@ export default StyleSheet.create({
   googleButtonText: {
     fontSize: RFValue(16),
     color: BLACK,
+    fontWeight: 'bold',
   },
   phoneButtonText: {
     fontSize: RFValue(16),
     color: WHITE,
+    fontWeight: 'bold',
+  },
+  icon: {
+    width: height * 0.04,
+    height: height * 0.04,
+    resizeMode: 'contain',
   },
 });

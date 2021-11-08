@@ -2,8 +2,10 @@ import React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 
+import {IconFactory} from '@components';
+import {IconTypes} from '@types';
+
 import styles from './styles';
-import IconFactory, {IconTypes} from '@components/IconFactory';
 
 const BottomTabBar: React.FC<BottomTabBarProps> = ({
   state,
