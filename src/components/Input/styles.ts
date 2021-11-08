@@ -1,5 +1,6 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {BLACK, GRAY} from '@styles/colors';
 const {width} = Dimensions.get('window');
 
 export default StyleSheet.create({
@@ -8,7 +9,7 @@ export default StyleSheet.create({
     height: width * 0.13,
     backgroundColor: 'white',
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: GRAY,
     borderRadius: 3,
     marginVertical: width * 0.02,
     justifyContent: 'center',

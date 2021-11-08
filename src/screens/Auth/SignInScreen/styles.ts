@@ -1,6 +1,6 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {WHITE, BLUE, YELLOW} from '@styles/colors';
+import {WHITE, BLUE, YELLOW, BLACK} from '@styles/colors';
 
 const {width, height} = Dimensions.get('window');
 
@@ -50,5 +50,20 @@ export default StyleSheet.create({
     fontSize: RFValue(18),
     fontWeight: 'bold',
     color: WHITE,
+  },
+  label: {
+    color: BLACK,
+    fontSize: RFValue(14),
+    fontWeight: 'bold',
+    textAlign: 'left',
+  },
+  labelCenter: {
+    color: BLACK,
+    fontSize: RFValue(14),
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  labelWrapper: {
+    width: '100%',
   },
 });
