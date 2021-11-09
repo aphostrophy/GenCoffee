@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Image} from 'react-native';
 
 import {Input, IconFactory, Spacer, FancyButton} from '@components';
+import {OTP} from '@components/Input/OTP';
 import styles from './styles';
 
 interface BoardTwoProps {
@@ -33,7 +34,16 @@ const BoardTwo: React.FC<BoardTwoProps> = ({
         <Text style={styles.labelCenter}>
           Kode OTP sudah dikirim melalui SMS ke ponsel-mu. Masukkan kode OTP :
         </Text>
-        <Input value={code} onChangeText={(text: string) => setCode(text)} />
+        <OTP
+          autoFocusOnLoad
+          clearInputs
+          pinCount={6}
+          style={styles.otpView}
+          code={code}
+          setCode={setCode}
+          codeInputFieldStyle={styles.underlineStyleBase}
+          onCodeFilled={value => console.log(value)}
+        />
         <Spacer height={10} />
         <FancyButton
           containerStyle={styles.button}

@@ -3,14 +3,13 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {StackScreenProps} from '@react-navigation/stack';
 
 import {useSignIn} from '@hooks';
-import {ScreenCarousel} from '@components';
+import {ScreenCarousel, Spacer} from '@components';
 import {AuthStackParamList} from '@types';
 
 import {BoardOne} from './boardOne';
 import {BoardTwo} from './boardTwo';
 import styles from './styles';
-
-const INTERVALS = 2;
+import {Image} from 'react-native';
 
 type Props = StackScreenProps<AuthStackParamList, 'SignIn'>;
 interface SignInScreenProps {
@@ -25,9 +24,7 @@ const SignInScreen: React.FC<SignInScreenProps> = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScreenCarousel
-        goBack={() => navigation.goBack()}
-        containerStyle={{width: `${100 * INTERVALS}`}}>
+      <ScreenCarousel goBack={() => navigation.goBack()}>
         <BoardOne
           phoneNumber={phoneNumber}
           setPhoneNumber={setPhoneNumber}
@@ -35,6 +32,11 @@ const SignInScreen: React.FC<SignInScreenProps> = ({navigation}) => {
         />
         <BoardTwo code={code} setCode={setCode} confirmCode={confirmCode} />
       </ScreenCarousel>
+      <Spacer height={40} />
+      <Image
+        style={styles.backgroundHouse}
+        source={require('@assets/background-image/man_inside_drinking_coffee.png')}
+      />
     </SafeAreaView>
   );
 };

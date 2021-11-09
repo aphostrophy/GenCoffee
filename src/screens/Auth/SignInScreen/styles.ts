@@ -8,8 +8,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingBottom: height * 0.1,
+    justifyContent: 'flex-end',
     backgroundColor: BLUE,
     width: width,
   },
@@ -28,7 +27,7 @@ export default StyleSheet.create({
     resizeMode: 'contain',
   },
   title: {
-    fontSize: RFValue(24),
+    fontSize: RFValue(28),
     fontWeight: 'bold',
     color: WHITE,
   },
@@ -65,5 +64,23 @@ export default StyleSheet.create({
   },
   labelWrapper: {
     width: '100%',
+  },
+  backgroundHouse: {
+    resizeMode: 'cover',
+    height: height * 0.4,
+  },
+
+  otpView: {
+    width: '80%',
+    height: 200,
+    color: 'black',
+  },
+  underlineStyleBase: {
+    width: 30,
+    height: 45,
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    color: 'black',
+    borderBottomColor: '#17BED0',
   },
 });

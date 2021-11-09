@@ -5,7 +5,7 @@ import {KeyboardTypeOptions, ViewProps} from 'react-native';
 interface Props extends ViewProps {
   value: string;
   onChangeText: (text: string) => void;
-  type?: string;
+  type?: 'regular' | 'OTP';
   placeHolder?: string;
   keyboardType?: KeyboardTypeOptions;
 }

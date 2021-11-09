@@ -17,7 +17,11 @@ interface ScreenCarouselProps {
 const INTERVALS = 2;
 const {width: WIDTH} = Dimensions.get('window');
 
-const ScreenCarousel: React.FC<ScreenCarouselProps> = ({children, goBack}) => {
+const ScreenCarousel: React.FC<ScreenCarouselProps> = ({
+  children,
+  goBack,
+  containerStyle,
+}) => {
   const scrollViewRef = useRef<null | ScrollView>(null);
   const [pageIndex, setPageIndex] = useState<number>(0);
 
@@ -61,7 +65,7 @@ const ScreenCarousel: React.FC<ScreenCarouselProps> = ({children, goBack}) => {
       decelerationRate="fast"
       showsHorizontalScrollIndicator={false}
       scrollEventThrottle={200}
-      contentContainerStyle={{width: `${100 * INTERVALS}%`}}>
+      contentContainerStyle={[{width: `${100 * INTERVALS}%`}, containerStyle]}>
       {React.Children.map(children, child => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child, {toNextPage, toPrevPage});

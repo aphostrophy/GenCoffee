@@ -1,19 +1,29 @@
 import React, {useState, useRef} from 'react';
-import {View, TextInput, Text, KeyboardTypeOptions} from 'react-native';
-import styles from './styles';
+import {
+  View,
+  TextInput,
+  Text,
+  TextProps,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
+import {RFValue} from 'react-native-responsive-fontsize';
 
-interface Props {
+import {GRAY} from '@styles/colors';
+
+const {width} = Dimensions.get('window');
+
+interface Props extends TextProps {
   value: string;
   onChangeText: (text: string) => void;
   placeHolder?: string;
-  keyboardType?: KeyboardTypeOptions;
 }
 
 const Regular: React.FC<Props> = ({
   value,
   onChangeText,
   placeHolder,
-  keyboardType,
+  ...otherProps
 }) => {
   const textInputRef = useRef<TextInput>(null);
   const [renderer, setRenderer] = useState(0);
@@ -36,15 +46,36 @@ const Regular: React.FC<Props> = ({
         onBlur={() => {
           setRenderer(cur => cur + 1);
         }}
-        keyboardType={keyboardType}
-        style={[{color: 'black'}, styles.input]}
+        {...otherProps}
+        style={styles.input}
       />
     </View>
   );
 };
 
-Regular.defaultProps = {
-  keyboardType: 'default',
-};
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: width * 0.13,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: GRAY,
+    borderRadius: 3,
+    marginVertical: width * 0.02,
+    justifyContent: 'center',
+  },
+  input: {
+    flex: 1,
+    textAlign: 'center',
+    fontSize: RFValue(16),
+  },
+  placeholder: {
+    fontSize: RFValue(14),
+    position: 'absolute',
+    textAlign: 'center',
+    alignSelf: 'center',
+    color: 'black',
+  },
+});
 
 export default Regular;
