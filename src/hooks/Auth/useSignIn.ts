@@ -21,14 +21,11 @@ const useSignIn = () => {
       );
 
       console.log(userCredential);
-      if (userCredential.additionalUserInfo?.isNewUser) {
-        const user = userCredential.user;
-        firestore().collection('users').doc(user.uid).set({
-          uid: user.uid,
-          name: user.displayName,
-          points: 0,
-        });
-      }
+      const user = userCredential.user;
+      transaction.set(firestore().collection('users').doc(user.uid), {
+        uid: user.uid,
+        name: user.displayName,
+      });
     });
   }
 
