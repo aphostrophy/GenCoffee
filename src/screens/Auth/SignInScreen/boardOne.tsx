@@ -42,9 +42,15 @@ const BoardOne: React.FC<BoardOneProps> = ({
         <FancyButton
           containerStyle={styles.button}
           onPress={async (): Promise<void> => {
-            // await signInWithPhoneNumber('+62' + phoneNumber);
-            if (toNextPage) {
-              toNextPage();
+            try {
+              await signInWithPhoneNumber('+62' + phoneNumber);
+              if (toNextPage) {
+                toNextPage();
+              }
+            } catch (err: unknown) {
+              if (err instanceof Error) {
+                console.log('Error during sending sms', err.message);
+              }
             }
           }}>
           <Image

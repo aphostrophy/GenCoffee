@@ -44,16 +44,41 @@ const useSignIn = () => {
   }
 
   async function signInWithPhoneNumber(number: string) {
-    const confirmation = await auth().signInWithPhoneNumber(number);
-    setConfirm(confirmation);
+    try {
+      const confirmation = await auth().signInWithPhoneNumber(number);
+      setConfirm(confirmation);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        throw err;
+      }
+    }
   }
 
   async function confirmCode(code: string) {
     if (confirm) {
       try {
-        await confirm.confirm(code);
-      } catch (error) {
-        console.log('Invalid code.');
+        const userCredential = await confirm.confirm(code);
+        const user = userCredential?.user;
+        if (!user) {
+          throw new Error('something went wrong');
+        } else {
+          const userDocumentSnapshot = await firestore()
+            .collection('users')
+            .doc(user.uid)
+            .get();
+
+          if (!userDocumentSnapshot.exists) {
+            await firestore().collection('users').doc(user.uid).set({
+              uid: user.uid,
+              points: 0,
+              phoneNumber: user.phoneNumber,
+            });
+          }
+        }
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.log('Invalid code.', err.message);
+        }
       }
     }
   }
