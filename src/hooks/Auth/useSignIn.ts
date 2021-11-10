@@ -6,7 +6,7 @@ const useSignIn = () => {
   const [confirm, setConfirm] =
     useState<null | FirebaseAuthTypes.ConfirmationResult>(null);
 
-  async function onGoogleButtonPress() {
+  async function googleSignIn() {
     // Get the users ID token
     const {idToken} = await GoogleSignin.signIn();
 
@@ -32,7 +32,7 @@ const useSignIn = () => {
     }
   }
 
-  return {onGoogleButtonPress, signInWithPhoneNumber, confirmCode};
+  return {googleSignIn, signInWithPhoneNumber, confirmCode};
 };
 
-export default useSignIn;
+export {useSignIn};

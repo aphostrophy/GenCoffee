@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleProp, TextStyle} from 'react-native';
+import {StyleProp, StyleSheet, TextStyle, View} from 'react-native';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -16,21 +16,7 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Zocial from 'react-native-vector-icons/Zocial';
 
-export enum IconTypes {
-  antDesign = 'AntDesign',
-  entypo = 'Entypo',
-  evilIcons = 'EvilIcons',
-  feather = 'Feather',
-  fontAwesome = 'FontAwesome',
-  fontAwesome5 = 'FontAwesome5',
-  foundation = 'Foundation',
-  ionicons = 'Ionicons',
-  materialCommunityIcons = 'MaterialCommunityIcons',
-  materialIcons = 'MaterialIcons',
-  octicons = 'Octicons',
-  simpleLineIcons = 'SimpleLineIcons',
-  zocial = 'Zocial',
-}
+import {IconTypes} from '@types';
 
 interface IconFactoryProps {
   type: IconTypes;
@@ -99,8 +85,19 @@ class IconFactory extends Component<IconFactoryProps, IconFactoryState> {
   }
 
   render() {
-    return <this.Icon {...this.props} />;
+    return (
+      <View style={styles.iconWrapper}>
+        <this.Icon {...this.props} />
+      </View>
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  iconWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default IconFactory;

@@ -25,4 +25,4 @@ const useSignInSubscriber = () => {
   return {};
 };
 
-export default useSignInSubscriber;
+export {useSignInSubscriber};

@@ -1,49 +1,42 @@
 import React, {useState} from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {Text, Button} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 
 import {useSignIn} from '@hooks';
-import {Input} from '@components';
+import {ScreenCarousel, Spacer, Container} from '@components';
 import {AuthStackParamList} from '@types';
 
-import useSignInSubscriber from './useSignInSubscriber';
+import {BoardOne} from './boardOne';
+import {BoardTwo} from './boardTwo';
+import styles from './styles';
+import {Image} from 'react-native';
 
 type Props = StackScreenProps<AuthStackParamList, 'SignIn'>;
+interface SignInScreenProps {
+  navigation: Props['navigation'];
+}
 
-const SignInScreen: React.FC = () => {
-  useSignInSubscriber();
-  const {onGoogleButtonPress, signInWithPhoneNumber, confirmCode} = useSignIn();
+const SignInScreen: React.FC<SignInScreenProps> = ({navigation}) => {
+  const {signInWithPhoneNumber, confirmCode} = useSignIn();
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   const [code, setCode] = useState<string>('');
 
   return (
-    <SafeAreaView>
-      <Text>SignIn Screen</Text>
-      <Input
-        value={phoneNumber}
-        onChangeText={(text: string): void => setPhoneNumber(text)}
-        keyboardType="phone-pad"
-        placeHolder="Nomor Handphone kamu"
+    <Container containerStyle={styles.container}>
+      <ScreenCarousel goBack={() => navigation.goBack()}>
+        <BoardOne
+          phoneNumber={phoneNumber}
+          setPhoneNumber={setPhoneNumber}
+          signInWithPhoneNumber={signInWithPhoneNumber}
+        />
+        <BoardTwo code={code} setCode={setCode} confirmCode={confirmCode} />
+      </ScreenCarousel>
+      <Spacer height={40} />
+      <Image
+        style={styles.backgroundHouse}
+        source={require('@assets/background-image/man_inside_drinking_coffee.png')}
       />
-      <Button
-        title="Phone Number Sign In"
-        onPress={(): Promise<void> =>
-          signInWithPhoneNumber('+62' + phoneNumber)
-        }
-      />
-      <Input value={code} onChangeText={(text: string) => setCode(text)} />
-      <Button title="Confirm Code" onPress={() => confirmCode(code)} />
-      <Button
-        title="Google Sign-In"
-        onPress={() =>
-          onGoogleButtonPress().then(() =>
-            console.log('Signed in with Google!'),
-          )
-        }
-      />
-    </SafeAreaView>
+    </Container>
   );
 };
 

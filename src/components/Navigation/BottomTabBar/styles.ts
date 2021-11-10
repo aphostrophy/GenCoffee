@@ -13,7 +13,7 @@ export default StyleSheet.create({
   },
   container: {
     justifyContent: 'space-between',
-    alignitems: 'center',
+    alignItems: 'center',
     width: 0.2 * width,
     marginHorizontal: 0.02 * width,
     paddingTop: 5,
