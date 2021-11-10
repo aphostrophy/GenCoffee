@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {StackScreenProps} from '@react-navigation/stack';
 
 import {useSignIn} from '@hooks';
-import {ScreenCarousel, Spacer} from '@components';
+import {ScreenCarousel, Spacer, Container} from '@components';
 import {AuthStackParamList} from '@types';
 
 import {BoardOne} from './boardOne';
@@ -23,7 +22,7 @@ const SignInScreen: React.FC<SignInScreenProps> = ({navigation}) => {
   const [code, setCode] = useState<string>('');
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container containerStyle={styles.container}>
       <ScreenCarousel goBack={() => navigation.goBack()}>
         <BoardOne
           phoneNumber={phoneNumber}
@@ -37,7 +36,7 @@ const SignInScreen: React.FC<SignInScreenProps> = ({navigation}) => {
         style={styles.backgroundHouse}
         source={require('@assets/background-image/man_inside_drinking_coffee.png')}
       />
-    </SafeAreaView>
+    </Container>
   );
 };
 

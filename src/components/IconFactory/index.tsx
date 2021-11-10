@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleProp, TextStyle} from 'react-native';
+import {StyleProp, StyleSheet, TextStyle, View} from 'react-native';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -85,8 +85,19 @@ class IconFactory extends Component<IconFactoryProps, IconFactoryState> {
   }
 
   render() {
-    return <this.Icon {...this.props} />;
+    return (
+      <View style={styles.iconWrapper}>
+        <this.Icon {...this.props} />
+      </View>
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  iconWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default IconFactory;

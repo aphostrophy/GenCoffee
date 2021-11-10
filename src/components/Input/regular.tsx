@@ -56,11 +56,11 @@ const Regular: React.FC<Props> = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: width * 0.13,
+    height: width * 0.1,
     backgroundColor: 'white',
     borderWidth: 1,
     borderColor: GRAY,
-    borderRadius: 3,
+    borderRadius: 8,
     marginVertical: width * 0.02,
     justifyContent: 'center',
   },

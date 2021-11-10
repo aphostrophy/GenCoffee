@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
 
-import {Input, IconFactory, Spacer, FancyButton} from '@components';
+import {IconFactory, Spacer, FancyButton} from '@components';
 import {OTP} from '@components/Input/OTP';
 import styles from './styles';
 

@@ -1,6 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {WHITE, BLUE, YELLOW, BLACK} from '@styles/colors';
+import {PoppinsBold} from '@styles/fonts';
 
 const {width, height} = Dimensions.get('window');
 
@@ -16,20 +17,24 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    height: 40,
   },
   icon: {
     fontSize: RFValue(24),
     color: WHITE,
+    textAlign: 'center',
   },
   mailIcon: {
     width: height * 0.04,
     height: height * 0.04,
     resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
     fontSize: RFValue(28),
-    fontWeight: 'bold',
     color: WHITE,
+    fontFamily: PoppinsBold,
   },
 
   inputContainer: {
@@ -46,9 +51,11 @@ export default StyleSheet.create({
     backgroundColor: YELLOW,
   },
   buttonText: {
-    fontSize: RFValue(18),
-    fontWeight: 'bold',
+    fontSize: RFValue(17),
     color: WHITE,
+    textAlignVertical: 'center',
+    fontFamily: PoppinsBold,
+    includeFontPadding: false,
   },
   label: {
     color: BLACK,
@@ -72,15 +79,15 @@ export default StyleSheet.create({
 
   otpView: {
     width: '80%',
-    height: 200,
-    color: 'black',
+    height: 120,
+    color: BLACK,
   },
   underlineStyleBase: {
     width: 30,
     height: 45,
     borderWidth: 0,
     borderBottomWidth: 1,
-    color: 'black',
-    borderBottomColor: '#17BED0',
+    color: BLACK,
+    borderBottomColor: BLACK,
   },
 });
