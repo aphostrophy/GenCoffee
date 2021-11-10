@@ -20,12 +20,26 @@ const useSignIn = () => {
         googleCredential,
       );
 
-      console.log(userCredential);
       const user = userCredential.user;
-      transaction.set(firestore().collection('users').doc(user.uid), {
-        uid: user.uid,
-        name: user.displayName,
-      });
+      const userDocumentSnapshot = await firestore()
+        .collection('users')
+        .doc(userCredential.user.uid)
+        .get();
+
+      if (userDocumentSnapshot.exists) {
+        await transaction.update(
+          firestore().collection('users').doc(user.uid),
+          {
+            name: user.displayName,
+          },
+        );
+      } else {
+        await transaction.set(firestore().collection('users').doc(user.uid), {
+          uid: user.uid,
+          name: user.displayName,
+          points: 0,
+        });
+      }
     });
   }
 
