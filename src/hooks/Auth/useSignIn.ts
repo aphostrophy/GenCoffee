@@ -1,20 +1,35 @@
 import {useState} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import firestore from '@react-native-firebase/firestore';
 
 const useSignIn = () => {
   const [confirm, setConfirm] =
     useState<null | FirebaseAuthTypes.ConfirmationResult>(null);
 
   async function googleSignIn() {
-    // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
+    return firestore().runTransaction(async transaction => {
+      // Get the users ID token
+      const {idToken} = await GoogleSignin.signIn();
 
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
+      // Sign-in the user with the credential
+      const userCredential = await auth().signInWithCredential(
+        googleCredential,
+      );
+
+      console.log(userCredential);
+      if (userCredential.additionalUserInfo?.isNewUser) {
+        const user = userCredential.user;
+        firestore().collection('users').doc(user.uid).set({
+          uid: user.uid,
+          name: user.displayName,
+          points: 0,
+        });
+      }
+    });
   }
 
   async function signInWithPhoneNumber(number: string) {

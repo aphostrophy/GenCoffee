@@ -1,6 +1,7 @@
 import {useEffect, useCallback} from 'react';
 import auth from '@react-native-firebase/auth';
 import {signIn} from '@action-creators';
+
 import {useAppDispatch} from '@hooks/hooks';
 
 const useSignInSubscriber = () => {

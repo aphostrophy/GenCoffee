@@ -6,7 +6,7 @@ export interface User {
   name?: string;
   points: number;
   phoneNumber?: string;
-  address?: UserAddress;
+  defaultAddress?: UserAddress;
   privateUserDocument: PrivateUserDocument;
 }
 
