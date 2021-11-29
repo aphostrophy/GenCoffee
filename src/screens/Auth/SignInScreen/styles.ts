@@ -1,9 +1,9 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {WHITE, BLUE, YELLOW, BLACK} from '@styles/colors';
-import {PoppinsBold} from '@styles/fonts';
+import { StyleSheet, Dimensions } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { WHITE, BLUE, YELLOW, BLACK } from '@styles/colors';
+import { PoppinsBold } from '@styles/fonts';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {

@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import { View, Text, Image } from 'react-native';
 
-import {IconFactory, Spacer, FancyButton} from '@components';
-import {OTP} from '@components/Input/OTP';
+import { IconFactory, Spacer, FancyButton } from '@components';
+import { OTP } from '@components/Input/OTP';
 import styles from './styles';
 
 interface BoardTwoProps {
@@ -12,20 +12,11 @@ interface BoardTwoProps {
   confirmCode: (code: string) => Promise<void>;
 }
 
-const BoardTwo: React.FC<BoardTwoProps> = ({
-  toPrevPage,
-  code,
-  setCode,
-  confirmCode,
-}) => {
+const BoardTwo: React.FC<BoardTwoProps> = ({ toPrevPage, code, setCode, confirmCode }) => {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <IconFactory
-          type="FontAwesome5"
-          name="user-alt"
-          style={[styles.icon]}
-        />
+        <IconFactory type="FontAwesome5" name="user-alt" style={[styles.icon]} />
         <Spacer width={10} />
         <Text style={styles.title}>Daftar</Text>
       </View>
@@ -51,11 +42,9 @@ const BoardTwo: React.FC<BoardTwoProps> = ({
             if (toPrevPage) {
               toPrevPage();
             }
-          }}>
-          <Image
-            style={styles.mailIcon}
-            source={require('@assets/icons/mail.png')}
-          />
+          }}
+        >
+          <Image style={styles.mailIcon} source={require('@assets/icons/mail.png')} />
           <Spacer width={8} />
           <Text style={styles.buttonText}>Kirim Ulang Verifikasi</Text>
         </FancyButton>
@@ -64,4 +53,4 @@ const BoardTwo: React.FC<BoardTwoProps> = ({
   );
 };
 
-export {BoardTwo};
+export { BoardTwo };

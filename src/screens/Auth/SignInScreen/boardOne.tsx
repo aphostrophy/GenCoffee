@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import { View, Text, Image } from 'react-native';
 
-import {Input, IconFactory, Spacer, FancyButton} from '@components';
+import { Input, IconFactory, Spacer, FancyButton } from '@components';
 import styles from './styles';
 
 interface BoardOneProps {
@@ -20,11 +20,7 @@ const BoardOne: React.FC<BoardOneProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <IconFactory
-          type="FontAwesome5"
-          name="user-alt"
-          style={[styles.icon]}
-        />
+        <IconFactory type="FontAwesome5" name="user-alt" style={[styles.icon]} />
         <Spacer width={10} />
         <Text style={styles.title}>Daftar</Text>
       </View>
@@ -52,11 +48,9 @@ const BoardOne: React.FC<BoardOneProps> = ({
                 console.log('Error during sending sms', err.message);
               }
             }
-          }}>
-          <Image
-            style={styles.mailIcon}
-            source={require('@assets/icons/mail.png')}
-          />
+          }}
+        >
+          <Image style={styles.mailIcon} source={require('@assets/icons/mail.png')} />
           <Spacer width={8} />
           <Text style={styles.buttonText}>Kirim Verifikasi via SMS</Text>
         </FancyButton>
@@ -65,4 +59,4 @@ const BoardOne: React.FC<BoardOneProps> = ({
   );
 };
 
-export {BoardOne};
+export { BoardOne };

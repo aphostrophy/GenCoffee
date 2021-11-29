@@ -1,8 +1,8 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {WHITE, BLUE} from '@styles/colors';
+import { StyleSheet, Dimensions } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { WHITE, BLUE } from '@styles/colors';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
   row: {

@@ -1,10 +1,10 @@
-import {useEffect, useCallback} from 'react';
+import { useEffect, useCallback } from 'react';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
-import {signIn} from '@action-creators';
+import { signIn } from '@action-creators';
 
-import {useAppDispatch} from '@hooks/hooks';
+import { useAppDispatch } from '@hooks/hooks';
 
 const useSignInSubscriber = () => {
   const dispatch = useAppDispatch();
@@ -26,13 +26,11 @@ const useSignInSubscriber = () => {
   );
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(token =>
-      onAuthStateChanged(token),
-    );
+    const subscriber = auth().onAuthStateChanged(token => onAuthStateChanged(token));
     return subscriber;
   }, [onAuthStateChanged]);
 
   return {};
 };
 
-export {useSignInSubscriber};
+export { useSignInSubscriber };

@@ -1,7 +1,7 @@
 import React from 'react';
-import {ActivityIndicator, StyleProp, ViewStyle} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useToggle} from '@hooks';
+import { ActivityIndicator, StyleProp, ViewStyle } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useToggle } from '@hooks';
 
 import styles from './styles';
 
@@ -11,11 +11,7 @@ interface FancyButtonProps {
   onPress: () => Promise<void>;
 }
 
-const FancyButton: React.FC<FancyButtonProps> = ({
-  children,
-  containerStyle,
-  onPress,
-}) => {
+const FancyButton: React.FC<FancyButtonProps> = ({ children, containerStyle, onPress }) => {
   const [isLoading, toggleLoading] = useToggle(false);
 
   function handlePress() {
@@ -29,7 +25,8 @@ const FancyButton: React.FC<FancyButtonProps> = ({
     <TouchableOpacity
       disabled={isLoading}
       style={[styles.row, containerStyle]}
-      onPress={() => handlePress()}>
+      onPress={() => handlePress()}
+    >
       {isLoading ? (
         <ActivityIndicator />
       ) : (

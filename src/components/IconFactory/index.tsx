@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {StyleProp, StyleSheet, TextStyle, View} from 'react-native';
+import React, { Component } from 'react';
+import { StyleProp, StyleSheet, TextStyle, View } from 'react-native';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -16,7 +16,7 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Zocial from 'react-native-vector-icons/Zocial';
 
-import {IconTypes} from '@types';
+import { IconTypes } from '@types';
 
 interface IconFactoryProps {
   type: IconTypes;

@@ -1,6 +1,6 @@
-import {createReducer} from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 
-import {signIn, signOut} from '@action-creators/AuthActionCreator';
+import { signIn, signOut } from '@action-creators/AuthActionCreator';
 
 interface AuthState {
   userToken: null | string;

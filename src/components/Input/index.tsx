@@ -1,6 +1,6 @@
 import React from 'react';
 import Regular from './regular';
-import {KeyboardTypeOptions, ViewProps} from 'react-native';
+import { KeyboardTypeOptions, ViewProps } from 'react-native';
 
 interface Props extends ViewProps {
   value: string;

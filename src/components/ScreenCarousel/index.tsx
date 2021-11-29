@@ -1,12 +1,6 @@
-import React, {useRef, useCallback, useState} from 'react';
-import {
-  StyleProp,
-  ViewStyle,
-  ScrollView,
-  Dimensions,
-  BackHandler,
-} from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
+import React, { useRef, useCallback, useState } from 'react';
+import { StyleProp, ViewStyle, ScrollView, Dimensions, BackHandler } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 interface ScreenCarouselProps {
   children: React.ReactNode;
@@ -15,13 +9,9 @@ interface ScreenCarouselProps {
 }
 
 const INTERVALS = 2;
-const {width: WIDTH} = Dimensions.get('window');
+const { width: WIDTH } = Dimensions.get('window');
 
-const ScreenCarousel: React.FC<ScreenCarouselProps> = ({
-  children,
-  goBack,
-  containerStyle,
-}) => {
+const ScreenCarousel: React.FC<ScreenCarouselProps> = ({ children, goBack, containerStyle }) => {
   const scrollViewRef = useRef<null | ScrollView>(null);
   const [pageIndex, setPageIndex] = useState<number>(0);
 
@@ -53,8 +43,7 @@ const ScreenCarousel: React.FC<ScreenCarouselProps> = ({
   useFocusEffect(
     useCallback(() => {
       BackHandler.addEventListener('hardwareBackPress', toPrevPage);
-      return () =>
-        BackHandler.removeEventListener('hardwareBackPress', toPrevPage);
+      return () => BackHandler.removeEventListener('hardwareBackPress', toPrevPage);
     }, [toPrevPage]),
   );
   return (
@@ -65,10 +54,11 @@ const ScreenCarousel: React.FC<ScreenCarouselProps> = ({
       decelerationRate="fast"
       showsHorizontalScrollIndicator={false}
       scrollEventThrottle={200}
-      contentContainerStyle={[{width: `${100 * INTERVALS}%`}, containerStyle]}>
+      contentContainerStyle={[{ width: `${100 * INTERVALS}%` }, containerStyle]}
+    >
       {React.Children.map(children, child => {
         if (React.isValidElement(child)) {
-          return React.cloneElement(child, {toNextPage, toPrevPage});
+          return React.cloneElement(child, { toNextPage, toPrevPage });
         }
       })}
     </ScrollView>

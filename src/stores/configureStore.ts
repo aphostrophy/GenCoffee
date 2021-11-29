@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {configureStore} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import {reduxBatch} from '@manaflair/redux-batch';
+import { reduxBatch } from '@manaflair/redux-batch';
 import {
   persistStore,
   persistReducer,
@@ -12,7 +12,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import {name as appName} from '../../app.json';
+import { name as appName } from '../../app.json';
 
 import rootReducer from '@reducers';
 
@@ -40,7 +40,7 @@ let store = configureStore({
 let persistor = persistStore(store);
 
 export default () => {
-  return {store, persistor};
+  return { store, persistor };
 };
 
 export type RootState = ReturnType<typeof store.getState>;

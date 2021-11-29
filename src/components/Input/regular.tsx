@@ -1,17 +1,10 @@
-import React, {useState, useRef} from 'react';
-import {
-  View,
-  TextInput,
-  Text,
-  TextProps,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
+import React, { useState, useRef } from 'react';
+import { View, TextInput, Text, TextProps, StyleSheet, Dimensions } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
 
-import {GRAY} from '@styles/colors';
+import { GRAY } from '@styles/colors';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 interface Props extends TextProps {
   value: string;
@@ -19,12 +12,7 @@ interface Props extends TextProps {
   placeHolder?: string;
 }
 
-const Regular: React.FC<Props> = ({
-  value,
-  onChangeText,
-  placeHolder,
-  ...otherProps
-}) => {
+const Regular: React.FC<Props> = ({ value, onChangeText, placeHolder, ...otherProps }) => {
   const textInputRef = useRef<TextInput>(null);
   const [renderer, setRenderer] = useState(0);
   return (
@@ -32,9 +20,7 @@ const Regular: React.FC<Props> = ({
       {textInputRef &&
         textInputRef.current &&
         value.length === 0 &&
-        !textInputRef.current.isFocused() && (
-          <Text style={styles.placeholder}>{placeHolder}</Text>
-        )}
+        !textInputRef.current.isFocused() && <Text style={styles.placeholder}>{placeHolder}</Text>}
       {renderer === 0 && <Text style={styles.placeholder}>{placeHolder}</Text>}
       <TextInput
         ref={textInputRef}

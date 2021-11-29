@@ -1,26 +1,26 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {useAppSelector} from '@hooks/hooks';
-import {RootStackParamList} from '@types';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useAppSelector } from '@hooks/hooks';
+import { RootStackParamList } from '@types';
 
 // import {Linking} from 'react-native';
 // import VersionCheck from 'react-native-version-check';
 
 import AppStackNavigator from './app';
 import AuthStackNavigator from './auth';
-import {useSignInSubscriber} from '@hooks';
+import { useSignInSubscriber } from '@hooks';
 
 interface RootStackNavigatorProps {
   userToken: string | null;
 }
 
 const RootStack = createStackNavigator<RootStackParamList>();
-const RootStackNavigator: React.FC<RootStackNavigatorProps> = ({userToken}) => {
+const RootStackNavigator: React.FC<RootStackNavigatorProps> = ({ userToken }) => {
   useSignInSubscriber();
   return (
-    <RootStack.Navigator screenOptions={{headerShown: false}}>
+    <RootStack.Navigator screenOptions={{ headerShown: false }}>
       {userToken ? (
         <RootStack.Screen name="App" component={AppStackNavigator} />
       ) : (

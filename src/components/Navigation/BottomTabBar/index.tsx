@@ -1,20 +1,16 @@
 import React from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
-import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
+import { View, TouchableOpacity, Text } from 'react-native';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 
-import {IconFactory} from '@components';
+import { IconFactory } from '@components';
 
 import styles from './styles';
 
-const BottomTabBar: React.FC<BottomTabBarProps> = ({
-  state,
-  descriptors,
-  navigation,
-}) => {
+const BottomTabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, navigation }) => {
   return (
     <View style={styles.row}>
       {state.routes.map((route, index) => {
-        const {options} = descriptors[route.key];
+        const { options } = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
@@ -46,18 +42,15 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
         return (
           <TouchableOpacity
             accessibilityRole="button"
-            accessibilityState={isFocused ? {selected: true} : {}}
+            accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
             key={label + index.toString()}
-            style={styles.container}>
-            <BottomTabIcon
-              routeName={route.name}
-              isFocused={isFocused}
-              label={label.toString()}
-            />
+            style={styles.container}
+          >
+            <BottomTabIcon routeName={route.name} isFocused={isFocused} label={label.toString()} />
           </TouchableOpacity>
         );
       })}
@@ -81,15 +74,9 @@ const BottomTabIcon: React.FC<BottomTabIconProps> = ({
       return (
         <View style={styles.column}>
           <View style={styles.iconContainer}>
-            <IconFactory
-              type="FontAwesome5"
-              name="user-alt"
-              style={[styles.icon]}
-            />
+            <IconFactory type="FontAwesome5" name="user-alt" style={[styles.icon]} />
           </View>
-          <Text style={isFocused ? styles.activeButton : styles.inactiveButton}>
-            {label}
-          </Text>
+          <Text style={isFocused ? styles.activeButton : styles.inactiveButton}>{label}</Text>
         </View>
       );
     case 'MenuStack':
@@ -102,9 +89,7 @@ const BottomTabIcon: React.FC<BottomTabIconProps> = ({
               style={[styles.middleIcon]}
             />
           </View>
-          <Text style={isFocused ? styles.activeButton : styles.inactiveButton}>
-            {label}
-          </Text>
+          <Text style={isFocused ? styles.activeButton : styles.inactiveButton}>{label}</Text>
         </View>
       );
     case 'OrderStack':
@@ -113,9 +98,7 @@ const BottomTabIcon: React.FC<BottomTabIconProps> = ({
           <View style={styles.iconContainer}>
             <IconFactory type="FontAwesome5" name="box" style={[styles.icon]} />
           </View>
-          <Text style={isFocused ? styles.activeButton : styles.inactiveButton}>
-            {label}
-          </Text>
+          <Text style={isFocused ? styles.activeButton : styles.inactiveButton}>{label}</Text>
         </View>
       );
   }

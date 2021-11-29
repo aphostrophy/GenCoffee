@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import {ViewStyle, TextStyle} from 'react-native';
-import OTPInputView, {InputProps} from '@twotalltotems/react-native-otp-input';
+import React, { useState, useEffect } from 'react';
+import { ViewStyle, TextStyle } from 'react-native';
+import OTPInputView, { InputProps } from '@twotalltotems/react-native-otp-input';
 
 interface OTPProps extends InputProps {
   pinCount: number;
@@ -51,4 +51,4 @@ const OTP: React.FC<OTPProps> = ({
   );
 };
 
-export {OTP};
+export { OTP };

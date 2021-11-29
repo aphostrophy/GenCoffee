@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 
-import {signOut} from '@action-creators';
-import {useAppDispatch} from '@hooks/hooks';
+import { signOut } from '@action-creators';
+import { useAppDispatch } from '@hooks/hooks';
 
 const useSignOut = () => {
   const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ const useSignOut = () => {
     }
   }
 
-  return {onSignOut};
+  return { onSignOut };
 };
 
-export {useSignOut};
+export { useSignOut };

@@ -1,5 +1,5 @@
-import {ICE_CHOICES, SUGAR_CHOICES, ORDER_STATUS, ROLES} from './enum';
-import {UserAddress} from './subtypes';
+import { ICE_CHOICES, SUGAR_CHOICES, ORDER_STATUS, ROLES } from './enum';
+import { UserAddress } from './subtypes';
 
 export interface User {
   uid: string;
