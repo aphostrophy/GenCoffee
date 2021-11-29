@@ -42,7 +42,7 @@ const BoardTwo: React.FC<BoardTwoProps> = ({
           code={code}
           setCode={setCode}
           codeInputFieldStyle={styles.underlineStyleBase}
-          onCodeFilled={value => console.log(value)}
+          onCodeFilled={value => confirmCode(value)}
         />
         <Spacer height={10} />
         <FancyButton
