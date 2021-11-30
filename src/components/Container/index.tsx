@@ -1,16 +1,36 @@
-import React from 'react';
-import { StyleSheet, Keyboard, StyleProp, ViewStyle } from 'react-native';
+import React, { useCallback } from 'react';
+import {
+  StyleSheet,
+  Keyboard,
+  StyleProp,
+  ViewStyle,
+  StatusBar,
+  StatusBarStyle,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { WHITE } from '@styles/colors';
+import { useFocusEffect } from '@react-navigation/core';
 
 interface ContainerProps {
   children: React.ReactNode;
+  statusBarStyle?: StatusBarStyle;
   containerStyle?: StyleProp<ViewStyle>;
   onTouchStart?: () => void;
 }
 
-const Container: React.FC<ContainerProps> = ({ children, containerStyle, onTouchStart }) => {
+const Container: React.FC<ContainerProps> = ({
+  children,
+  statusBarStyle = 'default',
+  containerStyle,
+  onTouchStart,
+}) => {
+  useFocusEffect(
+    useCallback(() => {
+      StatusBar.setBarStyle(statusBarStyle, true);
+    }, [statusBarStyle]),
+  );
+
   return (
     <SafeAreaView
       style={[styles.container, containerStyle]}

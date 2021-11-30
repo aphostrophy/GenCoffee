@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
 
+import { Container } from '@components';
 import { OrderStackParamList, AppTabParamList } from '@types';
 
 type Props = CompositeScreenProps<
@@ -15,11 +15,11 @@ type Props = CompositeScreenProps<
 
 const OrderScreen: React.FC = () => {
   return (
-    <SafeAreaView>
+    <Container statusBarStyle="dark-content">
       <View>
         <Text>Order</Text>
       </View>
-    </SafeAreaView>
+    </Container>
   );
 };
 
