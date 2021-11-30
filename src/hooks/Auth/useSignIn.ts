@@ -3,7 +3,13 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import firestore from '@react-native-firebase/firestore';
 
-const useSignIn = () => {
+interface useSignInReturnInterface {
+  googleSignIn: () => Promise<any>;
+  signInWithPhoneNumber: (number: string) => Promise<void>;
+  confirmCode: (code: string) => Promise<void>;
+}
+
+const useSignIn = (): useSignInReturnInterface => {
   const [confirm, setConfirm] = useState<null | FirebaseAuthTypes.ConfirmationResult>(null);
 
   async function googleSignIn() {
