@@ -10,14 +10,14 @@ interface OTPProps extends InputProps {
   setCode: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const OTP: React.FC<OTPProps> = ({
+const OTP = ({
   pinCount,
   style,
   code,
   setCode,
   codeInputFieldStyle,
   onCodeFilled,
-}) => {
+}: OTPProps): JSX.Element => {
   const [clearInput, setClearInput] = useState<boolean>(false);
 
   function handleCodeFilled(value: string) {

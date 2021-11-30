@@ -15,7 +15,6 @@ import {
 import { name as appName } from '../../app.json';
 
 import rootReducer from '@reducers';
-
 const persistConfig = {
   key: 'root',
   keyPrefix: appName,
@@ -26,7 +25,7 @@ const preloadedState = {};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-let store = configureStore({
+const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
@@ -37,7 +36,7 @@ let store = configureStore({
   preloadedState: preloadedState,
   enhancers: [reduxBatch],
 });
-let persistor = persistStore(store);
+const persistor = persistStore(store);
 
 export default () => {
   return { store, persistor };

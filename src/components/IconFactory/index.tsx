@@ -25,9 +25,7 @@ interface IconFactoryProps {
   style?: StyleProp<TextStyle>;
 }
 
-interface IconFactoryState {}
-
-class IconFactory extends Component<IconFactoryProps, IconFactoryState> {
+class IconFactory extends Component<IconFactoryProps, Record<string, unknown>> {
   constructor(props: IconFactoryProps) {
     super(props);
     this.setIcon(props.type);
@@ -35,7 +33,7 @@ class IconFactory extends Component<IconFactoryProps, IconFactoryState> {
 
   Icon = FontAwesome5;
 
-  setIcon(iconType: string) {
+  setIcon(iconType: string): void {
     switch (iconType) {
       case 'AntDesign':
         this.Icon = AntDesign;
@@ -84,7 +82,7 @@ class IconFactory extends Component<IconFactoryProps, IconFactoryState> {
     }
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <View style={styles.iconWrapper}>
         <this.Icon {...this.props} />
