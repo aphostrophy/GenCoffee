@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { ActivityIndicator, StyleProp, ViewStyle } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-// import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { useToggle } from '@hooks';
 
 import styles from './styles';
@@ -13,14 +13,42 @@ interface FancyButtonProps {
 }
 
 const FancyButton: React.FC<FancyButtonProps> = ({ children, containerStyle, onPress }) => {
+  let subscription: Subscription | null = null;
   const [isLoading, toggleLoading] = useToggle(false);
 
   function handlePress() {
     toggleLoading();
-    onPress().then(() => {
-      toggleLoading();
+    const observable = new Observable<boolean>(subscriber => {
+      onPress()
+        .then(() => {
+          subscriber.next(true);
+          subscriber.complete();
+        })
+        .catch((err: unknown) => {
+          subscriber.error(err);
+        });
+    });
+    subscription = observable.subscribe({
+      next: (value: boolean) => {
+        if (value) {
+          toggleLoading();
+        }
+      },
+      error: err => {
+        if (err instanceof Error) {
+          console.log(`Error at fancy button observable ${err.message}`);
+        }
+      },
     });
   }
+
+  useEffect(() => {
+    return () => {
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+    };
+  }, [subscription]);
 
   return (
     <TouchableOpacity
