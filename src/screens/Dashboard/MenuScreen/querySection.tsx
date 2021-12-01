@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-import { Spacer } from '@components';
+import { useDebouncedSearch } from '@hooks/hooks';
+import { Spacer, SearchBar } from '@components';
 import { querySectionStyles as styles } from './styles';
 
 interface QuerySectionProps {
@@ -26,9 +27,20 @@ const placeholder: Placeholder & PlaceholderIndex = {
   food: 'Makanan',
 };
 
+const useSearchProduct = () => useDebouncedSearch(query => getProducts(query));
+const getProducts = (query: string) => {
+  return new Promise(resolve =>
+    setTimeout(() => {
+      console.log('PRODUCTS SEARCHED', query);
+      resolve('OK');
+    }, 1),
+  );
+};
+
 const QuerySection = ({ category, setCategory }: QuerySectionProps): JSX.Element => {
   const [pickerOpen, setPickerOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<string>(category);
+  const { inputText, setInputText, searchResults } = useSearchProduct();
   const [items] = useState([
     {
       label: 'Semua',
@@ -43,6 +55,7 @@ const QuerySection = ({ category, setCategory }: QuerySectionProps): JSX.Element
       value: 'food',
     },
   ]);
+
   return (
     <View style={styles.container}>
       <View style={[styles.column, { flex: 2 }]}>
@@ -68,6 +81,7 @@ const QuerySection = ({ category, setCategory }: QuerySectionProps): JSX.Element
       <Spacer width={20} />
       <View style={[styles.column, { flex: 3 }]}>
         <Text style={styles.headerText}>Pencarian</Text>
+        <SearchBar value={inputText} setValue={setInputText} placeholder="Cari apapun..." />
       </View>
     </View>
   );
