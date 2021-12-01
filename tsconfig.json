@@ -20,7 +20,7 @@
       "@constants/*": ["./src/constants/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@navigations/*": ["./src/navigations/*"],
-      "@reducers/*": ["./src/reducers/*"],
+      "@slices/*": ["src/slices/*"],
       "@screens/*": ["./src/screens/*"],
       "@services/*": ["./src/services/*"],
       "@stores/*": ["./src/stores/*"],
@@ -33,7 +33,7 @@
       "@constants": ["./src/constants"],
       "@hooks": ["./src/hooks"],
       "@navigations": ["src/navigations"],
-      "@reducers": ["./src/reducers"],
+      "@slices": ["src/slices"],
       "@screens": ["./src/screens"],
       "@services": ["./src/services"],
       "@stores": ["./src/stores"],
@@ -42,10 +42,5 @@
       "@utils": ["./src/utils"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "babel.config.js",
-    "metro.config.js",
-    "jest.config.js"
-  ]
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]
 }

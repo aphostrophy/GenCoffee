@@ -14,7 +14,7 @@ import {
 } from 'redux-persist';
 import { name as appName } from '../../app.json';
 
-import rootReducer from '@reducers';
+import rootReducer from '@slices';
 
 const persistConfig = {
   key: 'root',
