@@ -32,4 +32,6 @@ const shopSlice = createSlice({
   },
 });
 
+export const { changeCategory, changeShop, addProducts, restartProductsBatch } = shopSlice.actions;
+
 export default shopSlice;
