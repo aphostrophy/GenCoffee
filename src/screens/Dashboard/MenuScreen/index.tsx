@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
@@ -6,9 +6,10 @@ import { StackScreenProps } from '@react-navigation/stack';
 
 import { useAppSelector, useAppDispatch } from '@hooks/hooks';
 import { changeCategory } from '@slices/ShopSlice';
-import { Container } from '@components';
+import { Container, Spacer } from '@components';
 import { MenuStackParamList, AppTabParamList } from '@types';
 
+import { QuerySection } from './querySection';
 import { DeliveryCard } from './deliveryCard';
 
 type Props = CompositeScreenProps<
@@ -17,7 +18,7 @@ type Props = CompositeScreenProps<
 >;
 
 const MenuScreen: React.FC = () => {
-  const { category, shop, items } = useAppSelector(state => state.useShop);
+  const { category, items } = useAppSelector(state => state.useShop);
   const dispatch = useAppDispatch();
 
   return (
@@ -25,7 +26,13 @@ const MenuScreen: React.FC = () => {
       <View style={styles.deliveryCardWrapper}>
         <DeliveryCard />
       </View>
-      <Text>{category}</Text>
+      <Spacer height={20} />
+      <QuerySection
+        category={category}
+        setCategory={category => {
+          dispatch(changeCategory(category));
+        }}
+      />
     </Container>
   );
 };

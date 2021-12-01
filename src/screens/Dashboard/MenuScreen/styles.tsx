@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { PoppinsBold, Poppins, MontserratBold, MontserratSemiBold } from '@styles/fonts';
-import { WHITE, YELLOW } from '@styles/colors';
+import { WHITE, YELLOW, GRAY } from '@styles/colors';
 
 const deliveryCardStyles = StyleSheet.create({
   container: {
@@ -92,4 +92,24 @@ const deliveryCardStyles = StyleSheet.create({
   },
 });
 
-export { deliveryCardStyles };
+const querySectionStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  column: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  picker: {
+    borderColor: GRAY,
+  },
+  dropDownContainerStyle: {
+    borderColor: GRAY,
+  },
+  line: {
+    backgroundColor: GRAY,
+  },
+});
+
+export { deliveryCardStyles, querySectionStyles };

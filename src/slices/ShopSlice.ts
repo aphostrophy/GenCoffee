@@ -3,13 +3,13 @@ import { Product } from '@types';
 
 interface ShopState {
   shop: string | null;
-  category: string | null;
+  category: string;
   items: Product[];
 }
 
 const ShopInitialState = {
   shop: null,
-  category: null,
+  category: 'all',
   items: [],
 };
 
