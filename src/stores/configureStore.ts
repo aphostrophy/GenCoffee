@@ -15,11 +15,19 @@ import {
 import { name as appName } from '../../app.json';
 
 import rootReducer from '@reducers';
+
 const persistConfig = {
   key: 'root',
   keyPrefix: appName,
   storage: AsyncStorage,
 };
+const middlewares = [logger];
+
+if (__DEV__) {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const createDebugger = require('redux-flipper').default;
+  middlewares.push(createDebugger());
+}
 
 const preloadedState = {};
 
@@ -32,7 +40,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(logger),
+    }).concat(middlewares),
   preloadedState: preloadedState,
   enhancers: [reduxBatch],
 });
