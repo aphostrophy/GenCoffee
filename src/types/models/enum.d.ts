@@ -1,23 +1,19 @@
-export enum ICE_CHOICES {
-  BIASA = 'BIASA',
-  KURANGI = 'KURANGI',
-  BANYAK = 'BANYAK',
-}
+export type ICE_CHOICES = 'BIASA' | 'KURANGI' | 'BANYAK';
 
-export enum SUGAR_CHOICES {
-  BIASA = 'BIASA',
-  KURANGI = 'KURANGI',
-  BANYAK = 'BANYAK',
-}
+export type SUGAR_CHOICES = 'BIASA' | 'KURANGI' | 'BANYAK';
 
-export enum ORDER_STATUS {
-  PENDING = 'PENDING', // Belum dibayar
-  ONGOING = 'ONGOING', // Paid and confirmed by shop
-  COMPLETED = 'COMPLETED', // Delivered
-  FAILED = 'FAILED', // Something went wrong
-}
+export type ORDER_STATUS = 'PENDING' | 'ONGOING' | 'COMPLETED' | 'FAILED';
 
-export enum ROLES {
-  ADMIN = 'ADMIN',
-  CUSTOMER = 'CUSTOMER',
-}
+export type ROLES = 'ADMIN' | 'CUSTOMER';
+
+// export enum ORDER_STATUS {
+//   PENDING = 'PENDING', // Belum dibayar
+//   ONGOING = 'ONGOING', // Paid and confirmed by shop
+//   COMPLETED = 'COMPLETED', // Delivered
+//   FAILED = 'FAILED', // Something went wrong
+// }
+
+// export enum ROLES {
+//   ADMIN = 'ADMIN',
+//   CUSTOMER = 'CUSTOMER',
+// }
