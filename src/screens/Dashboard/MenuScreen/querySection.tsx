@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
+import { Spacer } from '@components';
 import { querySectionStyles as styles } from './styles';
 
 interface QuerySectionProps {
@@ -44,23 +45,30 @@ const QuerySection = ({ category, setCategory }: QuerySectionProps): JSX.Element
   ]);
   return (
     <View style={styles.container}>
-      <DropDownPicker
-        open={pickerOpen}
-        items={items}
-        value={selectedItem}
-        setOpen={setPickerOpen}
-        setValue={setSelectedItem}
-        onChangeValue={value => {
-          if (typeof value === 'string') {
-            setCategory(value);
-          }
-        }}
-        placeholder={placeholder[category]}
-        style={styles.picker}
-        itemSeparatorStyle={styles.line}
-        itemSeparator={true}
-        dropDownContainerStyle={styles.dropDownContainerStyle}
-      />
+      <View style={[styles.column, { flex: 2 }]}>
+        <Text style={styles.headerText}>Kategori</Text>
+        <DropDownPicker
+          open={pickerOpen}
+          items={items}
+          value={selectedItem}
+          setOpen={setPickerOpen}
+          setValue={setSelectedItem}
+          onChangeValue={value => {
+            if (typeof value === 'string') {
+              setCategory(value);
+            }
+          }}
+          placeholder={placeholder[category]}
+          style={styles.picker}
+          itemSeparatorStyle={styles.line}
+          itemSeparator={true}
+          dropDownContainerStyle={styles.dropDownContainerStyle}
+        />
+      </View>
+      <Spacer width={20} />
+      <View style={[styles.column, { flex: 3 }]}>
+        <Text style={styles.headerText}>Pencarian</Text>
+      </View>
     </View>
   );
 };

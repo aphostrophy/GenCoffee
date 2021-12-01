@@ -110,6 +110,10 @@ const querySectionStyles = StyleSheet.create({
   line: {
     backgroundColor: GRAY,
   },
+  headerText: {
+    fontFamily: PoppinsBold,
+    fontSize: 16,
+  },
 });
 
 export { deliveryCardStyles, querySectionStyles };
