@@ -9,8 +9,9 @@ import { changeCategory } from '@slices/ShopSlice';
 import { Container, Spacer } from '@components';
 import { MenuStackParamList, AppTabParamList } from '@types';
 
-import { QuerySection } from './querySection';
-import { DeliveryCard } from './deliveryCard';
+import { MenuSection } from './MenuSection';
+import { QuerySection } from './QuerySection';
+import { DeliveryCard } from './DeliveryCard';
 
 type Props = CompositeScreenProps<
   StackScreenProps<MenuStackParamList, 'Menu'>,
@@ -33,6 +34,7 @@ const MenuScreen: React.FC = () => {
           dispatch(changeCategory(category));
         }}
       />
+      <MenuSection />
     </Container>
   );
 };

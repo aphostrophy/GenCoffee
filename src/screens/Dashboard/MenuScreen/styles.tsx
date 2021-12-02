@@ -116,4 +116,10 @@ const querySectionStyles = StyleSheet.create({
   },
 });
 
-export { deliveryCardStyles, querySectionStyles };
+const menuSectionStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+
+export { deliveryCardStyles, querySectionStyles, menuSectionStyles };

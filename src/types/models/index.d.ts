@@ -1,7 +1,9 @@
+import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+
 import { ICE_CHOICES, SUGAR_CHOICES, ORDER_STATUS, ROLES } from './enum';
 import { UserAddress } from './subtypes';
 
-export interface User {
+export interface User extends FirebaseFirestoreTypes.DocumentData {
   uid: string;
   name?: string;
   points: number;
@@ -14,7 +16,7 @@ export interface PrivateUserDocument {
   role: ROLES;
 }
 
-export interface Product {
+export interface Product extends FirebaseFirestoreTypes.DocumentData {
   productId: string;
   name: string;
   description: string;

@@ -6,6 +6,7 @@ import FancyButton from './FancyButton';
 import Spacer from './Spacer';
 import ScreenCarousel from './ScreenCarousel';
 import SearchBar from './SearchBar';
+import { ProductCard } from './Cards';
 
 export {
   Input,
@@ -16,4 +17,5 @@ export {
   ScreenCarousel,
   Container,
   SearchBar,
+  ProductCard,
 };
