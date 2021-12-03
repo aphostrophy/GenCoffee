@@ -27,7 +27,6 @@ const productCardStyles = StyleSheet.create({
   },
   imageContainer: {
     flex: 2,
-    backgroundColor: 'yellow',
     width: width * 0.415,
     padding: 0,
     margin: 0,

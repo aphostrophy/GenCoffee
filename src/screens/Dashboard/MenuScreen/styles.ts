@@ -1,6 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { PoppinsBold, Poppins, MontserratBold, MontserratSemiBold } from '@styles/fonts';
 import { WHITE, YELLOW, GRAY } from '@styles/colors';
+const { width, height } = Dimensions.get('window');
 
 const deliveryCardStyles = StyleSheet.create({
   container: {
@@ -125,4 +126,41 @@ const menuSectionStyles = StyleSheet.create({
   },
 });
 
-export { deliveryCardStyles, querySectionStyles, menuSectionStyles };
+const modalStyles = StyleSheet.create({
+  modal: {
+    margin: 0,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  modalBody: {
+    backgroundColor: WHITE,
+    borderTopLeftRadius: width * 0.05,
+    borderTopRightRadius: width * 0.05,
+    width: width,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  modalRow: {
+    alignItems: 'center',
+    paddingVertical: height * 0.02,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  closeIcon: {
+    fontSize: 24,
+    color: GRAY,
+    alignSelf: 'flex-end',
+  },
+  image: {
+    width: 100,
+    height: 100,
+  },
+  plusMinusIcon: {},
+  name: {},
+  description: {},
+  headerLabel: {},
+});
+
+export { deliveryCardStyles, querySectionStyles, menuSectionStyles, modalStyles };

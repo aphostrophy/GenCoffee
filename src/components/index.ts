@@ -7,6 +7,7 @@ import Spacer from './Spacer';
 import ScreenCarousel from './ScreenCarousel';
 import SearchBar from './SearchBar';
 import { ProductCard } from './Cards';
+import DashedLine from './DashedLine';
 
 export {
   Input,
@@ -18,4 +19,5 @@ export {
   Container,
   SearchBar,
   ProductCard,
+  DashedLine,
 };

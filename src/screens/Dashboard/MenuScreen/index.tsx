@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
@@ -12,6 +12,7 @@ import { MenuStackParamList, AppTabParamList, Product } from '@types';
 
 import { QuerySection } from './QuerySection';
 import { DeliveryCard } from './DeliveryCard';
+import { AddOrderModal } from './AddOrderModal';
 
 type Props = CompositeScreenProps<
   StackScreenProps<MenuStackParamList, 'Menu'>,
@@ -22,6 +23,9 @@ const MenuScreen = (): JSX.Element => {
   const { category, items } = useAppSelector(state => state.useShop);
   const dispatch = useAppDispatch();
 
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [product, setProduct] = useState<null | Product>(null);
+
   const fetchProduct = useCallback(() => {
     if (category === 'all') {
       return firestore().collection('product').get();
@@ -29,6 +33,12 @@ const MenuScreen = (): JSX.Element => {
       return firestore().collection('product').where('category', '==', category).get();
     }
   }, [category]);
+
+  const onOrderButtonClick = (index: number) => {
+    console.log(items[index]);
+    setProduct(items[index]);
+    setIsVisible(true);
+  };
 
   const products = useFirebaseDataSource<Product>(fetchProduct);
 
@@ -42,7 +52,9 @@ const MenuScreen = (): JSX.Element => {
     <Container statusBarStyle="dark-content" containerStyle={styles.container}>
       <FlatList
         data={items}
-        renderItem={({ item }) => <ProductCard product={item} />}
+        renderItem={({ item, index }) => (
+          <ProductCard product={item} index={index} onOrderButtonClick={onOrderButtonClick} />
+        )}
         ListHeaderComponent={() => (
           <View style={styles.headerContainer}>
             <View style={styles.deliveryCardWrapper}>
@@ -64,6 +76,7 @@ const MenuScreen = (): JSX.Element => {
         contentContainerStyle={styles.listContent}
         extraData={products}
       />
+      <AddOrderModal isVisible={isVisible} setIsVisible={setIsVisible} product={product} />
     </Container>
   );
 };
