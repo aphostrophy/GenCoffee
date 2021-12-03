@@ -9,9 +9,9 @@ import { productCardStyles as styles } from './styles';
 const ProductCard = ({ product }: { product: Product }): JSX.Element => {
   return (
     <View style={styles.container}>
-      {/* <View style={styles.imageContainer}>
+      <View style={styles.imageContainer}>
         <Image source={{ uri: product.imagePath }} style={styles.image} />
-      </View> */}
+      </View>
       <View style={styles.contentContainer}>
         <Text style={styles.name}>{product.name}</Text>
         <Text style={styles.description}>{product.description}</Text>

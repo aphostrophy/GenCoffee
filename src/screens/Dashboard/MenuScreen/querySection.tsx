@@ -80,6 +80,8 @@ const QuerySection = ({ category, setCategory }: QuerySectionProps): JSX.Element
           style={styles.picker}
           itemSeparatorStyle={styles.line}
           itemSeparator={true}
+          listMode="FLATLIST"
+          dropDownDirection="TOP"
           dropDownContainerStyle={styles.dropDownContainerStyle}
         />
       </View>

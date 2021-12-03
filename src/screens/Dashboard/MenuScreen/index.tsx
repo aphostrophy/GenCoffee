@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -10,7 +10,6 @@ import { changeCategory, restartProductsBatch } from '@slices/ShopSlice';
 import { Container, Spacer, ProductCard } from '@components';
 import { MenuStackParamList, AppTabParamList, Product } from '@types';
 
-import { MenuSection } from './MenuSection';
 import { QuerySection } from './QuerySection';
 import { DeliveryCard } from './DeliveryCard';
 
@@ -45,7 +44,7 @@ const MenuScreen = (): JSX.Element => {
         data={items}
         renderItem={({ item }) => <ProductCard product={item} />}
         ListHeaderComponent={() => (
-          <>
+          <View style={styles.headerContainer}>
             <View style={styles.deliveryCardWrapper}>
               <DeliveryCard />
             </View>
@@ -59,8 +58,9 @@ const MenuScreen = (): JSX.Element => {
               />
             </View>
             <Spacer height={20} />
-          </>
+          </View>
         )}
+        numColumns={2}
         ListHeaderComponentStyle={styles.listHeader}
         contentContainerStyle={styles.listContent}
         extraData={products}
@@ -79,11 +79,14 @@ const styles = StyleSheet.create({
   listContent: {
     zIndex: 0,
   },
+  headerContainer: {
+    zIndex: 10,
+  },
   deliveryCardWrapper: {
     flex: 3,
   },
   querySectionWrapper: {
-    flex: 1,
+    minHeight: 100,
   },
   menuSectionWrapper: {
     flex: 1,
