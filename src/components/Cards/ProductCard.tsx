@@ -4,6 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { Spacer } from '@components';
 import { Product } from '@types';
+import { limitString, formatRupiah } from '@utils';
 import { productCardStyles as styles } from './styles';
 
 interface ProductCardProps {
@@ -19,9 +20,11 @@ const ProductCard = ({ product, index, onOrderButtonClick }: ProductCardProps): 
         <Image source={{ uri: product.imagePath }} style={styles.image} />
       </View>
       <View style={styles.contentContainer}>
-        <Text style={styles.name}>{product.name}</Text>
-        <Text style={styles.description}>{product.description}</Text>
-        <Text style={styles.price}>{product.price}</Text>
+        <View>
+          <Text style={styles.name}>{limitString(product.name, 17)}</Text>
+          <Text style={styles.description}>{limitString(product.description, 20)}</Text>
+          <Text style={styles.price}>{formatRupiah(product.price)}</Text>
+        </View>
         <TouchableOpacity style={styles.orderButton} onPress={() => onOrderButtonClick(index)}>
           <View style={styles.textContainer}>
             <Text style={styles.buttonText}>+</Text>

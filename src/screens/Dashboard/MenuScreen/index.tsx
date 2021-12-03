@@ -28,14 +28,13 @@ const MenuScreen = (): JSX.Element => {
 
   const fetchProduct = useCallback(() => {
     if (category === 'all') {
-      return firestore().collection('product').get();
+      return firestore().collection('products').get();
     } else {
-      return firestore().collection('product').where('category', '==', category).get();
+      return firestore().collection('products').where('category', '==', category).get();
     }
   }, [category]);
 
   const onOrderButtonClick = (index: number) => {
-    console.log(items[index]);
     setProduct(items[index]);
     setIsVisible(true);
   };
@@ -74,6 +73,7 @@ const MenuScreen = (): JSX.Element => {
         numColumns={2}
         ListHeaderComponentStyle={styles.listHeader}
         contentContainerStyle={styles.listContent}
+        columnWrapperStyle={styles.columnWrapper}
         extraData={products}
       />
       <AddOrderModal isVisible={isVisible} setIsVisible={setIsVisible} product={product} />
@@ -104,6 +104,11 @@ const styles = StyleSheet.create({
   menuSectionWrapper: {
     flex: 1,
     backgroundColor: 'purple',
+  },
+  columnWrapper: {
+    paddingHorizontal: 2,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
 

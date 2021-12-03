@@ -8,6 +8,7 @@ import ScreenCarousel from './ScreenCarousel';
 import SearchBar from './SearchBar';
 import { ProductCard } from './Cards';
 import DashedLine from './DashedLine';
+import RadioButton from './RadioButton';
 
 export {
   Input,
@@ -20,4 +21,5 @@ export {
   SearchBar,
   ProductCard,
   DashedLine,
+  RadioButton,
 };

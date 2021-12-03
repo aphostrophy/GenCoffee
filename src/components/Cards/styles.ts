@@ -6,8 +6,7 @@ const { width } = Dimensions.get('window');
 
 const productCardStyles = StyleSheet.create({
   container: {
-    marginHorizontal: 8,
-    width: width * 0.415,
+    width: width * 0.43,
     borderRadius: 12,
     overflow: 'hidden',
     shadowColor: '#000',
@@ -19,27 +18,29 @@ const productCardStyles = StyleSheet.create({
     shadowRadius: 3.84,
 
     elevation: 5,
+    height: width * 0.7,
   },
   image: {
-    width: width * 0.415,
-    height: width * 0.415,
+    width: '100%',
+    aspectRatio: 1,
     resizeMode: 'cover',
   },
   imageContainer: {
-    flex: 2,
-    width: width * 0.415,
+    flex: 7,
+    width: '100%',
     padding: 0,
     margin: 0,
   },
   contentContainer: {
-    flex: 1,
-    backgroundColor: 'white',
+    flex: 5,
+    backgroundColor: WHITE,
     paddingHorizontal: 8,
     paddingVertical: 8,
+    justifyContent: 'center',
   },
   name: {
     fontFamily: PoppinsBold,
-    fontSize: 20,
+    fontSize: 14,
   },
   description: {
     fontFamily: Poppins,

@@ -3,10 +3,25 @@ import firestore from '@react-native-firebase/firestore';
 import { View, TouchableOpacity, Text, Image, ActivityIndicator } from 'react-native';
 import Modal from 'react-native-modal';
 import { useAppSelector } from '@hooks';
-import { DashedLine, IconFactory, Spacer } from '@components';
+import { DashedLine, IconFactory, Spacer, RadioButton } from '@components';
 import { Product } from '@types';
 import { GRAY } from '@styles/colors';
 import { modalStyles as styles } from './styles';
+
+const options = [
+  {
+    key: 'BIASA',
+    text: 'Biasa',
+  },
+  {
+    key: 'KURANGI',
+    text: 'Kurangi',
+  },
+  {
+    key: 'BANYAK',
+    text: 'Banyak',
+  },
+];
 
 interface AddOrderModalProps {
   isVisible: boolean;
@@ -38,6 +53,7 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
           <Spacer height={15} />
           <DashedLine dashLength={5} dashColor={GRAY} />
           <Spacer height={15} />
+          <RadioButton options={options} />
         </View>
       ) : (
         <ActivityIndicator size="large" />
