@@ -57,7 +57,6 @@ const MenuScreen = (): JSX.Element => {
                 }}
               />
             </View>
-            <Spacer height={20} />
           </View>
         )}
         numColumns={2}
@@ -78,6 +77,7 @@ const styles = StyleSheet.create({
   },
   listContent: {
     zIndex: 0,
+    minHeight: '100%',
   },
   headerContainer: {
     zIndex: 10,

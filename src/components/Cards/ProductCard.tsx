@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { IconFactory } from '@components';
+import { Spacer } from '@components';
 import { Product } from '@types';
 import { productCardStyles as styles } from './styles';
 
@@ -17,8 +17,11 @@ const ProductCard = ({ product }: { product: Product }): JSX.Element => {
         <Text style={styles.description}>{product.description}</Text>
         <Text style={styles.price}>{product.price}</Text>
         <TouchableOpacity style={styles.orderButton}>
-          <IconFactory type="Entypo" name="plus" style={styles.plusIcon} />
-          <Text style={styles.buttonText}>Order</Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.buttonText}>+</Text>
+            <Spacer width={4} />
+            <Text style={styles.buttonText}>Order</Text>
+          </View>
         </TouchableOpacity>
       </View>
     </View>
