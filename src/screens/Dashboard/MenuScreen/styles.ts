@@ -105,6 +105,7 @@ const querySectionStyles = StyleSheet.create({
   picker: {
     borderColor: GRAY,
     zIndex: 10,
+    height: width * 0.12,
   },
   dropDownContainerStyle: {
     borderColor: GRAY,
