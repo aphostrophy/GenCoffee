@@ -1,10 +1,10 @@
 import React from 'react';
 import Regular from './regular';
-import { KeyboardTypeOptions, ViewProps } from 'react-native';
+import { KeyboardTypeOptions, TextInputProps } from 'react-native';
 
-interface Props extends ViewProps {
+interface Props extends TextInputProps {
   value: string;
-  onChangeText: (text: string) => void;
+  onChangeText?: (text: string) => void;
   type?: 'regular' | 'OTP';
   placeHolder?: string;
   keyboardType?: KeyboardTypeOptions;

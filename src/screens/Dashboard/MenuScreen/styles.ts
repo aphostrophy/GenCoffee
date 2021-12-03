@@ -149,6 +149,9 @@ const modalStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  alignCenter: {
+    alignItems: 'center',
+  },
   closeIcon: {
     fontSize: 24,
     color: GRAY,
@@ -158,10 +161,55 @@ const modalStyles = StyleSheet.create({
     width: 100,
     height: 100,
   },
-  plusMinusIcon: {},
-  name: {},
-  description: {},
-  headerLabel: {},
+  plusMinusIconWrapper: {
+    backgroundColor: YELLOW,
+    width: 25,
+    height: 25,
+    borderRadius: 12.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  plusMinusIcon: {
+    fontSize: 24,
+    color: YELLOW,
+    textAlign: 'center',
+    includeFontPadding: false,
+    padding: 0,
+  },
+  name: {
+    fontFamily: PoppinsBold,
+    fontSize: 16,
+  },
+  description: {
+    fontFamily: Poppins,
+    color: GRAY,
+    fontSize: 12,
+  },
+  headerLabel: {
+    fontFamily: PoppinsBold,
+  },
+  textContainer: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  numberContainer: {
+    borderColor: GRAY,
+    borderWidth: 1,
+    borderRadius: 6,
+    paddingHorizontal: 20,
+    paddingVertical: 6,
+  },
+  button: {
+    width: '60%',
+    backgroundColor: YELLOW,
+    paddingVertical: 7,
+    borderRadius: 7,
+  },
+  buttonText: {
+    color: WHITE,
+    fontFamily: PoppinsBold,
+  },
 });
 
 export { deliveryCardStyles, querySectionStyles, menuSectionStyles, modalStyles };

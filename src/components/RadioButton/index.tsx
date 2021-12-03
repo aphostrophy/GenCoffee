@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Spacer } from '@components';
+import { MontserratSemiBold, MontserratBold } from '@styles/fonts';
 import { YELLOW } from '@styles/colors';
 
 type keyValue = {
@@ -52,13 +53,14 @@ export default class RadioButton extends Component<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 35,
+    marginBottom: 5,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
   },
   radioText: {
-    fontSize: 20,
+    fontFamily: MontserratSemiBold,
+    fontSize: 14,
     color: '#000',
   },
   radioCircle: {
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
     width: 15,
     borderRadius: 100,
     borderWidth: 2,
-    borderColor: '#3740ff',
+    borderColor: YELLOW,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
     width: 7,
     height: 7,
     borderRadius: 50,
-    backgroundColor: 'green',
+    backgroundColor: YELLOW,
   },
   result: {
     marginTop: 20,

@@ -8,11 +8,16 @@ const { width } = Dimensions.get('window');
 
 interface Props extends TextProps {
   value: string;
-  onChangeText: (text: string) => void;
+  onChangeText?: (text: string) => void;
   placeHolder?: string;
 }
 
-const Regular: React.FC<Props> = ({ value, onChangeText, placeHolder, ...otherProps }) => {
+const Regular: React.FC<Props> = ({
+  value,
+  onChangeText = () => null,
+  placeHolder,
+  ...otherProps
+}) => {
   const textInputRef = useRef<TextInput>(null);
   const [renderer, setRenderer] = useState(0);
   return (

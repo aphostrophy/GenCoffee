@@ -71,6 +71,7 @@ const MenuScreen = (): JSX.Element => {
           </View>
         )}
         numColumns={2}
+        showsVerticalScrollIndicator={false}
         ListHeaderComponentStyle={styles.listHeader}
         contentContainerStyle={styles.listContent}
         columnWrapperStyle={styles.columnWrapper}
