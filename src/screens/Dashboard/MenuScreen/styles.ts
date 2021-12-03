@@ -4,7 +4,7 @@ import { WHITE, YELLOW, GRAY } from '@styles/colors';
 
 const deliveryCardStyles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 3,
     borderRadius: 8,
     paddingHorizontal: 25,
     paddingVertical: 18,
@@ -106,6 +106,7 @@ const querySectionStyles = StyleSheet.create({
   },
   dropDownContainerStyle: {
     borderColor: GRAY,
+    zIndex: 10,
   },
   line: {
     backgroundColor: GRAY,
@@ -118,7 +119,8 @@ const querySectionStyles = StyleSheet.create({
 
 const menuSectionStyles = StyleSheet.create({
   container: {
-    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
 });
 

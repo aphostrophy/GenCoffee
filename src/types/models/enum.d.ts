@@ -6,6 +6,8 @@ export type ORDER_STATUS = 'PENDING' | 'ONGOING' | 'COMPLETED' | 'FAILED';
 
 export type ROLES = 'ADMIN' | 'CUSTOMER';
 
+export type PRODUCT_CATEGORY = 'all' | 'coffee' | 'food';
+
 // export enum ORDER_STATUS {
 //   PENDING = 'PENDING', // Belum dibayar
 //   ONGOING = 'ONGOING', // Paid and confirmed by shop

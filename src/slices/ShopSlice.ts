@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Product } from '@types';
+import { Product, PRODUCT_CATEGORY } from '@types';
 
 interface ShopState {
   shop: string | null;
-  category: string;
+  category: PRODUCT_CATEGORY;
   items: Product[];
 }
 
@@ -17,7 +17,7 @@ const shopSlice = createSlice({
   name: 'shop',
   initialState: ShopInitialState as ShopState,
   reducers: {
-    changeCategory: (state, action: PayloadAction<string>) => {
+    changeCategory: (state, action: PayloadAction<PRODUCT_CATEGORY>) => {
       state.category = action.payload;
     },
     changeShop: (state, action: PayloadAction<string>) => {

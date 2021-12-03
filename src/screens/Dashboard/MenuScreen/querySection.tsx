@@ -4,11 +4,12 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 import { useDebouncedSearch } from '@hooks/hooks';
 import { Spacer, SearchBar } from '@components';
+import { PRODUCT_CATEGORY } from '@types';
 import { querySectionStyles as styles } from './styles';
 
 interface QuerySectionProps {
-  category: string;
-  setCategory: (category: string) => void;
+  category: PRODUCT_CATEGORY;
+  setCategory: (category: PRODUCT_CATEGORY) => void;
 }
 
 type Placeholder = {
@@ -67,7 +68,11 @@ const QuerySection = ({ category, setCategory }: QuerySectionProps): JSX.Element
           setOpen={setPickerOpen}
           setValue={setSelectedItem}
           onChangeValue={value => {
-            if (typeof value === 'string') {
+            if (
+              (typeof value === 'string' && value === 'coffee') ||
+              value === 'all' ||
+              value === 'food'
+            ) {
               setCategory(value);
             }
           }}

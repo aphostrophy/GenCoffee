@@ -17,7 +17,7 @@ export interface PrivateUserDocument {
 }
 
 export interface Product extends FirebaseFirestoreTypes.DocumentData {
-  productId: string;
+  id: string;
   name: string;
   description: string;
   price: number;
@@ -71,3 +71,6 @@ export interface PriceTable {
   district: string;
   deliveryPrice: string;
 }
+
+export * from './enum';
+export * from './subtypes';
