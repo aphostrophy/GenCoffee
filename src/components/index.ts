@@ -5,5 +5,21 @@ import IconFactory from './IconFactory';
 import FancyButton from './FancyButton';
 import Spacer from './Spacer';
 import ScreenCarousel from './ScreenCarousel';
+import SearchBar from './SearchBar';
+import { ProductCard } from './Cards';
+import DashedLine from './DashedLine';
+import RadioButton from './RadioButton';
 
-export { Input, BottomTabBar, IconFactory, FancyButton, Spacer, ScreenCarousel, Container };
+export {
+  Input,
+  BottomTabBar,
+  IconFactory,
+  FancyButton,
+  Spacer,
+  ScreenCarousel,
+  Container,
+  SearchBar,
+  ProductCard,
+  DashedLine,
+  RadioButton,
+};

@@ -1,7 +1,9 @@
+import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+
 import { ICE_CHOICES, SUGAR_CHOICES, ORDER_STATUS, ROLES } from './enum';
 import { UserAddress } from './subtypes';
 
-export interface User {
+export interface User extends FirebaseFirestoreTypes.DocumentData {
   uid: string;
   name?: string;
   points: number;
@@ -14,16 +16,16 @@ export interface PrivateUserDocument {
   role: ROLES;
 }
 
-export interface Product {
-  productId: string;
+export interface Product extends FirebaseFirestoreTypes.DocumentData {
+  id: string;
   name: string;
   description: string;
   price: number;
   categories: Array<string>;
   availableForOrder: boolean;
   options: {
-    esBatu?: Array<ICE_CHOICES>;
-    gula?: Array<SUGAR_CHOICES>;
+    esBatu?: Array<string>;
+    gula?: Array<string>;
   };
   imagePath: string;
 }
@@ -69,3 +71,6 @@ export interface PriceTable {
   district: string;
   deliveryPrice: string;
 }
+
+export * from './enum';
+export * from './subtypes';

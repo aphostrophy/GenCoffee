@@ -28,10 +28,15 @@
     "@types/react-native-vector-icons": "^6.4.9",
     "@types/react-native-version-check": "^3.4.3",
     "@types/redux-logger": "^3.0.9",
+    "awesome-debounce-promise": "^2.1.0",
     "react": "^17.0.2",
+    "react-async-hook": "^4.0.0",
     "react-native": "^0.66.2",
+    "react-native-dropdown-picker": "^5.2.3",
     "react-native-flipper": "^0.122.0",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-modal": "^13.0.0",
     "react-native-responsive-fontsize": "^0.5.1",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.8.0",
@@ -46,7 +51,8 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.0",
     "rxjs": "^7.4.0",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.2",
+    "use-constant": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

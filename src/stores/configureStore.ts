@@ -14,12 +14,13 @@ import {
 } from 'redux-persist';
 import { name as appName } from '../../app.json';
 
-import rootReducer from '@reducers';
+import rootReducer from '@slices';
 
 const persistConfig = {
   key: 'root',
   keyPrefix: appName,
   storage: AsyncStorage,
+  whitelist: ['useAuth', 'cart'],
 };
 const middlewares = [logger];
 
