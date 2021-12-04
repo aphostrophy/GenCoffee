@@ -20,7 +20,7 @@ const persistConfig = {
   key: 'root',
   keyPrefix: appName,
   storage: AsyncStorage,
-  whitelist: ['useAuth'],
+  whitelist: ['useAuth', 'cart'],
 };
 const middlewares = [logger];
 
