@@ -24,8 +24,8 @@ export interface Product extends FirebaseFirestoreTypes.DocumentData {
   categories: Array<string>;
   availableForOrder: boolean;
   options: {
-    esBatu?: Array<ICE_CHOICES>;
-    gula?: Array<SUGAR_CHOICES>;
+    esBatu?: Array<string>;
+    gula?: Array<string>;
   };
   imagePath: string;
 }

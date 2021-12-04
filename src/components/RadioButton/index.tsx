@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Spacer } from '@components';
+import { capitalize } from '@utils/text';
 import { MontserratSemiBold, MontserratBold } from '@styles/fonts';
 import { YELLOW } from '@styles/colors';
 
-type keyValue = {
-  key: string;
-  text: string;
-};
-
 type Props = {
-  options: Array<keyValue>;
+  options: Array<string>;
 };
 
 type State = {
@@ -23,7 +19,7 @@ export default class RadioButton extends Component<Props, State> {
   };
 
   render() {
-    const { options } = this.props;
+    const options = this.props.options.map(val => ({ key: val, text: capitalize(val) }));
     const { selectedKey } = this.state;
 
     return (

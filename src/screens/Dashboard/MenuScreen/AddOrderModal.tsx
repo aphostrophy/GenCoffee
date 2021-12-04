@@ -11,25 +11,13 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { useAppSelector } from '@hooks';
-import { DashedLine, IconFactory, Spacer, RadioButton, Input } from '@components';
+import { DashedLine, IconFactory, Spacer, RadioButton } from '@components';
 import { Product } from '@types';
+import { camelToSentenceCase } from '@utils';
 import { GRAY } from '@styles/colors';
 import { modalStyles as styles } from './styles';
 
-const options = [
-  {
-    key: 'BIASA',
-    text: 'Biasa',
-  },
-  {
-    key: 'KURANGI',
-    text: 'Kurangi',
-  },
-  {
-    key: 'BANYAK',
-    text: 'Banyak',
-  },
-];
+const options = ['BIASA', 'KURANGI', 'BANYAK'];
 
 interface AddOrderModalProps {
   isVisible: boolean;
@@ -88,22 +76,7 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
               </TouchableOpacity>
             </View>
           </View>
-          <Spacer height={15} />
-          <DashedLine dashGap={5} dashLength={8} dashThickness={1.5} dashColor={GRAY} />
-          <Spacer height={15} />
-          <View style={styles.alignCenter}>
-            <Text style={styles.headerLabel}>Es Batu</Text>
-            <Spacer height={5} />
-            <RadioButton options={options} />
-          </View>
-          <Spacer height={15} />
-          <DashedLine dashGap={5} dashLength={8} dashThickness={1.5} dashColor={GRAY} />
-          <Spacer height={15} />
-          <View style={styles.alignCenter}>
-            <Text style={styles.headerLabel}>Gula</Text>
-            <Spacer height={5} />
-            <RadioButton options={options} />
-          </View>
+          <OrderOptions options={product.options} />
           <Spacer height={15} />
           <View style={styles.alignCenter}>
             <TouchableOpacity style={styles.button}>
@@ -120,5 +93,22 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
     </Modal>
   );
 };
+
+const OrderOptions = ({ options }: { options: Record<string, Array<string>> }): JSX.Element => (
+  <>
+    {Object.keys(options).map(key => (
+      <View key={key}>
+        <Spacer height={15} />
+        <DashedLine dashGap={5} dashLength={8} dashThickness={1.5} dashColor={GRAY} />
+        <Spacer height={15} />
+        <View style={styles.alignCenter}>
+          <Text style={styles.headerLabel}>{camelToSentenceCase(key)}</Text>
+          <Spacer height={5} />
+          <RadioButton options={options[key]} />
+        </View>
+      </View>
+    ))}
+  </>
+);
 
 export { AddOrderModal };
