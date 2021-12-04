@@ -14,6 +14,7 @@
     "skipLibCheck": true, // This also ignores *.d.ts outside of node_modules
     "baseUrl": ".",
     "paths": {
+      "@api/*": ["./src/api/*"],
       "@action-creators/*": ["./src/action-creators/*"],
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
@@ -28,6 +29,7 @@
       "@types/*": ["./src/types/*"],
       "@utils/*": ["./src/utils/*"],
 
+      "@api": ["./src/api"],
       "@action-creators": ["./src/action-creators"],
       "@components": ["./src/components"],
       "@constants": ["./src/constants"],

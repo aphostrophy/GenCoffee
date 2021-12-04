@@ -3,8 +3,8 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
-import firestore from '@react-native-firebase/firestore';
 
+import { ProductDBContext } from '@api';
 import { useAppSelector, useAppDispatch, useFirebaseDataSource } from '@hooks';
 import { changeCategory, restartProductsBatch } from '@slices/ShopSlice';
 import { Container, Spacer, ProductCard } from '@components';
@@ -27,11 +27,7 @@ const MenuScreen = (): JSX.Element => {
   const [product, setProduct] = useState<null | Product>(null);
 
   const fetchProduct = useCallback(() => {
-    if (category === 'all') {
-      return firestore().collection('products').get();
-    } else {
-      return firestore().collection('products').where('category', '==', category).get();
-    }
+    return ProductDBContext.current.getProducts({ category });
   }, [category]);
 
   const onOrderButtonClick = (index: number) => {
