@@ -13,18 +13,18 @@ import { WHITE } from '@styles/colors';
 import { useFocusEffect } from '@react-navigation/core';
 
 interface ContainerProps {
-  children: React.ReactNode;
+  children: JSX.Element | JSX.Element[];
   statusBarStyle?: StatusBarStyle;
   containerStyle?: StyleProp<ViewStyle>;
   onTouchStart?: () => void;
 }
 
-const Container: React.FC<ContainerProps> = ({
+const Container = ({
   children,
   statusBarStyle = 'default',
   containerStyle,
   onTouchStart,
-}) => {
+}: ContainerProps): JSX.Element => {
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBarStyle(statusBarStyle, true);

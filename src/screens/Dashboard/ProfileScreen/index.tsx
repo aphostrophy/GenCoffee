@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
@@ -16,10 +15,6 @@ type NavigationProps = CompositeScreenProps<
   StackScreenProps<ProfileStackParamList, 'Profile'>,
   BottomTabScreenProps<AppTabParamList>
 >;
-
-interface ProfileScreenProps {
-  navigation: NavigationProps;
-}
 
 const ProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const { onSignOut } = useSignOut();

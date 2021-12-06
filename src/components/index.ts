@@ -1,6 +1,7 @@
 import Input from './Input';
 import { BottomTabBar } from './Navigation';
 import { Container } from './Container';
+import Header from './Header';
 import IconFactory from './IconFactory';
 import FancyButton from './FancyButton';
 import Spacer from './Spacer';
@@ -23,4 +24,5 @@ export {
   DashedLine,
   RadioButton,
   MemberCard,
+  Header,
 };
