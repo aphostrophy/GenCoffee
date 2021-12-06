@@ -26,4 +26,5 @@ export type OrderStackParamList = {
 
 export type ProfileStackParamList = {
   Profile: undefined;
+  EditProfile: undefined;
 };

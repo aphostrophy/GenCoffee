@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import { PoppinsBold, Poppins, MontserratBold, MontserratSemiBold } from '@styles/fonts';
-import { WHITE, YELLOW, GRAY } from '@styles/colors';
+import { WHITE, YELLOW, GRAY, BLACK } from '@styles/colors';
 
 const { width } = Dimensions.get('window');
 
@@ -69,4 +69,47 @@ const productCardStyles = StyleSheet.create({
   },
 });
 
-export { productCardStyles };
+const memberCardStyles = StyleSheet.create({
+  container: {
+    borderColor: BLACK,
+    borderWidth: 2,
+    borderRadius: 8,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    height: 200,
+  },
+  leftColumn: {
+    flexDirection: 'column',
+  },
+  rightColumn: {
+    flexDirection: 'column',
+  },
+  tag: {
+    backgroundColor: YELLOW,
+    width: '45%',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+  },
+  tagText: {
+    fontFamily: PoppinsBold,
+    color: WHITE,
+  },
+  member: {
+    position: 'absolute',
+    right: 10,
+    bottom: 0,
+  },
+  name: {
+    fontFamily: PoppinsBold,
+    fontSize: 25,
+  },
+  points: {
+    fontFamily: MontserratSemiBold,
+    fontSize: 20,
+  },
+});
+
+export { productCardStyles, memberCardStyles };

@@ -6,7 +6,7 @@ import FancyButton from './FancyButton';
 import Spacer from './Spacer';
 import ScreenCarousel from './ScreenCarousel';
 import SearchBar from './SearchBar';
-import { ProductCard } from './Cards';
+import { ProductCard, MemberCard } from './Cards';
 import DashedLine from './DashedLine';
 import RadioButton from './RadioButton';
 
@@ -22,4 +22,5 @@ export {
   ProductCard,
   DashedLine,
   RadioButton,
+  MemberCard,
 };
