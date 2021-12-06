@@ -6,14 +6,17 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
 
 import { Container } from '@components';
-import { OrderStackParamList, AppTabParamList } from '@types';
+import { OrderStackParamList, AppTabParamList, AppStackParamList } from '@types';
 
-type Props = CompositeScreenProps<
+type NavigationProps = CompositeScreenProps<
   StackScreenProps<OrderStackParamList, 'Order'>,
-  BottomTabScreenProps<AppTabParamList>
+  CompositeScreenProps<
+    BottomTabScreenProps<AppTabParamList>,
+    StackScreenProps<AppStackParamList, 'AppTab'>
+  >
 >;
 
-const OrderScreen: React.FC = () => {
+const OrderScreen = (): JSX.Element => {
   return (
     <Container statusBarStyle="dark-content">
       <View>

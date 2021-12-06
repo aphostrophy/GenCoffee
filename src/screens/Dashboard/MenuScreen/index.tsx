@@ -8,15 +8,18 @@ import { ProductDBContext } from '@api';
 import { useAppSelector, useAppDispatch, useFirebaseDataSource } from '@hooks';
 import { changeCategory, restartProductsBatch } from '@slices/ShopSlice';
 import { Container, Spacer, ProductCard } from '@components';
-import { MenuStackParamList, AppTabParamList, Product } from '@types';
+import { MenuStackParamList, AppTabParamList, Product, AppStackParamList } from '@types';
 
 import { QuerySection } from './QuerySection';
 import { DeliveryCard } from './DeliveryCard';
 import { AddOrderModal } from './AddOrderModal';
 
-type Props = CompositeScreenProps<
+type NavigationProps = CompositeScreenProps<
   StackScreenProps<MenuStackParamList, 'Menu'>,
-  BottomTabScreenProps<AppTabParamList>
+  CompositeScreenProps<
+    BottomTabScreenProps<AppTabParamList>,
+    StackScreenProps<AppStackParamList, 'AppTab'>
+  >
 >;
 
 const MenuScreen = (): JSX.Element => {

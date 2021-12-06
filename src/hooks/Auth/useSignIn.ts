@@ -37,6 +37,9 @@ const useSignIn = (): useSignInReturnInterface => {
         await transaction.set(firestore().collection('users').doc(user.uid), {
           uid: user.uid,
           name: user.displayName,
+        });
+        await transaction.set(firestore().collection(`users/${user.uid}/private`).doc('secret'), {
+          role: 'user',
           points: 0,
         });
       }
