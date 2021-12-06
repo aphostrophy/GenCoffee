@@ -1,6 +1,7 @@
 import { WHITE, YELLOW } from '@styles/colors';
 import { Poppins, PoppinsBold } from '@styles/fonts';
 import { StyleSheet, Dimensions } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
   logoutText: {
     fontFamily: PoppinsBold,
     color: YELLOW,
-    fontSize: 16,
+    fontSize: RFValue(16),
   },
   editProfileButton: {
     backgroundColor: YELLOW,
