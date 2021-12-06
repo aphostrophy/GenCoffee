@@ -16,6 +16,11 @@ export type AppTabParamList = {
   ProfileStack: NavigatorScreenParams<ProfileStackParamList>;
 };
 
+export type AppStackParamList = {
+  AppTab: NavigatorScreenParams<AppTabParamList>;
+  ChooseDistrict: undefined;
+};
+
 export type MenuStackParamList = {
   Menu: undefined;
 };

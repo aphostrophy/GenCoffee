@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, StyleProp, ViewProps, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, StyleProp, ViewStyle, TouchableOpacity } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { IconFactory, Spacer } from '@components';
 import { BLACK } from '@styles/colors';
@@ -7,12 +7,13 @@ import { MontserratSemiBold } from '@styles/fonts';
 
 interface HeaderProps {
   title: string;
-  containerStyle?: StyleProp<ViewProps>;
+  containerStyle?: StyleProp<ViewStyle>;
   children?: JSX.Element | JSX.Element[];
   onBack: () => void;
+  color?: string;
 }
 
-const Header = ({ title, containerStyle, children, onBack }: HeaderProps): JSX.Element => {
+const Header = ({ title, containerStyle, children, onBack, color }: HeaderProps): JSX.Element => {
   return (
     <View style={[styles.container, containerStyle]}>
       {children ? (
@@ -24,11 +25,11 @@ const Header = ({ title, containerStyle, children, onBack }: HeaderProps): JSX.E
       ) : (
         <>
           <TouchableOpacity style={styles.left} onPress={() => onBack()}>
-            <IconFactory type="AntDesign" name="arrowleft" style={styles.icon} />
+            <IconFactory type="AntDesign" name="arrowleft" style={[styles.icon, { color }]} />
           </TouchableOpacity>
           <Spacer width={30} />
           <TouchableOpacity style={styles.center}>
-            <Text style={styles.title}>{title}</Text>
+            <Text style={[styles.title, { color }]}>{title}</Text>
           </TouchableOpacity>
         </>
       )}
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
     fontFamily: MontserratSemiBold,
     includeFontPadding: false,
     padding: 0,
+    color: BLACK,
   },
   icon: {
     fontSize: RFValue(22),

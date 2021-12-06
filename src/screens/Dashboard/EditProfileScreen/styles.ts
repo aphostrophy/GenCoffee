@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { GRAY, WHITE, YELLOW } from '@styles/colors';
 import { Poppins, PoppinsBold, PoppinsSemiBold } from '@styles/fonts';
 import { RFValue } from 'react-native-responsive-fontsize';

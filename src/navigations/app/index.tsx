@@ -1,6 +1,8 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AppTabParamList } from '@types';
+import { createStackNavigator } from '@react-navigation/stack';
+import { AppTabParamList, AppStackParamList } from '@types';
+import { ChooseDistrictScreen } from '@screens';
 
 import MenuStack from './menuStack';
 import OrderStack from './orderStack';
@@ -9,6 +11,7 @@ import ProfileStack from './profileStack';
 import { BottomTabBar } from '@components';
 
 const AppTab = createBottomTabNavigator<AppTabParamList>();
+const AppStack = createStackNavigator<AppStackParamList>();
 
 const AppTabNavigator: React.FC = () => {
   return (
@@ -35,4 +38,13 @@ const AppTabNavigator: React.FC = () => {
   );
 };
 
-export default AppTabNavigator;
+const AppStackNavigator = (): JSX.Element => {
+  return (
+    <AppStack.Navigator screenOptions={{ headerShown: false }}>
+      <AppStack.Screen name="AppTab" component={AppTabNavigator} />
+      <AppStack.Screen name="ChooseDistrict" component={ChooseDistrictScreen} />
+    </AppStack.Navigator>
+  );
+};
+
+export default AppStackNavigator;

@@ -5,12 +5,15 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
 
 import { Container, Header, Input, Spacer, FancyButton } from '@components';
-import { ProfileStackParamList, AppTabParamList } from '@types';
+import { ProfileStackParamList, AppTabParamList, AppStackParamList } from '@types';
 import { styles } from './styles';
 
 type NavigationProps = CompositeScreenProps<
   StackScreenProps<ProfileStackParamList, 'Profile'>,
-  BottomTabScreenProps<AppTabParamList>
+  CompositeScreenProps<
+    BottomTabScreenProps<AppTabParamList>,
+    StackScreenProps<AppStackParamList, 'AppTab'>
+  >
 >;
 
 const EditProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
@@ -31,7 +34,10 @@ const EditProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
         <View style={styles.row}>
           <Text style={styles.district}>{district}</Text>
           <Spacer width={20} />
-          <TouchableOpacity style={styles.districtButton}>
+          <TouchableOpacity
+            style={styles.districtButton}
+            onPress={() => navigation.navigate('ChooseDistrict')}
+          >
             <Text style={styles.districtButtonText}>{'Ganti Kecamatan >'}</Text>
           </TouchableOpacity>
         </View>
