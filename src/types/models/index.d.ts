@@ -1,6 +1,6 @@
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 
-import { ICE_CHOICES, SUGAR_CHOICES, ORDER_STATUS, ROLES } from './enum';
+import { ORDER_STATUS, ROLES } from './enum';
 import { UserAddress } from './subtypes';
 
 export interface User extends FirebaseFirestoreTypes.DocumentData {
@@ -23,10 +23,7 @@ export interface Product extends FirebaseFirestoreTypes.DocumentData {
   price: number;
   categories: Array<string>;
   availableForOrder: boolean;
-  options: {
-    esBatu?: Array<string>;
-    gula?: Array<string>;
-  };
+  options: Record<string, Array<string>>;
   imagePath: string;
 }
 

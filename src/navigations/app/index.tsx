@@ -20,12 +20,16 @@ const AppTabNavigator: React.FC = () => {
       tabBar={props => <BottomTabBar {...props} />}
       initialRouteName="MenuStack"
     >
-      <AppTab.Screen name="OrderStack" component={OrderStack} options={{ tabBarLabel: 'Order' }} />
+      <AppTab.Screen
+        name="OrderStack"
+        component={OrderStack}
+        options={{ tabBarLabel: 'Riwayat' }}
+      />
       <AppTab.Screen name="MenuStack" component={MenuStack} options={{ tabBarLabel: 'Menu' }} />
       <AppTab.Screen
         name="ProfileStack"
         component={ProfileStack}
-        options={{ tabBarLabel: 'Profile' }}
+        options={{ tabBarLabel: 'Profil' }}
       />
     </AppTab.Navigator>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, Image } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 
 import { IconFactory } from '@components';
@@ -83,11 +83,7 @@ const BottomTabIcon: React.FC<BottomTabIconProps> = ({
       return (
         <View style={[styles.column, styles.middleColumn]}>
           <View style={styles.middleIconContainer}>
-            <IconFactory
-              type="MaterialCommunityIcons"
-              name="food-fork-drink"
-              style={[styles.middleIcon]}
-            />
+            <Image source={require('@assets/icons/drink.png')} style={{ width: 20, height: 40 }} />
           </View>
           <Text style={isFocused ? styles.activeButton : styles.inactiveButton}>{label}</Text>
         </View>

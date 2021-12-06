@@ -52,8 +52,8 @@ const QuerySection = ({ category, setCategory }: QuerySectionProps): JSX.Element
       value: 'coffee',
     },
     {
-      label: 'Makanan',
-      value: 'food',
+      label: 'Non Kopi',
+      value: 'non-coffee',
     },
   ]);
 
@@ -71,7 +71,7 @@ const QuerySection = ({ category, setCategory }: QuerySectionProps): JSX.Element
             if (
               (typeof value === 'string' && value === 'coffee') ||
               value === 'all' ||
-              value === 'food'
+              value === 'non-coffee'
             ) {
               setCategory(value);
             }

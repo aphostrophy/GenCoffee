@@ -25,7 +25,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   middleColumn: {
-    top: -height * 0.029,
+    top: -height * 0.0335,
   },
   activeButton: {
     color: WHITE,

@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import firestore from '@react-native-firebase/firestore';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  Image,
-  ActivityIndicator,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
+import { View, TouchableOpacity, Text, Image, ActivityIndicator } from 'react-native';
 import Modal from 'react-native-modal';
 import { useAppSelector } from '@hooks';
 import { DashedLine, IconFactory, Spacer, RadioButton } from '@components';
@@ -16,8 +7,6 @@ import { Product } from '@types';
 import { camelToSentenceCase } from '@utils';
 import { GRAY } from '@styles/colors';
 import { modalStyles as styles } from './styles';
-
-const options = ['BIASA', 'KURANGI', 'BANYAK'];
 
 interface AddOrderModalProps {
   isVisible: boolean;
