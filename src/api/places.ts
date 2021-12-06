@@ -1,8 +1,7 @@
 import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
-import { getProductRequest, getProductsRequest } from '@types';
 
-export class ProductDBContext {
-  static current: ProductDBContext = new ProductDBContext();
+export class PlacesDBContext {
+  static current: PlacesDBContext = new PlacesDBContext();
   private db: FirebaseFirestoreTypes.Module;
 
   private constructor() {
@@ -31,15 +30,11 @@ export class ProductDBContext {
     return this.db.collection(collectionName);
   }
 
-  public async getProduct(req: getProductRequest) {
-    return this.collectionReference('product').doc(req.id).get();
+  public async getDistricts() {
+    return await this.collectionReference('places').doc('districts').get();
   }
 
-  public async getProducts(req: getProductsRequest) {
-    let query = this.collectionQuery('products');
-    if (req.category && req.category !== 'all') {
-      query = query.where('category', '==', req.category);
-    }
-    return query.get();
+  public async getStores() {
+    return this.collectionReference('places').doc('stores').get();
   }
 }

@@ -69,5 +69,9 @@ export interface PriceTable {
   deliveryPrice: string;
 }
 
+export interface Districts extends FirebaseFirestoreTypes.DocumentData {
+  value: Array<string>;
+}
+
 export * from './enum';
 export * from './subtypes';
