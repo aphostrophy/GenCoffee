@@ -4,7 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
 import { signIn } from '@action-creators';
 
-import { updateProfile } from '@slices/ProfileSlice';
+import { initProfile } from '@slices/ProfileSlice';
 import { useAppDispatch } from '@hooks/hooks';
 import { User, Secret } from '@types';
 
@@ -31,9 +31,10 @@ const useSignInSubscriber = () => {
               phoneNumber: user.phoneNumber ? user.phoneNumber : null,
               district: user.address?.district ? user.address?.district : null,
               fullAddress: user.address?.streetAddress ? user.address?.streetAddress : null,
+              addressNote: user.address?.addressNote ? user.address?.addressNote : null,
               points: userSecret.points,
             };
-            dispatch(updateProfile(profile));
+            dispatch(initProfile(profile));
           }
         }
         dispatch(signIn(token.uid));

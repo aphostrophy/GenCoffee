@@ -4,6 +4,9 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
 
+import { ProfileDBContext } from '@api';
+import { useAppSelector, useAppDispatch } from '@hooks';
+import { ProfileStateLoaded, updateProfile } from '@slices/ProfileSlice';
 import { Container, Header, Input, Spacer, FancyButton } from '@components';
 import { ProfileStackParamList, AppTabParamList, AppStackParamList } from '@types';
 import { styles } from './styles';
@@ -16,11 +19,52 @@ type NavigationProps = CompositeScreenProps<
   >
 >;
 
+/**
+ * Precondition : Profile store must be fully loaded and hydrated with data before this page is allowed to be opened
+ */
+
 const EditProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
-  const [name, setName] = useState<string>('John Doe');
-  const [district, setDistrict] = useState<string>('Cidadap');
-  const [address, setAddress] = useState<string>('Jl. Ganesha No.10, Dago, Bandung');
+  const user = useAppSelector<ProfileStateLoaded>(state => state.profile as ProfileStateLoaded);
+  const userToken = useAppSelector(state => state.useAuth.userToken as string);
+  const dispatch = useAppDispatch();
+
+  const [name, setName] = useState<string>(user.name);
+  const [district, setDistrict] = useState<string | null>(user.district);
+  const [address, setAddress] = useState<string>(user.fullAddress ? user.fullAddress : '');
   const [addressNote, setAddressNote] = useState<string>('');
+
+  const submitChange = async () => {
+    if (district && address) {
+      try {
+        await ProfileDBContext.current.updateProfile({
+          id: userToken,
+          data: {
+            name,
+            address: {
+              city: 'Bandung',
+              district,
+              streetAddress: address,
+              addressNote,
+            },
+          },
+        });
+        dispatch(
+          updateProfile({
+            name,
+            district,
+            fullAddress: address,
+            addressNote,
+          }),
+        );
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.log(`Err in submit edit profile change ${err.message}`);
+        }
+      }
+    } else {
+      console.log('DATA TIDAK LENGKAP');
+    }
+  };
 
   return (
     <Container containerStyle={styles.container} statusBarStyle="dark-content">
@@ -32,7 +76,7 @@ const EditProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
         <Spacer height={20} />
         <Text style={styles.label}>Kecamatan</Text>
         <View style={styles.row}>
-          <Text style={styles.district}>{district}</Text>
+          <UserInfoText data={district} />
           <Spacer width={20} />
           <TouchableOpacity
             style={styles.districtButton}
@@ -54,12 +98,20 @@ const EditProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
         />
         <Text style={styles.hint}>Cth. Rumah cat hijau, pagar hitam, dll.</Text>
         <Spacer height={30} />
-        <FancyButton containerStyle={styles.submitButton}>
+        <FancyButton containerStyle={styles.submitButton} onPress={() => submitChange()}>
           <Text style={styles.submitText}>Simpan Perubahan</Text>
         </FancyButton>
       </View>
     </Container>
   );
+};
+
+const UserInfoText = ({ data }: { data: string | null }) => {
+  if (data) {
+    return <Text style={styles.text}>{data}</Text>;
+  }
+
+  return <Text style={styles.redText}>Belum dipasang</Text>;
 };
 
 export default EditProfileScreen;

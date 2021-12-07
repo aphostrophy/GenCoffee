@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import { signIn, signOut } from '@action-creators/AuthActionCreator';
 
-interface AuthState {
+export interface AuthState {
   userToken: null | string;
 }
 

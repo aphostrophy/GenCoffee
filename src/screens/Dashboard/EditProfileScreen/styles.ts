@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { GRAY, WHITE, YELLOW } from '@styles/colors';
+import { GRAY, RED, WHITE, YELLOW } from '@styles/colors';
 import { Poppins, PoppinsBold, PoppinsSemiBold } from '@styles/fonts';
 import { RFValue } from 'react-native-responsive-fontsize';
 
@@ -14,8 +14,12 @@ const styles = StyleSheet.create({
     height: '90%',
     paddingHorizontal: 20,
   },
-  district: {
+  text: {
     fontFamily: PoppinsBold,
+  },
+  redText: {
+    fontFamily: Poppins,
+    color: RED,
   },
   row: {
     flexDirection: 'row',
