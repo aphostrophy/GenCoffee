@@ -6,21 +6,18 @@ import { MontserratSemiBold, MontserratBold } from '@styles/fonts';
 import { YELLOW } from '@styles/colors';
 
 type Props = {
-  options: Array<string>;
+  options: Array<{ option: string; selected: boolean }>;
+  optionKey: string;
+  handleChooseOption: (optionKey: string, option: string) => void;
 };
 
-type State = {
-  selectedKey: null | string;
-};
-
-export default class RadioButton extends Component<Props, State> {
-  state = {
-    selectedKey: null,
-  };
-
+export default class RadioButton extends Component<Props> {
   render() {
-    const options = this.props.options.map(val => ({ key: val, text: capitalize(val) }));
-    const { selectedKey } = this.state;
+    const options = this.props.options.map(val => ({
+      key: val.option,
+      selected: val.selected,
+      text: capitalize(val.option),
+    }));
 
     return (
       <View>
@@ -30,12 +27,10 @@ export default class RadioButton extends Component<Props, State> {
               <TouchableOpacity
                 style={styles.radioCircle}
                 onPress={() => {
-                  this.setState({
-                    selectedKey: res.key,
-                  });
+                  this.props.handleChooseOption(this.props.optionKey, res.key);
                 }}
               >
-                {selectedKey === res.key && <View style={styles.selectedRb} />}
+                {res.selected && <View style={styles.selectedRb} />}
               </TouchableOpacity>
               <Spacer width={10} />
               <Text style={styles.radioText}>{res.text}</Text>

@@ -20,10 +20,56 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
   const dispatch = useAppDispatch();
   const quantity = useAppSelector(state => selectCartItemQuantity(state, product?.id));
   const [count, setCount] = useState<number>(0);
+  const [options, setOptions] = useState<null | Record<
+    string,
+    {
+      option: string;
+      selected: boolean;
+    }[]
+  >>(null);
 
   useEffect(() => {
     setCount(quantity);
   }, [quantity]);
+
+  useEffect(() => {
+    if (product) {
+      const options: Record<
+        string,
+        Array<{
+          option: string;
+          selected: boolean;
+        }>
+      > = {};
+      const keys = Object.keys(product.options);
+      keys.forEach(key => {
+        options[key] = product.options[key].map((val, index) => {
+          if (index === 0) {
+            return { option: val, selected: true };
+          } else {
+            return { option: val, selected: false };
+          }
+        });
+      });
+      setOptions(options);
+    }
+  }, [product]);
+
+  const handleChooseOption = (optionKey: string, chosenOption: string) => {
+    if (options) {
+      const newOptions = { ...options };
+      newOptions[optionKey] = options[optionKey].map(option => {
+        if (option.option === chosenOption) {
+          option.selected = true;
+          return option;
+        } else {
+          option.selected = false;
+          return option;
+        }
+      });
+      setOptions(newOptions);
+    }
+  };
 
   const closeModal = () => {
     setIsVisible(false);
@@ -51,7 +97,7 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
       style={styles.modal}
       onBackdropPress={() => closeModal()}
     >
-      {product ? (
+      {product && options ? (
         <View style={styles.modalBody}>
           <TouchableOpacity onPress={() => closeModal()}>
             <IconFactory type="AntDesign" name="close" style={styles.closeIcon} />
@@ -93,7 +139,7 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
               </TouchableOpacity>
             </View>
           </View>
-          <OrderOptions options={product.options} />
+          <OrderOptions options={options} handleChooseOption={handleChooseOption} />
           <Spacer height={15} />
           <View style={styles.alignCenter}>
             <TouchableOpacity style={styles.button} onPress={submitChangesToCart}>
@@ -111,7 +157,13 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
   );
 };
 
-const OrderOptions = ({ options }: { options: Record<string, Array<string>> }): JSX.Element => (
+const OrderOptions = ({
+  options,
+  handleChooseOption,
+}: {
+  options: Record<string, Array<{ option: string; selected: boolean }>>;
+  handleChooseOption: (optionKey: string, option: string) => void;
+}): JSX.Element => (
   <>
     {Object.keys(options).map(key => (
       <View key={key}>
@@ -121,7 +173,11 @@ const OrderOptions = ({ options }: { options: Record<string, Array<string>> }): 
         <View style={styles.alignCenter}>
           <Text style={styles.headerLabel}>{camelToSentenceCase(key)}</Text>
           <Spacer height={5} />
-          <RadioButton options={options[key]} />
+          <RadioButton
+            options={options[key]}
+            handleChooseOption={handleChooseOption}
+            optionKey={key}
+          />
         </View>
       </View>
     ))}
