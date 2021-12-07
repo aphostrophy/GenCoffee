@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, NativeEventEmitter, NativeModules } from 'react-native';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -65,6 +65,14 @@ const EditProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
       console.log('DATA TIDAK LENGKAP');
     }
   };
+
+  useEffect(() => {
+    const eventEmitter = new NativeEventEmitter(NativeModules.GenCoffee);
+    const eventListener = eventEmitter.addListener('ChooseDistrict', message => {
+      setDistrict(message);
+    });
+    return () => eventListener.remove();
+  }, []);
 
   return (
     <Container containerStyle={styles.container} statusBarStyle="dark-content">

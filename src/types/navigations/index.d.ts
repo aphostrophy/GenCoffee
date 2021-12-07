@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type RootStackParamList = {
