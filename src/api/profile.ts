@@ -32,10 +32,11 @@ export class ProfileDBContext {
   }
 
   public async getProfile(req: getProfileRequest) {
-    return this.collectionReference('profile').doc(req.id).get();
+    return this.collectionReference('users').doc(req.id).get();
   }
 
   public async updateProfile(req: updateProfileRequest) {
-    return this.collectionReference('profile').doc(req.id).update(req.data);
+    console.log(req);
+    return this.collectionReference('users').doc(req.id).update(req.data);
   }
 }

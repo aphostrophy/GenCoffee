@@ -24,7 +24,7 @@ type NavigationProps = CompositeScreenProps<
  */
 
 const EditProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
-  const user = useAppSelector<ProfileStateLoaded>(state => state.profile as ProfileStateLoaded);
+  const user = useAppSelector(state => state.profile as ProfileStateLoaded);
   const userToken = useAppSelector(state => state.useAuth.userToken as string);
   const dispatch = useAppDispatch();
 
@@ -56,6 +56,7 @@ const EditProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
             addressNote,
           }),
         );
+        navigation.goBack();
       } catch (err: unknown) {
         if (err instanceof Error) {
           console.log(`Err in submit edit profile change ${err.message}`);
