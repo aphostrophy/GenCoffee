@@ -12,10 +12,12 @@ type ReducedProductData = {
  */
 interface CartState {
   items: Record<string, ReducedProductData>;
+  itemCount: number;
 }
 
 const CartInitialState = {
   items: {},
+  itemCount: 0,
 };
 
 const cartSlice = createSlice({
@@ -40,6 +42,7 @@ const cartSlice = createSlice({
     },
     reduceProductQuantityFromCart: (state, action: PayloadAction<string>) => {
       const id = action.payload;
+      state.itemCount--;
       if (state.items[id].quantity > 1) {
         state.items[id].quantity--;
       } else {
@@ -47,6 +50,7 @@ const cartSlice = createSlice({
       }
     },
     removeProductFromCart: (state, action: PayloadAction<string>) => {
+      state.itemCount -= state.items[action.payload].quantity;
       delete state.items[action.payload];
     },
   },
