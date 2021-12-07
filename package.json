@@ -47,7 +47,6 @@
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-flipper": "^2.0.1",
-    "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.0",
     "rxjs": "^7.4.0",

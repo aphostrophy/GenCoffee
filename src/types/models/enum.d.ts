@@ -1,6 +1,6 @@
-export type ORDER_STATUS = 'PENDING' | 'ONGOING' | 'COMPLETED' | 'FAILED';
+export type ORDER_STATUS = 'pending' | 'ongoing' | 'completed' | 'failed';
 
-export type ROLES = 'ADMIN' | 'CUSTOMER';
+export type ROLES = 'admin' | 'customer';
 
 export type PRODUCT_CATEGORY = 'all' | 'coffee' | 'non-coffee';
 

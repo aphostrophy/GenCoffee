@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, Image, ActivityIndicator } from 'react-native';
 import Modal from 'react-native-modal';
-import { useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import { DashedLine, IconFactory, Spacer, RadioButton } from '@components';
+import { addProductToCart, reduceProductQuantityFromCart } from '@slices/CartSlice';
+import { selectCartItemQuantity } from '@selectors';
 import { Product } from '@types';
 import { camelToSentenceCase } from '@utils';
 import { GRAY } from '@styles/colors';
@@ -15,17 +17,43 @@ interface AddOrderModalProps {
 }
 
 const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps): JSX.Element => {
-  const [count, setCount] = useState<number>(2);
+  const dispatch = useAppDispatch();
+  const quantity = useAppSelector(state => selectCartItemQuantity(state, product?.id));
+  const [count, setCount] = useState<number>(0);
+
+  useEffect(() => {
+    setCount(quantity);
+  }, [quantity]);
+
+  const closeModal = () => {
+    setIsVisible(false);
+    setCount(0);
+  };
+
+  const submitChangesToCart = () => {
+    if (product && count > 0) {
+      dispatch(
+        addProductToCart({
+          id: product.id,
+          name: product.name,
+          quantity: count,
+          imagePath: product.imagePath,
+        }),
+      );
+    }
+    closeModal();
+  };
+
   return (
     <Modal
       isVisible={isVisible}
       useNativeDriver={true}
       style={styles.modal}
-      onBackdropPress={() => setIsVisible(false)}
+      onBackdropPress={() => closeModal()}
     >
       {product ? (
         <View style={styles.modalBody}>
-          <TouchableOpacity onPress={() => setIsVisible(false)}>
+          <TouchableOpacity onPress={() => closeModal()}>
             <IconFactory type="AntDesign" name="close" style={styles.closeIcon} />
           </TouchableOpacity>
           <View style={styles.row}>
@@ -68,7 +96,7 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
           <OrderOptions options={product.options} />
           <Spacer height={15} />
           <View style={styles.alignCenter}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={submitChangesToCart}>
               <View style={styles.textContainer}>
                 <Text style={styles.buttonText}>Tambah ke Keranjang</Text>
               </View>

@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { configureStore } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
+import { configureStore, Middleware, Dispatch, AnyAction } from '@reduxjs/toolkit';
 import { reduxBatch } from '@manaflair/redux-batch';
 import {
   persistStore,
@@ -22,7 +21,7 @@ const persistConfig = {
   storage: AsyncStorage,
   whitelist: ['useAuth', 'cart'],
 };
-const middlewares = [logger];
+const middlewares: Middleware<Record<string, unknown>, any, Dispatch<AnyAction>>[] = [];
 
 if (__DEV__) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires

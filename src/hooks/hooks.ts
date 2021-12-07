@@ -3,7 +3,7 @@ import useConstant from 'use-constant';
 import { useAsync } from 'react-async-hook';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import type { RootState, AppDispatch } from '../stores/configureStore';
+import type { RootState, AppDispatch } from '@stores/configureStore';
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = (): AppDispatch => useDispatch<AppDispatch>();

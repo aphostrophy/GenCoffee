@@ -26,9 +26,11 @@ const cartSlice = createSlice({
   reducers: {
     clearCart: state => {
       state.items = {};
+      state.itemCount = 0;
     },
     addProductToCart: (state, action: PayloadAction<ReducedProductData>) => {
       const { id, name, imagePath, quantity } = action.payload;
+      state.itemCount += quantity;
       if (Object.prototype.hasOwnProperty.call(state.items, id)) {
         state.items[id].quantity += quantity;
       } else {
@@ -42,11 +44,13 @@ const cartSlice = createSlice({
     },
     reduceProductQuantityFromCart: (state, action: PayloadAction<string>) => {
       const id = action.payload;
-      state.itemCount--;
-      if (state.items[id].quantity > 1) {
-        state.items[id].quantity--;
-      } else {
-        delete state.items[id];
+      if (Object.prototype.hasOwnProperty.call(state.items, id)) {
+        state.itemCount--;
+        if (state.items[id].quantity > 1) {
+          state.items[id].quantity--;
+        } else {
+          delete state.items[id];
+        }
       }
     },
     removeProductFromCart: (state, action: PayloadAction<string>) => {
