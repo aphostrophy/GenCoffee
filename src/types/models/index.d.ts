@@ -6,14 +6,13 @@ import { UserAddress } from './subtypes';
 export interface User extends FirebaseFirestoreTypes.DocumentData {
   uid: string;
   name?: string;
-  points: number;
   phoneNumber?: string;
-  defaultAddress?: UserAddress;
-  privateUserDocument: PrivateUserDocument;
+  address?: UserAddress;
 }
 
-export interface PrivateUserDocument {
+export interface Secret extends FirebaseFirestoreTypes.DocumentData {
   role: ROLES;
+  points: number;
 }
 
 export interface Product extends FirebaseFirestoreTypes.DocumentData {
