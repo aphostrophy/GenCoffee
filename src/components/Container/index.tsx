@@ -13,7 +13,7 @@ import { WHITE } from '@styles/colors';
 import { useFocusEffect } from '@react-navigation/core';
 
 interface ContainerProps {
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactNode;
   statusBarStyle?: StatusBarStyle;
   containerStyle?: StyleProp<ViewStyle>;
   onTouchStart?: () => void;
@@ -39,7 +39,11 @@ const Container = ({
         Keyboard.dismiss();
       }}
     >
-      {children}
+      {React.Children.map(children, child => {
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child);
+        }
+      })}
     </SafeAreaView>
   );
 };

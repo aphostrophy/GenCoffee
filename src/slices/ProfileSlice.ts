@@ -1,13 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface ProfileState {
-  name: string | null;
+interface ProfileStateLoading {
+  name: null;
+  phoneNumber: null;
+  district: null;
+  fullAddress: null;
+  points: number;
+  loading: true;
+}
+
+interface ProfileStateLoaded {
+  name: string;
   phoneNumber: string | null;
   district: string | null;
   fullAddress: string | null;
   points: number;
-  loading: boolean;
+  loading: false;
 }
+
+export type ProfileState = ProfileStateLoading | ProfileStateLoaded;
 
 const ProfileInitialState = {
   name: null,
