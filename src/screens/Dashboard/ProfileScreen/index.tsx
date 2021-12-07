@@ -28,13 +28,13 @@ const ProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
           <DashedLine dashGap={5} dashLength={8} dashThickness={1.5} dashColor={GRAY} />
           <Spacer height={25} />
           <Text style={styles.header}>Kecamatan</Text>
-          <Text style={styles.text}>Cidadap</Text>
+          <UserInfoText data={user.district} />
           <Spacer height={25} />
           <Text style={styles.header}>Alamat Lengkap</Text>
-          <Text style={styles.text}> Jl. Ganesha No.10, Dago, Bandung</Text>
+          <UserInfoText data={user.fullAddress} />
           <Spacer height={25} />
           <Text style={styles.header}>No. Handphone</Text>
-          <Text style={styles.text}>08123456781</Text>
+          <UserInfoText data={user.phoneNumber} />
           <Spacer height={50} />
           <View style={styles.buttonsContainer}>
             <FancyButton
@@ -52,6 +52,14 @@ const ProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
       )}
     </Container>
   );
+};
+
+const UserInfoText = ({ data }: { data: string | null }) => {
+  if (data) {
+    return <Text style={styles.text}>{data}</Text>;
+  }
+
+  return <Text style={styles.redText}>Belum dipasang</Text>;
 };
 
 export default ProfileScreen;

@@ -1,4 +1,4 @@
-import { WHITE, YELLOW } from '@styles/colors';
+import { RED, WHITE, YELLOW } from '@styles/colors';
 import { Poppins, PoppinsBold } from '@styles/fonts';
 import { StyleSheet, Dimensions } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -20,6 +20,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: Poppins,
+  },
+  redText: {
+    fontFamily: Poppins,
+    color: RED,
   },
   logoutButton: {
     borderColor: YELLOW,
