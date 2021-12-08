@@ -9,7 +9,12 @@ export const selectCartItemQuantity = createSelector(
   (items, id) => {
     if (id) {
       if (Object.prototype.hasOwnProperty.call(items, id)) {
-        return items[id].quantity;
+        let quantity = 0;
+        for (let i = 0; i < items[id].variants.length; i++) {
+          quantity += items[id].variants[i].quantity;
+        }
+
+        return quantity;
       } else {
         return 0;
       }

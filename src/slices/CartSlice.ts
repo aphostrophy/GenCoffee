@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { extractOptions, getVariantIndex } from '@utils/cart';
 
 interface DenormalizedProductData {
   id: string;
@@ -9,7 +10,7 @@ interface DenormalizedProductData {
 
 type NormalizedProductData = Omit<DenormalizedProductData, 'id'>;
 
-interface ProductTypeData {
+export interface ProductTypeData {
   imagePath: string;
   availableOptions: Record<string, Array<string>>;
   variants: Array<NormalizedProductData>;
@@ -20,6 +21,11 @@ interface AddProductPayload {
   name: string;
   imagePath: string;
   quantity: number;
+  options: Record<string, Array<{ option: string; selected: boolean }>>;
+}
+
+interface UniqueProductPayload {
+  id: string;
   options: Record<string, Array<{ option: string; selected: boolean }>>;
 }
 
@@ -46,48 +52,16 @@ const cartSlice = createSlice({
 
       state.itemCount += quantity;
 
-      const optionsKeys = Object.keys(options);
-      const availableOptions: Record<string, Array<string>> = {};
-      const selectedOptions: Record<string, string> = {};
-
-      for (let i = 0; i < optionsKeys.length; i++) {
-        const key = optionsKeys[i];
-        const arr = [];
-        let selected = '';
-        for (let j = 0; j < options[key].length; j++) {
-          arr.push(options[key][j].option);
-          if (options[key][j].selected) {
-            selected = options[key][j].option;
-          }
-        }
-        availableOptions[key] = arr;
-        selectedOptions[key] = selected;
-      }
-
-      console.log(availableOptions);
-      console.log(selectedOptions);
+      const [selectedOptions, availableOptions] = extractOptions(options);
 
       if (Object.prototype.hasOwnProperty.call(state.items, id)) {
-        let found = false;
         const productTypeData = state.items[id];
+        const index = getVariantIndex(options, selectedOptions, productTypeData);
 
-        for (let i = 0; i < productTypeData.variants.length; i++) {
-          let isEqual = true;
-          for (let j = 0; j < optionsKeys.length; j++) {
-            const key = optionsKeys[j];
-            if (productTypeData.variants[i].options[key] !== selectedOptions[key]) {
-              isEqual = false;
-            }
-          }
-          if (isEqual) {
-            productTypeData.variants[i].quantity += quantity;
-            found = true;
-            break;
-          }
-        }
-
-        if (!found) {
-          state.items[id].variants.push({ name, quantity, options: selectedOptions });
+        if (index === -1) {
+          productTypeData.variants.push({ name, quantity, options: selectedOptions });
+        } else {
+          state.items[id].variants[index].quantity += quantity;
         }
       } else {
         state.items[id] = {
@@ -97,19 +71,36 @@ const cartSlice = createSlice({
         };
       }
     },
-    reduceProductQuantityFromCart: (state, action: PayloadAction<string>) => {
-      const id = action.payload;
+    reduceProductQuantityFromCart: (state, action: PayloadAction<UniqueProductPayload>) => {
+      const { id, options } = action.payload;
       if (Object.prototype.hasOwnProperty.call(state.items, id)) {
         state.itemCount--;
-
+        const [selectedOptions] = extractOptions(options);
         const productTypeData = state.items[id];
 
-        for (let i = 0; productTypeData.variants.length; i++) {}
+        const index = getVariantIndex(options, selectedOptions, productTypeData);
+
+        if (index !== -1) {
+          productTypeData.variants[index].quantity--;
+        }
       }
     },
-    removeProductFromCart: (state, action: PayloadAction<string>) => {
-      state.itemCount -= state.items[action.payload].quantity;
-      delete state.items[action.payload];
+    removeProductFromCart: (state, action: PayloadAction<UniqueProductPayload>) => {
+      const { id, options } = action.payload;
+      if (Object.prototype.hasOwnProperty.call(state.items, id)) {
+        const productTypeData = state.items[id];
+        const [selectedOptions] = extractOptions(options);
+
+        const index = getVariantIndex(options, selectedOptions, productTypeData);
+
+        if (index !== -1) {
+          state.itemCount -= productTypeData.variants[index].quantity;
+          productTypeData.variants = productTypeData.variants.splice(index, 1);
+          if (productTypeData.variants.length === 0) {
+            delete state.items[id];
+          }
+        }
+      }
     },
   },
 });
