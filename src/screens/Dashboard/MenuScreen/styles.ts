@@ -7,7 +7,7 @@ const deliveryCardStyles = StyleSheet.create({
   container: {
     flex: 3,
     borderRadius: 8,
-    paddingHorizontal: 25,
+    paddingHorizontal: width * 0.04,
     paddingVertical: 18,
     justifyContent: 'center',
   },
@@ -56,6 +56,7 @@ const deliveryCardStyles = StyleSheet.create({
     backgroundColor: WHITE,
     flex: 2,
     paddingHorizontal: 10,
+    paddingVertical: 5,
     alignItems: 'center',
     justifyContent: 'space-between',
     borderBottomLeftRadius: 8,
