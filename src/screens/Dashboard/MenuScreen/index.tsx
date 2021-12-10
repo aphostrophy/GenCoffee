@@ -13,6 +13,7 @@ import { MenuStackParamList, AppTabParamList, Product, AppStackParamList } from 
 import { QuerySection } from './QuerySection';
 import { DeliveryCard } from './DeliveryCard';
 import { AddOrderModal } from './AddOrderModal';
+import { CartBarButton } from './CartBarButton';
 
 type NavigationProps = CompositeScreenProps<
   StackScreenProps<MenuStackParamList, 'Menu'>,
@@ -24,6 +25,7 @@ type NavigationProps = CompositeScreenProps<
 
 const MenuScreen = (): JSX.Element => {
   const { category, items } = useAppSelector(state => state.useShop);
+  const itemCount = useAppSelector(state => state.cart.itemCount);
   const dispatch = useAppDispatch();
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -36,6 +38,10 @@ const MenuScreen = (): JSX.Element => {
   const onOrderButtonClick = (index: number) => {
     setProduct(items[index]);
     setIsVisible(true);
+  };
+
+  const onCartButtonPress = () => {
+    console.log(itemCount);
   };
 
   const products = useFirebaseDataSource<Product>(fetchProduct);
@@ -76,6 +82,7 @@ const MenuScreen = (): JSX.Element => {
         columnWrapperStyle={styles.columnWrapper}
         extraData={products}
       />
+      <CartBarButton itemCount={itemCount} onPress={onCartButtonPress} />
       <AddOrderModal isVisible={isVisible} setIsVisible={setIsVisible} product={product} />
     </Container>
   );
