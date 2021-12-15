@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
-import { CompositeScreenProps } from '@react-navigation/native';
+import { CompositeScreenProps, NavigationRouteContext } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
 
@@ -23,7 +23,7 @@ type NavigationProps = CompositeScreenProps<
   >
 >;
 
-const MenuScreen = (): JSX.Element => {
+const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const { category, items } = useAppSelector(state => state.useShop);
   const itemCount = useAppSelector(state => state.cart.itemCount);
   const dispatch = useAppDispatch();
@@ -41,7 +41,7 @@ const MenuScreen = (): JSX.Element => {
   };
 
   const onCartButtonPress = () => {
-    console.log(itemCount);
+    navigation.push('Cart');
   };
 
   const products = useFirebaseDataSource<Product>(fetchProduct);

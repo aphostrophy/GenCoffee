@@ -24,6 +24,7 @@ export type AppStackParamList = {
 
 export type MenuStackParamList = {
   Menu: undefined;
+  Cart: undefined;
 };
 
 export type OrderStackParamList = {
