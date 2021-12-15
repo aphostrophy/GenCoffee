@@ -77,7 +77,7 @@ const EditProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
 
   return (
     <Container containerStyle={styles.container} statusBarStyle="dark-content">
-      <Header title="Ubah Profil" onBack={navigation.goBack} />
+      <Header title="Ubah Profil" onBack={() => navigation.navigate('Profile')} />
       <Spacer height={25} />
       <View style={styles.innerContainer}>
         <Text style={styles.label}>Nama Lengkap</Text>

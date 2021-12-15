@@ -5,6 +5,7 @@ import ProfileScreen from './Dashboard/ProfileScreen';
 import EditProfileScreen from './Dashboard/EditProfileScreen';
 import OrderScreen from './Dashboard/OrderScreen';
 import ChooseDistrictScreen from './Dashboard/ChooseDistrictScreen';
+import CartScreen from './Dashboard/CartScreen';
 
 export {
   SignInScreen,
@@ -14,4 +15,5 @@ export {
   OrderScreen,
   WelcomeScreen,
   ChooseDistrictScreen,
+  CartScreen,
 };

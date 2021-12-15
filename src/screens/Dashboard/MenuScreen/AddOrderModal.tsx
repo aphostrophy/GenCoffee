@@ -18,19 +18,11 @@ interface AddOrderModalProps {
 
 const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  const quantity = useAppSelector(state => selectCartItemQuantity(state, product?.id));
   const [count, setCount] = useState<number>(0);
   const [options, setOptions] = useState<null | Record<
     string,
-    {
-      option: string;
-      selected: boolean;
-    }[]
+    Array<{ option: string; selected: boolean }>
   >>(null);
-
-  useEffect(() => {
-    setCount(quantity);
-  }, [quantity]);
 
   useEffect(() => {
     if (product) {
@@ -77,13 +69,14 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
   };
 
   const submitChangesToCart = () => {
-    if (product && count > 0) {
+    if (product && count > 0 && options) {
       dispatch(
         addProductToCart({
           id: product.id,
           name: product.name,
           quantity: count,
           imagePath: product.imagePath,
+          options,
         }),
       );
     }

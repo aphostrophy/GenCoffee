@@ -30,6 +30,7 @@ const productCardStyles = StyleSheet.create({
     width: '100%',
     padding: 0,
     margin: 0,
+    backgroundColor: WHITE,
   },
   contentContainer: {
     flex: 5,

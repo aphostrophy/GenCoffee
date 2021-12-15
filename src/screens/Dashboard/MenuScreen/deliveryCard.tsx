@@ -2,11 +2,36 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { StackScreenProps } from '@react-navigation/stack';
+import { MenuStackParamList, AppTabParamList, AppStackParamList } from '@types';
 
 import { Spacer } from '@components';
+import { limitString } from '@utils/text';
 import { deliveryCardStyles as styles } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
-const DeliveryCard = (): JSX.Element => {
+type NavigationProps = CompositeScreenProps<
+  StackScreenProps<MenuStackParamList, 'Menu'>,
+  CompositeScreenProps<
+    BottomTabScreenProps<AppTabParamList>,
+    StackScreenProps<AppStackParamList, 'AppTab'>
+  >
+>;
+
+interface DeliveryCardProps {
+  fullAddress: string | null;
+  district: string | null;
+  onChangePress: () => void;
+}
+interface MiniCardProps {
+  fullAddress: string | null;
+  district: string | null;
+  onChangePress: () => void;
+}
+
+const DeliveryCard = ({ fullAddress, district, onChangePress }: DeliveryCardProps): JSX.Element => {
   return (
     <LinearGradient colors={['#458FFF', '#AACCFF']} style={styles.container}>
       <View style={[styles.row, styles.topSection]}>
@@ -14,17 +39,17 @@ const DeliveryCard = (): JSX.Element => {
         <Spacer width={10} />
         <Text style={styles.title}>Diantar</Text>
         <Spacer width={10} />
-        <Text style={styles.subtitle}>{`ganti ke 'Ambil Sendiri'`}</Text>
+        {/* <Text style={styles.subtitle}>{`ganti ke 'Ambil Sendiri'`}</Text> */}
       </View>
       <Spacer height={15} />
       <View style={styles.bottomSection}>
-        <MiniCard />
+        <MiniCard fullAddress={fullAddress} district={district} onChangePress={onChangePress} />
       </View>
     </LinearGradient>
   );
 };
 
-const MiniCard = (): JSX.Element => {
+const MiniCard = ({ fullAddress, district, onChangePress }: MiniCardProps): JSX.Element => {
   return (
     <View style={styles.miniCardContainer}>
       <View style={[styles.row, styles.miniCardTop]}>
@@ -32,10 +57,12 @@ const MiniCard = (): JSX.Element => {
       </View>
       <View style={[styles.row, styles.miniCardBottom]}>
         <View style={styles.column}>
-          <Text style={styles.miniCardBottomLabel}>Jl. Ganesha no 10</Text>
-          <Text style={styles.miniCardBottomSmallLabel}>Dago, Bandung</Text>
+          <Text style={styles.miniCardBottomLabel}>
+            {fullAddress ? limitString(fullAddress, 18) : ''}
+          </Text>
+          <Text style={styles.miniCardBottomSmallLabel}>{district}</Text>
         </View>
-        <TouchableOpacity style={styles.miniCardBottomButton}>
+        <TouchableOpacity style={styles.miniCardBottomButton} onPress={() => onChangePress()}>
           <Text style={styles.miniCardBottomButtonText}>Ganti</Text>
         </TouchableOpacity>
       </View>

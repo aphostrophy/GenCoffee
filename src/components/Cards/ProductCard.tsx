@@ -22,7 +22,7 @@ const ProductCard = ({ product, index, onOrderButtonClick }: ProductCardProps): 
       <View style={styles.contentContainer}>
         <View>
           <Text style={styles.name}>{limitString(product.name, 17)}</Text>
-          <Text style={styles.description}>{limitString(product.description, 20)}</Text>
+          <Text style={styles.description}>{limitString(product.description, 17)}</Text>
           <Text style={styles.price}>{formatRupiah(product.price)}</Text>
         </View>
         <TouchableOpacity style={styles.orderButton} onPress={() => onOrderButtonClick(index)}>

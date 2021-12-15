@@ -1,13 +1,13 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { PoppinsBold, Poppins, MontserratBold, MontserratSemiBold } from '@styles/fonts';
-import { WHITE, YELLOW, GRAY } from '@styles/colors';
+import { WHITE, YELLOW, GRAY, BLUE } from '@styles/colors';
 const { width, height } = Dimensions.get('window');
 
 const deliveryCardStyles = StyleSheet.create({
   container: {
     flex: 3,
     borderRadius: 8,
-    paddingHorizontal: 25,
+    paddingHorizontal: width * 0.04,
     paddingVertical: 18,
     justifyContent: 'center',
   },
@@ -56,6 +56,7 @@ const deliveryCardStyles = StyleSheet.create({
     backgroundColor: WHITE,
     flex: 2,
     paddingHorizontal: 10,
+    paddingVertical: 5,
     alignItems: 'center',
     justifyContent: 'space-between',
     borderBottomLeftRadius: 8,
@@ -212,4 +213,47 @@ const modalStyles = StyleSheet.create({
   },
 });
 
-export { deliveryCardStyles, querySectionStyles, menuSectionStyles, modalStyles };
+const cartBarButtonStyles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    bottom: 40,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '95%',
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    borderRadius: 8,
+  },
+  hide: {
+    display: 'none',
+  },
+  cart: {
+    width: 25,
+    height: 25,
+    resizeMode: 'contain',
+  },
+  itemCount: {
+    fontFamily: PoppinsBold,
+    color: WHITE,
+    includeFontPadding: false,
+    padding: 0,
+    fontSize: 14,
+  },
+  label: {
+    fontFamily: Poppins,
+    color: WHITE,
+    includeFontPadding: false,
+    padding: 0,
+    fontSize: 12,
+  },
+});
+
+export {
+  deliveryCardStyles,
+  querySectionStyles,
+  menuSectionStyles,
+  modalStyles,
+  cartBarButtonStyles,
+};
