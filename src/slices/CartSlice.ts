@@ -83,6 +83,14 @@ const cartSlice = createSlice({
 
         if (index !== -1) {
           productTypeData.variants[index].quantity--;
+
+          if (productTypeData.variants[index].quantity === 0) {
+            productTypeData.variants.splice(index, 1);
+          }
+
+          if (productTypeData.variants.length === 0) {
+            delete state.items[id];
+          }
         }
       }
     },
