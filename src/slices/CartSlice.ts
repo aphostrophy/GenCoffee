@@ -10,7 +10,7 @@ interface DenormalizedProductData {
 
 export type NormalizedProductData = Omit<DenormalizedProductData, 'id'>;
 
-export type CartScreenProductData = NormalizedProductData & { imagePath: string };
+export type CartScreenProductData = NormalizedProductData & { imagePath: string; id: string };
 
 export interface ProductTypeData {
   imagePath: string;
@@ -28,7 +28,7 @@ interface AddProductPayload {
 
 interface UniqueProductPayload {
   id: string;
-  options: Record<string, Array<{ option: string; selected: boolean }>>;
+  selectedOptions: Record<string, string>;
 }
 
 interface CartState {
@@ -58,7 +58,7 @@ const cartSlice = createSlice({
 
       if (Object.prototype.hasOwnProperty.call(state.items, id)) {
         const productTypeData = state.items[id];
-        const index = getVariantIndex(options, selectedOptions, productTypeData);
+        const index = getVariantIndex(selectedOptions, productTypeData);
 
         if (index === -1) {
           productTypeData.variants.push({ name, quantity, options: selectedOptions });
@@ -74,26 +74,37 @@ const cartSlice = createSlice({
       }
     },
     reduceProductQuantityFromCart: (state, action: PayloadAction<UniqueProductPayload>) => {
-      const { id, options } = action.payload;
+      const { id, selectedOptions } = action.payload;
       if (Object.prototype.hasOwnProperty.call(state.items, id)) {
         state.itemCount--;
-        const [selectedOptions] = extractOptions(options);
         const productTypeData = state.items[id];
 
-        const index = getVariantIndex(options, selectedOptions, productTypeData);
+        const index = getVariantIndex(selectedOptions, productTypeData);
 
         if (index !== -1) {
           productTypeData.variants[index].quantity--;
         }
       }
     },
+    addProductQuantityToCart: (state, action: PayloadAction<UniqueProductPayload>) => {
+      const { id, selectedOptions } = action.payload;
+      if (Object.prototype.hasOwnProperty.call(state.items, id)) {
+        state.itemCount++;
+        const productTypeData = state.items[id];
+
+        const index = getVariantIndex(selectedOptions, productTypeData);
+
+        if (index !== -1) {
+          productTypeData.variants[index].quantity++;
+        }
+      }
+    },
     removeProductFromCart: (state, action: PayloadAction<UniqueProductPayload>) => {
-      const { id, options } = action.payload;
+      const { id, selectedOptions } = action.payload;
       if (Object.prototype.hasOwnProperty.call(state.items, id)) {
         const productTypeData = state.items[id];
-        const [selectedOptions] = extractOptions(options);
 
-        const index = getVariantIndex(options, selectedOptions, productTypeData);
+        const index = getVariantIndex(selectedOptions, productTypeData);
 
         if (index !== -1) {
           state.itemCount -= productTypeData.variants[index].quantity;
@@ -107,7 +118,12 @@ const cartSlice = createSlice({
   },
 });
 
-export const { clearCart, addProductToCart, reduceProductQuantityFromCart, removeProductFromCart } =
-  cartSlice.actions;
+export const {
+  clearCart,
+  addProductToCart,
+  reduceProductQuantityFromCart,
+  addProductQuantityToCart,
+  removeProductFromCart,
+} = cartSlice.actions;
 
 export default cartSlice;

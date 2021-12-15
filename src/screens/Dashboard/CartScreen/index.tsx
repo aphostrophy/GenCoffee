@@ -36,18 +36,12 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
       {user.loading === false && (
         <View style={styles.innerContainer}>
           <FlatList
-            ListHeaderComponent={() => <CartHeader user={user} />}
+            ListHeaderComponent={<CartHeader user={user} />}
             data={cartItems}
-            ItemSeparatorComponent={() => (
-              <View>
-                <Spacer height={10} />
-                <DashedLine dashGap={5} dashLength={8} dashThickness={1.5} dashColor={GRAY} />
-                <Spacer height={10} />
-              </View>
-            )}
+            keyExtractor={(item, index) => `${item.id}-${index}`}
             renderItem={({ item }) => <ProductCard item={item} />}
             style={styles.list}
-            ListFooterComponent={() => <CartFooter />}
+            ListFooterComponent={<CartFooter />}
           />
         </View>
       )}
@@ -68,9 +62,6 @@ const CartHeader = ({ user }: { user: ProfileStateLoaded }): JSX.Element => {
 const CartFooter = (): JSX.Element => {
   return (
     <View>
-      <Spacer height={10} />
-      <DashedLine dashGap={5} dashLength={8} dashThickness={1.5} dashColor={GRAY} />
-      <Spacer height={10} />
       <View style={styles.center}>
         <View style={styles.breadcrumb}>
           <Text style={styles.breadcrumbText}>Pengiriman</Text>

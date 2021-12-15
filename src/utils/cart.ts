@@ -30,11 +30,10 @@ export const extractOptions = (
  */
 
 export const getVariantIndex = (
-  options: Record<string, Array<{ option: string; selected: boolean }>>,
   selectedOptions: WritableDraft<Record<string, string>>,
   productTypeData: ProductTypeData,
 ) => {
-  const optionsKeys = Object.keys(options);
+  const optionsKeys = Object.keys(selectedOptions);
 
   for (let i = 0; i < productTypeData.variants.length; i++) {
     let isEqual = true;
