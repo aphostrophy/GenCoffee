@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
-import { CompositeScreenProps, NavigationRouteContext } from '@react-navigation/native';
+import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
 
@@ -25,6 +25,7 @@ type NavigationProps = CompositeScreenProps<
 
 const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const { category, items } = useAppSelector(state => state.useShop);
+  const { fullAddress, district } = useAppSelector(state => state.profile);
   const itemCount = useAppSelector(state => state.cart.itemCount);
   const dispatch = useAppDispatch();
 
@@ -62,7 +63,11 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
         ListHeaderComponent={() => (
           <View style={styles.headerContainer}>
             <View style={styles.deliveryCardWrapper}>
-              <DeliveryCard />
+              <DeliveryCard
+                fullAddress={fullAddress}
+                district={district}
+                onChangePress={() => navigation.navigate('ProfileStack', { screen: 'EditProfile' })}
+              />
             </View>
             <Spacer height={20} />
             <View style={styles.querySectionWrapper}>

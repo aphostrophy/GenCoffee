@@ -19,6 +19,7 @@ const AppTabNavigator: React.FC = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: { position: 'absolute' },
+        unmountOnBlur: true,
       }}
       tabBar={props => <BottomTabBar {...props} />}
       initialRouteName="MenuStack"
