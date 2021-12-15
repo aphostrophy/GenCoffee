@@ -1,12 +1,14 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { Spacer, DashedLine, Header, Container } from '@components';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useAppSelector } from '@hooks/hooks';
-import { selectNormalizedCartItems } from '@selectors/cart';
+import { selectNormalizedCartItems, selectTotalCartPrice } from '@selectors/cart';
 import { ProfileStateLoaded } from '@slices/ProfileSlice';
+import { PlacesDBContext } from '@api/places';
+import { formatRupiah } from '@utils';
 import { MenuStackParamList, AppTabParamList, AppStackParamList } from '@types';
 import { WHITE, GRAY } from '@styles/colors';
 import { ProductCard } from './ProductCard';
@@ -24,7 +26,22 @@ type NavigationProps = CompositeScreenProps<
 const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const user = useAppSelector(state => state.profile);
   const memoizedSelectNormalizedCartItems = useMemo(() => selectNormalizedCartItems, []);
+  const memoizedSelectTotalCartPrice = useMemo(() => selectTotalCartPrice, []);
   const cartItems = useAppSelector(memoizedSelectNormalizedCartItems);
+  const totalCost = useAppSelector(memoizedSelectTotalCartPrice);
+  const [deliveryCost, setDeliveryCost] = useState<number>(0);
+
+  useEffect(() => {
+    (async () => {
+      if (user.district) {
+        const priceData = await PlacesDBContext.current.getDeliveryPrice('Lengkong', user.district);
+        if (priceData.length > 0) {
+          setDeliveryCost(priceData[0].data().price);
+        }
+      }
+    })();
+  }, [user.district]);
+
   return (
     <Container containerStyle={styles.container}>
       <Header
@@ -41,7 +58,7 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
             keyExtractor={(item, index) => `${item.id}-${index}`}
             renderItem={({ item }) => <ProductCard item={item} />}
             style={styles.list}
-            ListFooterComponent={<CartFooter />}
+            ListFooterComponent={<CartFooter deliveryCost={deliveryCost} totalCost={totalCost} />}
           />
         </View>
       )}
@@ -59,7 +76,13 @@ const CartHeader = ({ user }: { user: ProfileStateLoaded }): JSX.Element => {
   );
 };
 
-const CartFooter = (): JSX.Element => {
+const CartFooter = ({
+  deliveryCost,
+  totalCost,
+}: {
+  deliveryCost: number;
+  totalCost: number;
+}): JSX.Element => {
   return (
     <View>
       <View style={styles.center}>
@@ -71,7 +94,7 @@ const CartFooter = (): JSX.Element => {
         <Spacer width={20} />
         <View>
           <Text style={styles.costLabel}>Ongkos Kirim</Text>
-          <Text style={styles.cost}>Rp 15.000</Text>
+          <Text style={styles.cost}>{formatRupiah(deliveryCost)}</Text>
         </View>
         <Spacer width={20} />
       </View>
@@ -82,7 +105,7 @@ const CartFooter = (): JSX.Element => {
         <Spacer width={20} />
         <View style={[styles.column, { flex: 3 }]}>
           <Text style={styles.totalLabel}>Total</Text>
-          <Text style={styles.totalPrice}>Rp 45.000</Text>
+          <Text style={styles.totalPrice}>{formatRupiah(totalCost)}</Text>
         </View>
         <TouchableOpacity style={[styles.column, styles.checkout]}>
           <Text style={styles.checkoutText}>Checkout</Text>

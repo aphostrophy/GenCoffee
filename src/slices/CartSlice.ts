@@ -10,11 +10,16 @@ interface DenormalizedProductData {
 
 export type NormalizedProductData = Omit<DenormalizedProductData, 'id'>;
 
-export type CartScreenProductData = NormalizedProductData & { imagePath: string; id: string };
+export type CartScreenProductData = NormalizedProductData & {
+  imagePath: string;
+  id: string;
+  price: number;
+};
 
 export interface ProductTypeData {
   imagePath: string;
   availableOptions: Record<string, Array<string>>;
+  price: number;
   variants: Array<NormalizedProductData>;
 }
 
@@ -23,6 +28,7 @@ interface AddProductPayload {
   name: string;
   imagePath: string;
   quantity: number;
+  price: number;
   options: Record<string, Array<{ option: string; selected: boolean }>>;
 }
 
@@ -50,7 +56,7 @@ const cartSlice = createSlice({
       state.itemCount = 0;
     },
     addProductToCart: (state, action: PayloadAction<AddProductPayload>) => {
-      const { id, name, imagePath, quantity, options } = action.payload;
+      const { id, name, imagePath, quantity, options, price } = action.payload;
 
       state.itemCount += quantity;
 
@@ -69,6 +75,7 @@ const cartSlice = createSlice({
         state.items[id] = {
           imagePath,
           availableOptions,
+          price,
           variants: [{ name, quantity, options: selectedOptions }],
         };
       }

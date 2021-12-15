@@ -37,4 +37,14 @@ export class PlacesDBContext {
   public async getStores() {
     return this.collectionReference('places').doc('stores').get();
   }
+
+  public async getDeliveryPrice(shop: string, destination: string) {
+    return (
+      await this.collectionReference('prices')
+        .where('from', '==', shop)
+        .where('to', '==', destination)
+        .limit(1)
+        .get()
+    ).docs;
+  }
 }

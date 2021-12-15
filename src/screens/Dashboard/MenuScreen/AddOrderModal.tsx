@@ -76,6 +76,7 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
           name: product.name,
           quantity: count,
           imagePath: product.imagePath,
+          price: product.price,
           options,
         }),
       );

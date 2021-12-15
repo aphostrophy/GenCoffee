@@ -1,6 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '@stores/configureStore';
 import type { CartScreenProductData } from '@slices/CartSlice';
+import { ProductDBContext } from '@api/products';
 
 const selectCartItems = (state: RootState) => state.cart.items;
 
@@ -31,13 +32,27 @@ export const selectNormalizedCartItems = createSelector(
     const normalizedCartItems = [];
     const keys = Object.keys(items);
     for (let i = 0; i < keys.length; i++) {
-      const productTypeData = { ...items[keys[i]] };
-      const imagePath = productTypeData.imagePath;
       const id = keys[i];
+      const productTypeData = { ...items[id] };
+      const imagePath = productTypeData.imagePath;
+      const price = productTypeData.price;
       for (let j = 0; j < productTypeData.variants.length; j++) {
-        normalizedCartItems.push({ ...productTypeData.variants[j], imagePath, id });
+        normalizedCartItems.push({ ...productTypeData.variants[j], imagePath, id, price });
       }
     }
     return normalizedCartItems;
   },
 );
+
+export const selectTotalCartPrice = createSelector(selectCartItems, items => {
+  const keys = Object.keys(items);
+  let total = 0;
+  for (let i = 0; i < keys.length; i++) {
+    const id = keys[i];
+    const price = items[id].price;
+    for (let j = 0; j < items[id].variants.length; j++) {
+      total += price * items[id].variants[j].quantity;
+    }
+  }
+  return total;
+});

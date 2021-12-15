@@ -133,6 +133,7 @@ const productCardStyles = StyleSheet.create({
   image: {
     width: '100%',
     aspectRatio: 1.2,
+    borderRadius: 8,
   },
   plusMinusIcon: {
     fontSize: 24,
