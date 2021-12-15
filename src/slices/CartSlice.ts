@@ -8,7 +8,9 @@ interface DenormalizedProductData {
   options: Record<string, string>;
 }
 
-type NormalizedProductData = Omit<DenormalizedProductData, 'id'>;
+export type NormalizedProductData = Omit<DenormalizedProductData, 'id'>;
+
+export type CartScreenProductData = NormalizedProductData & { imagePath: string };
 
 export interface ProductTypeData {
   imagePath: string;
