@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import useConstant from 'use-constant';
 import { useAsync } from 'react-async-hook';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
@@ -29,4 +29,23 @@ export function useDebouncedSearch(searchFunction: (query: string) => Promise<an
     setInputText,
     searchResults,
   };
+}
+
+const BOUNCE_RATE = 2000;
+
+export function useDebounce() {
+  const busy = useRef(false);
+
+  const debounce = async (callback: () => any | Promise<any>) => {
+    setTimeout(() => {
+      busy.current = false;
+    }, BOUNCE_RATE);
+
+    if (!busy.current) {
+      busy.current = true;
+      callback();
+    }
+  };
+
+  return { debounce };
 }
