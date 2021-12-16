@@ -21,11 +21,7 @@ export function useDebouncedSearch(searchFunction: (query: string) => Promise<an
   const debouncedSearchFunction = useConstant(() => AwesomeDebouncePromise(searchFunction, 1000));
 
   const searchResults = useAsync(async () => {
-    if (inputText.length < 5) {
-      return null;
-    } else {
-      return debouncedSearchFunction(inputText);
-    }
+    return debouncedSearchFunction(inputText);
   }, [debouncedSearchFunction, inputText]);
 
   return {

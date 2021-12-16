@@ -1,7 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '@stores/configureStore';
 import type { CartScreenProductData } from '@slices/CartSlice';
-import { ProductDBContext } from '@api/products';
 
 const selectCartItems = (state: RootState) => state.cart.items;
 

@@ -36,9 +36,13 @@ export class ProductDBContext {
   }
 
   public async getProducts(req: getProductsRequest) {
+    console.log(req);
     let query = this.collectionQuery('products');
     if (req.category && req.category !== 'all') {
       query = query.where('category', '==', req.category);
+    }
+    if (req.query) {
+      query = query.where('name', '>=', req.query);
     }
     return query.get();
   }

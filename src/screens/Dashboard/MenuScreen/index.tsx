@@ -8,6 +8,7 @@ import { ProductDBContext } from '@api';
 import { useAppSelector, useAppDispatch, useFirebaseDataSource } from '@hooks';
 import { changeCategory, restartProductsBatch } from '@slices/ShopSlice';
 import { Container, Spacer, ProductCard } from '@components';
+import { selectFilteredShopItems } from '@selectors';
 import { MenuStackParamList, AppTabParamList, Product, AppStackParamList } from '@types';
 
 import { QuerySection } from './QuerySection';
@@ -24,7 +25,8 @@ type NavigationProps = CompositeScreenProps<
 >;
 
 const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
-  const { category, items } = useAppSelector(state => state.useShop);
+  const { category } = useAppSelector(state => state.useShop);
+  const items = useAppSelector(selectFilteredShopItems);
   const { fullAddress, district } = useAppSelector(state => state.profile);
   const itemCount = useAppSelector(state => state.cart.itemCount);
   const dispatch = useAppDispatch();
@@ -60,7 +62,7 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
         renderItem={({ item, index }) => (
           <ProductCard product={item} index={index} onOrderButtonClick={onOrderButtonClick} />
         )}
-        ListHeaderComponent={() => (
+        ListHeaderComponent={
           <View style={styles.headerContainer}>
             <View style={styles.deliveryCardWrapper}>
               <DeliveryCard
@@ -79,7 +81,12 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
               />
             </View>
           </View>
-        )}
+        }
+        ListFooterComponent={
+          <>
+            <Spacer height={40} />
+          </>
+        }
         numColumns={2}
         showsVerticalScrollIndicator={false}
         ListHeaderComponentStyle={styles.listHeader}
@@ -119,6 +126,7 @@ const styles = StyleSheet.create({
   },
   columnWrapper: {
     paddingHorizontal: 2,
+    paddingVertical: 15,
     alignItems: 'center',
     justifyContent: 'space-between',
   },

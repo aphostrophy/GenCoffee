@@ -6,4 +6,5 @@ export interface getProductRequest {
 
 export interface getProductsRequest {
   category?: PRODUCT_CATEGORY;
+  query?: string;
 }

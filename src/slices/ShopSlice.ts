@@ -5,12 +5,14 @@ interface ShopState {
   shop: string | null;
   category: PRODUCT_CATEGORY;
   items: Product[];
+  query: string;
 }
 
 const ShopInitialState = {
   shop: null,
   category: 'all',
   items: [],
+  query: '',
 };
 
 const shopSlice = createSlice({
@@ -29,9 +31,13 @@ const shopSlice = createSlice({
     restartProductsBatch: (state, action: PayloadAction<Product[]>) => {
       state.items = action.payload;
     },
+    changeQuery: (state, action: PayloadAction<string>) => {
+      state.query = action.payload;
+    },
   },
 });
 
-export const { changeCategory, changeShop, addProducts, restartProductsBatch } = shopSlice.actions;
+export const { changeCategory, changeShop, addProducts, restartProductsBatch, changeQuery } =
+  shopSlice.actions;
 
 export default shopSlice;
