@@ -10,7 +10,6 @@ import { MenuStackParamList, AppTabParamList, AppStackParamList } from '@types';
 import { Spacer } from '@components';
 import { limitString } from '@utils/text';
 import { deliveryCardStyles as styles } from './styles';
-import { useNavigation } from '@react-navigation/native';
 
 type NavigationProps = CompositeScreenProps<
   StackScreenProps<MenuStackParamList, 'Menu'>,
