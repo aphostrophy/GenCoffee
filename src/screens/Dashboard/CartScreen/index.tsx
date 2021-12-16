@@ -11,6 +11,7 @@ import { PlacesDBContext } from '@api/places';
 import { formatRupiah } from '@utils';
 import { MenuStackParamList, AppTabParamList, AppStackParamList } from '@types';
 import { WHITE, GRAY } from '@styles/colors';
+import { CheckoutModal } from './CheckoutModal';
 import { ProductCard } from './ProductCard';
 import { DeliveryCard } from './DeliveryCard';
 import { styles } from './styles';
@@ -28,19 +29,23 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const memoizedSelectNormalizedCartItems = useMemo(() => selectNormalizedCartItems, []);
   const memoizedSelectTotalCartPrice = useMemo(() => selectTotalCartPrice, []);
   const cartItems = useAppSelector(memoizedSelectNormalizedCartItems);
-  const totalCost = useAppSelector(memoizedSelectTotalCartPrice);
+  const totalCartCost = useAppSelector(memoizedSelectTotalCartPrice);
   const [deliveryCost, setDeliveryCost] = useState<number>(0);
+  const [totalCost, setTotalCost] = useState<number>(0);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [gopayNumber, setGopayNumber] = useState<string>('');
 
   useEffect(() => {
     (async () => {
       if (user.district) {
         const priceData = await PlacesDBContext.current.getDeliveryPrice('Lengkong', user.district);
         if (priceData.length > 0) {
-          setDeliveryCost(priceData[0].data().price);
+          setDeliveryCost(parseInt(priceData[0].data().price));
+          setTotalCost(parseInt(priceData[0].data().price) + totalCartCost);
         }
       }
     })();
-  }, [user.district]);
+  }, [totalCartCost, user.district]);
 
   return (
     <Container containerStyle={styles.container}>
@@ -58,7 +63,16 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
             keyExtractor={(item, index) => `${item.id}-${index}`}
             renderItem={({ item }) => <ProductCard item={item} />}
             style={styles.list}
-            ListFooterComponent={<CartFooter deliveryCost={deliveryCost} totalCost={totalCost} />}
+            ListFooterComponent={
+              <CartFooter
+                deliveryCost={deliveryCost}
+                totalCost={totalCost}
+                isVisible={isVisible}
+                setIsVisible={setIsVisible}
+                gopayNumber={gopayNumber}
+                setGopayNumber={setGopayNumber}
+              />
+            }
           />
         </View>
       )}
@@ -79,9 +93,17 @@ const CartHeader = ({ user }: { user: ProfileStateLoaded }): JSX.Element => {
 const CartFooter = ({
   deliveryCost,
   totalCost,
+  isVisible,
+  setIsVisible,
+  gopayNumber,
+  setGopayNumber,
 }: {
   deliveryCost: number;
   totalCost: number;
+  isVisible: boolean;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  gopayNumber: string;
+  setGopayNumber: React.Dispatch<React.SetStateAction<string>>;
 }): JSX.Element => {
   return (
     <View>
@@ -107,11 +129,20 @@ const CartFooter = ({
           <Text style={styles.totalLabel}>Total</Text>
           <Text style={styles.totalPrice}>{formatRupiah(totalCost)}</Text>
         </View>
-        <TouchableOpacity style={[styles.column, styles.checkout]}>
+        <TouchableOpacity
+          style={[styles.column, styles.checkout]}
+          onPress={() => setIsVisible(true)}
+        >
           <Text style={styles.checkoutText}>Checkout</Text>
         </TouchableOpacity>
         <Spacer width={20} />
       </View>
+      <CheckoutModal
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+        gopayNumber={gopayNumber}
+        setGopayNumber={setGopayNumber}
+      />
     </View>
   );
 };

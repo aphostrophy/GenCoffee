@@ -7,7 +7,8 @@ import {
   Montserrat,
   PoppinsSemiBold,
 } from '@styles/fonts';
-import { WHITE, YELLOW, GRAY, BLUE, RED } from '@styles/colors';
+import { WHITE, YELLOW, GRAY, BLUE, RED, LIGHTGRAY } from '@styles/colors';
+import { RFValue } from 'react-native-responsive-fontsize';
 const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -162,4 +163,66 @@ const productCardStyles = StyleSheet.create({
   },
 });
 
-export { styles, deliveryCardStyles, productCardStyles };
+const modalStyles = StyleSheet.create({
+  modal: {
+    margin: 0,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  modalBody: {
+    backgroundColor: WHITE,
+    borderTopLeftRadius: width * 0.05,
+    borderTopRightRadius: width * 0.05,
+    width: width,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  section: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  closeIcon: {
+    fontSize: 24,
+    color: GRAY,
+    alignSelf: 'flex-end',
+  },
+  hintContainer: {
+    width: '80%',
+    backgroundColor: LIGHTGRAY,
+    padding: 16,
+  },
+  hint: {
+    fontFamily: PoppinsSemiBold,
+    fontSize: RFValue(11),
+  },
+  submit: {
+    backgroundColor: YELLOW,
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 32,
+  },
+  submitText: {
+    fontFamily: PoppinsSemiBold,
+    fontSize: RFValue(16),
+    color: WHITE,
+    includeFontPadding: false,
+    padding: 0,
+  },
+  inputContainer: {
+    width: '80%',
+  },
+  genCoffee: {
+    fontFamily: MontserratSemiBold,
+    fontSize: RFValue(14),
+  },
+  genCoffeeNumber: {
+    fontFamily: PoppinsBold,
+    fontSize: RFValue(16),
+  },
+  label: {
+    fontFamily: MontserratSemiBold,
+    fontSize: RFValue(12),
+  },
+});
+
+export { styles, deliveryCardStyles, productCardStyles, modalStyles };
