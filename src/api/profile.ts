@@ -36,7 +36,6 @@ export class ProfileDBContext {
   }
 
   public async updateProfile(req: updateProfileRequest) {
-    console.log(req);
     return this.collectionReference('users').doc(req.id).update(req.data);
   }
 }
