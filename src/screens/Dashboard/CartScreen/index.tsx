@@ -46,9 +46,14 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
         createdAt: now,
         customerId: userToken,
         customerPaymentCredential: gopayNumber,
-        products: cartItems.map((item: any) => {
-          delete item.imagePath;
-          return item;
+        products: cartItems.map(item => {
+          return {
+            id: item.id,
+            name: item.name,
+            quantity: item.quantity,
+            options: item.options,
+            price: item.price,
+          };
         }),
         shipping: {
           address: {
