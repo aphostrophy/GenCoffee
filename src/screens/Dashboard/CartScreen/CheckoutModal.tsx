@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import Modal from 'react-native-modal';
-import { IconFactory, Input, Spacer } from '@components';
+import { IconFactory, Input, Spacer, NonNativeFancyButton } from '@components';
 import { modalStyles as styles } from './styles';
 
 interface CheckoutModalProps {
@@ -9,6 +9,7 @@ interface CheckoutModalProps {
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
   gopayNumber: string;
   setGopayNumber: React.Dispatch<React.SetStateAction<string>>;
+  handleSubmit: () => Promise<void>;
 }
 
 const CheckoutModal = ({
@@ -16,6 +17,7 @@ const CheckoutModal = ({
   setIsVisible,
   gopayNumber,
   setGopayNumber,
+  handleSubmit,
 }: CheckoutModalProps): JSX.Element => {
   const closeModal = () => {
     setIsVisible(false);
@@ -59,9 +61,9 @@ const CheckoutModal = ({
         </View>
         <Spacer height={20} />
         <View style={styles.section}>
-          <TouchableOpacity style={styles.submit}>
+          <NonNativeFancyButton containerStyle={styles.submit} onPress={handleSubmit}>
             <Text style={styles.submitText}>Lakukan Pembayaran</Text>
-          </TouchableOpacity>
+          </NonNativeFancyButton>
         </View>
         <Spacer height={20} />
       </View>

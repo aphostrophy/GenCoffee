@@ -10,6 +10,7 @@ import SearchBar from './SearchBar';
 import { ProductCard, MemberCard } from './Cards';
 import DashedLine from './DashedLine';
 import RadioButton from './RadioButton';
+import NonNativeFancyButton from './NonNativeFancyButton';
 
 export {
   Input,
@@ -25,4 +26,5 @@ export {
   RadioButton,
   MemberCard,
   Header,
+  NonNativeFancyButton,
 };

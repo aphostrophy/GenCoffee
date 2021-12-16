@@ -7,7 +7,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { useAppSelector } from '@hooks/hooks';
 import { selectNormalizedCartItems, selectTotalCartPrice } from '@selectors/cart';
 import { ProfileStateLoaded } from '@slices/ProfileSlice';
-import { PlacesDBContext } from '@api/places';
+import { PlacesDBContext, OrderDBContext } from '@api';
 import { formatRupiah } from '@utils';
 import { MenuStackParamList, AppTabParamList, AppStackParamList } from '@types';
 import { WHITE, GRAY } from '@styles/colors';
@@ -26,6 +26,7 @@ type NavigationProps = CompositeScreenProps<
 
 const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const user = useAppSelector(state => state.profile);
+  const userToken = useAppSelector(state => state.useAuth.userToken as string);
   const memoizedSelectNormalizedCartItems = useMemo(() => selectNormalizedCartItems, []);
   const memoizedSelectTotalCartPrice = useMemo(() => selectTotalCartPrice, []);
   const cartItems = useAppSelector(memoizedSelectNormalizedCartItems);
@@ -34,6 +35,43 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const [totalCost, setTotalCost] = useState<number>(0);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [gopayNumber, setGopayNumber] = useState<string>('');
+
+  const handleSubmit = async () => {
+    try {
+      if (user.district === null || user.fullAddress === null) {
+        throw new Error('Pemesanan tidak bisa diproses');
+      }
+      const now = new Date();
+      const body = {
+        createdAt: now,
+        customerId: userToken,
+        customerPaymentCredential: gopayNumber,
+        products: cartItems.map((item: any) => {
+          delete item.imagePath;
+          return item;
+        }),
+        shipping: {
+          address: {
+            city: 'Bandung',
+            district: user.district,
+            streetAddress: user.fullAddress,
+            addressNote: user.addressNote,
+          },
+          origin: {
+            name: 'Toko Lengkong',
+          },
+          deliveryPrice: deliveryCost,
+        },
+        totalCost: totalCost,
+      };
+      await OrderDBContext.current.createOrder(body);
+      setIsVisible(false);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.log(err.message);
+      }
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -71,6 +109,7 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
                 setIsVisible={setIsVisible}
                 gopayNumber={gopayNumber}
                 setGopayNumber={setGopayNumber}
+                handleSubmit={handleSubmit}
               />
             }
           />
@@ -97,6 +136,7 @@ const CartFooter = ({
   setIsVisible,
   gopayNumber,
   setGopayNumber,
+  handleSubmit,
 }: {
   deliveryCost: number;
   totalCost: number;
@@ -104,6 +144,7 @@ const CartFooter = ({
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
   gopayNumber: string;
   setGopayNumber: React.Dispatch<React.SetStateAction<string>>;
+  handleSubmit: () => Promise<void>;
 }): JSX.Element => {
   return (
     <View>
@@ -142,6 +183,7 @@ const CartFooter = ({
         setIsVisible={setIsVisible}
         gopayNumber={gopayNumber}
         setGopayNumber={setGopayNumber}
+        handleSubmit={() => handleSubmit()}
       />
     </View>
   );
