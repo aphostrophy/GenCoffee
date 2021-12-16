@@ -223,6 +223,17 @@ const modalStyles = StyleSheet.create({
     fontFamily: MontserratSemiBold,
     fontSize: RFValue(12),
   },
+  visible: {
+    display: 'flex',
+  },
+  invisible: {
+    display: 'none',
+  },
+  errorLabel: {
+    fontFamily: MontserratSemiBold,
+    fontSize: RFValue(12),
+    color: RED,
+  },
 });
 
 export { styles, deliveryCardStyles, productCardStyles, modalStyles };

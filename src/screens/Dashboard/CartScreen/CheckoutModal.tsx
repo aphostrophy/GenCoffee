@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import Modal from 'react-native-modal';
 import { IconFactory, Input, Spacer, NonNativeFancyButton } from '@components';
@@ -19,8 +19,19 @@ const CheckoutModal = ({
   setGopayNumber,
   handleSubmit,
 }: CheckoutModalProps): JSX.Element => {
+  const [errorVisible, setErrorVisible] = useState<boolean>(false);
   const closeModal = () => {
+    setErrorVisible(false);
     setIsVisible(false);
+  };
+
+  const validateAndSubmit = async () => {
+    if (gopayNumber.length > 0) {
+      await handleSubmit();
+    } else {
+      setErrorVisible(true);
+      console.log('Mohon isi nomor gopay');
+    }
   };
   return (
     <Modal
@@ -52,6 +63,9 @@ const CheckoutModal = ({
         <View style={styles.section}>
           <View style={styles.inputContainer}>
             <Text style={styles.label}>No. Akun Gopay Anda</Text>
+            <Text style={[styles.errorLabel, errorVisible ? styles.visible : styles.invisible]}>
+              Nomor tidak boleh kosong
+            </Text>
             <Input
               value={gopayNumber}
               onChangeText={val => setGopayNumber(val)}
@@ -61,7 +75,7 @@ const CheckoutModal = ({
         </View>
         <Spacer height={20} />
         <View style={styles.section}>
-          <NonNativeFancyButton containerStyle={styles.submit} onPress={handleSubmit}>
+          <NonNativeFancyButton containerStyle={styles.submit} onPress={validateAndSubmit}>
             <Text style={styles.submitText}>Lakukan Pembayaran</Text>
           </NonNativeFancyButton>
         </View>

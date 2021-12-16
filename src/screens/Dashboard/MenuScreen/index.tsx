@@ -84,7 +84,7 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
         }
         ListFooterComponent={
           <>
-            <Spacer height={40} />
+            <Spacer height={80} />
           </>
         }
         numColumns={2}
