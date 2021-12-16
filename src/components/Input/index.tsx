@@ -1,7 +1,7 @@
 import React from 'react';
 import Regular from './regular';
 import Note from './note';
-import { KeyboardTypeOptions, TextInputProps } from 'react-native';
+import { KeyboardTypeOptions, TextInputProps, StyleProp, ViewStyle } from 'react-native';
 
 interface Props extends TextInputProps {
   value: string;
@@ -10,6 +10,7 @@ interface Props extends TextInputProps {
   placeHolder?: string;
   keyboardType?: KeyboardTypeOptions;
   limit?: number;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 const Input: React.FC<Props> = props => {

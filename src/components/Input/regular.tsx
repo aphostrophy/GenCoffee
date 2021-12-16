@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Dimensions,
   StyleProp,
-  ViewProps,
+  ViewStyle,
 } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
@@ -20,7 +20,7 @@ interface Props extends TextInputProps {
   value: string;
   onChangeText?: (text: string) => void;
   placeHolder?: string;
-  containerStyle?: StyleProp<ViewProps>;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 const Regular: React.FC<Props> = ({

@@ -1,7 +1,8 @@
 import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import { createOrderRequest } from '@types';
 
-export class PlacesDBContext {
-  static current: PlacesDBContext = new PlacesDBContext();
+export class OrderDBContext {
+  static current: OrderDBContext = new OrderDBContext();
   private db: FirebaseFirestoreTypes.Module;
 
   private constructor() {
@@ -30,21 +31,8 @@ export class PlacesDBContext {
     return this.db.collection(collectionName);
   }
 
-  public async getDistricts() {
-    return await this.collectionReference('places').doc('districts').get();
-  }
-
-  public async getStores() {
-    return this.collectionReference('places').doc('stores').get();
-  }
-
-  public async getDeliveryPrice(shop: string, destination: string) {
-    return (
-      await this.collectionReference('prices')
-        .where('from', '==', shop)
-        .where('to', '==', destination)
-        .limit(1)
-        .get()
-    ).docs;
+  public async createOrder(req: createOrderRequest) {
+    const body = { ...req, status: 'pending' };
+    return this.collectionReference('order_ongoing').add(body);
   }
 }

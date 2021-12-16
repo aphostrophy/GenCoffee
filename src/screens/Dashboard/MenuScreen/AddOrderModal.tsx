@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, Image, ActivityIndicator } from 'react-native';
 import Modal from 'react-native-modal';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch } from '@hooks';
 import { DashedLine, IconFactory, Spacer, RadioButton } from '@components';
-import { addProductToCart, reduceProductQuantityFromCart } from '@slices/CartSlice';
-import { selectCartItemQuantity } from '@selectors';
+import { addProductToCart } from '@slices/CartSlice';
 import { Product } from '@types';
 import { camelToSentenceCase } from '@utils';
 import { GRAY } from '@styles/colors';
@@ -76,6 +75,7 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
           name: product.name,
           quantity: count,
           imagePath: product.imagePath,
+          price: product.price,
           options,
         }),
       );

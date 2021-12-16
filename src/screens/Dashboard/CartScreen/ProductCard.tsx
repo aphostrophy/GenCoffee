@@ -26,7 +26,7 @@ const ProductCard = ({ item }: ProductCardProps): JSX.Element => {
         <Spacer width={10} />
         <View style={[styles.column, { flex: 2 }]}>
           <Text style={styles.name}>{limitString(item.name, 17)}</Text>
-          <Text style={styles.price}>{formatRupiah(15000)}</Text>
+          <Text style={styles.price}>{formatRupiah(item.price)}</Text>
           <Text style={styles.options}>{optionsToText(item.options)}</Text>
         </View>
         <Spacer width={10} />
