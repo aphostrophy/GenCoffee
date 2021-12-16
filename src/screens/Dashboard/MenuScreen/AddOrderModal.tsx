@@ -17,14 +17,14 @@ interface AddOrderModalProps {
 
 const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  const [count, setCount] = useState<number>(0);
+  const [count, setCount] = useState<number>(1);
   const [options, setOptions] = useState<null | Record<
     string,
     Array<{ option: string; selected: boolean }>
   >>(null);
 
   useEffect(() => {
-    if (product) {
+    if (product && isVisible) {
       const options: Record<
         string,
         Array<{
@@ -44,7 +44,7 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
       });
       setOptions(options);
     }
-  }, [product]);
+  }, [product, isVisible]);
 
   const handleChooseOption = (optionKey: string, chosenOption: string) => {
     if (options) {
@@ -64,7 +64,7 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
 
   const closeModal = () => {
     setIsVisible(false);
-    setCount(0);
+    setCount(1);
   };
 
   const submitChangesToCart = () => {
@@ -113,7 +113,7 @@ const AddOrderModal = ({ isVisible, setIsVisible, product }: AddOrderModalProps)
               <TouchableOpacity
                 onPress={() =>
                   setCount(count => {
-                    if (count > 0) {
+                    if (count > 1) {
                       return count - 1;
                     }
                     return count;

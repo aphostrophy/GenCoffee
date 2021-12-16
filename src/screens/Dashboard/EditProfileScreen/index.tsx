@@ -31,7 +31,7 @@ const EditProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const [name, setName] = useState<string>(user.name);
   const [district, setDistrict] = useState<string | null>(user.district);
   const [address, setAddress] = useState<string>(user.fullAddress ? user.fullAddress : '');
-  const [addressNote, setAddressNote] = useState<string>('');
+  const [addressNote, setAddressNote] = useState<string>(user.addressNote ? user.addressNote : '');
 
   const submitChange = async () => {
     if (district && address) {
