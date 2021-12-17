@@ -9,7 +9,10 @@ import PushNotification from 'react-native-push-notification';
 
 PushNotification.configure({
   onNotification: function (notification) {
+    // eslint-disable-next-line no-undef
     console.log('NOTIFICATION:', notification);
+    PushNotification.cancelAllLocalNotifications();
+    PushNotification.localNotification(notification);
   },
   popInitialNotification: true,
 
@@ -22,13 +25,5 @@ PushNotification.configure({
    */
   requestPermissions: true,
 });
-
-PushNotification.createChannel(
-  {
-    channelId: 'gen-coffee', // (required)
-    channelName: 'gen-coffee', // (required)
-  },
-  created => console.log(`CreateChannel returned '${created}'`),
-);
 
 AppRegistry.registerComponent(appName, () => App);
