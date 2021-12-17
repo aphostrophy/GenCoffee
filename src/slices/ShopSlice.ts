@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Product, PRODUCT_CATEGORY } from '@types';
 
-interface ShopState {
+export interface ShopState {
   shop: string | null;
   category: PRODUCT_CATEGORY;
   items: Product[];

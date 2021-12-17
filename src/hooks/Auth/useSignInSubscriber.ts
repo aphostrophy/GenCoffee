@@ -22,8 +22,11 @@ const useSignInSubscriber = () => {
         ref.update({
           deviceToken: deviceToken,
         });
+        console.log('============');
         const user = (await ref.get()).data();
         const userSecret = (await privateRef.get()).data();
+        console.log(user);
+        console.log(userSecret);
         if (user) {
           if (userSecret) {
             const profile = {

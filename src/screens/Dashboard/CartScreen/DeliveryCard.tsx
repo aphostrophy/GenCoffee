@@ -14,8 +14,14 @@ const DeliveryCard = ({ address, district }: DeliveryCardProps): JSX.Element => 
         <Text style={styles.headerText}>Diantar ke</Text>
       </View>
       <View style={styles.content}>
-        <Text style={styles.address}>{address}</Text>
-        <Text style={styles.district}>{district}</Text>
+        {address && district ? (
+          <>
+            <Text style={styles.address}>{address}</Text>
+            <Text style={styles.district}>{district}</Text>
+          </>
+        ) : (
+          <Text style={styles.alert}>Mohon atur alamat kamu sebelum melakukan pemesanan</Text>
+        )}
       </View>
     </View>
   );

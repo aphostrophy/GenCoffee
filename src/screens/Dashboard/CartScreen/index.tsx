@@ -108,6 +108,7 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
             style={styles.list}
             ListFooterComponent={
               <CartFooter
+                enableCheckout={Boolean(user.district !== null && user.fullAddress !== null)}
                 deliveryCost={deliveryCost}
                 totalCost={totalCost}
                 isVisible={isVisible}
@@ -135,6 +136,7 @@ const CartHeader = ({ user }: { user: ProfileStateLoaded }): JSX.Element => {
 };
 
 const CartFooter = ({
+  enableCheckout,
   deliveryCost,
   totalCost,
   isVisible,
@@ -143,6 +145,7 @@ const CartFooter = ({
   setGopayNumber,
   handleSubmit,
 }: {
+  enableCheckout: boolean;
   deliveryCost: number;
   totalCost: number;
   isVisible: boolean;
@@ -176,7 +179,8 @@ const CartFooter = ({
           <Text style={styles.totalPrice}>{formatRupiah(totalCost)}</Text>
         </View>
         <TouchableOpacity
-          style={[styles.column, styles.checkout]}
+          disabled={!enableCheckout}
+          style={[styles.column, enableCheckout ? styles.checkout : styles.checkoutDisabled]}
           onPress={() => setIsVisible(true)}
         >
           <Text style={styles.checkoutText}>Checkout</Text>

@@ -1,6 +1,12 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { PoppinsBold, Poppins, MontserratBold, MontserratSemiBold } from '@styles/fonts';
-import { WHITE, YELLOW, GRAY, BLUE } from '@styles/colors';
+import {
+  PoppinsBold,
+  Poppins,
+  MontserratBold,
+  MontserratSemiBold,
+  PoppinsSemiBold,
+} from '@styles/fonts';
+import { WHITE, YELLOW, GRAY, BLUE, RED } from '@styles/colors';
 const { width, height } = Dimensions.get('window');
 
 const deliveryCardStyles = StyleSheet.create({
@@ -91,6 +97,11 @@ const deliveryCardStyles = StyleSheet.create({
     fontFamily: PoppinsBold,
     color: WHITE,
     fontSize: 12,
+  },
+  miniCardRedLabel: {
+    color: RED,
+    fontSize: 12,
+    fontFamily: PoppinsSemiBold,
   },
 });
 

@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { configureStore, Middleware, Dispatch, AnyAction } from '@reduxjs/toolkit';
+import { configureStore, Middleware, Dispatch, AnyAction, CombinedState } from '@reduxjs/toolkit';
 import { reduxBatch } from '@manaflair/redux-batch';
 import {
   persistStore,
@@ -13,7 +13,11 @@ import {
 } from 'redux-persist';
 import { name as appName } from '../../app.json';
 
-import rootReducer from '@slices';
+import appReducer from '@slices';
+import { AuthState } from '@slices/AuthReducer';
+import { ProfileState } from '@slices/ProfileSlice';
+import { ShopState } from '@slices/ShopSlice';
+import { CartState } from '@slices/CartSlice';
 
 const persistConfig = {
   key: 'root',
@@ -30,6 +34,24 @@ if (__DEV__) {
 }
 
 const preloadedState = {};
+
+const rootReducer = (
+  state:
+    | CombinedState<{
+        useAuth: AuthState;
+        useShop: ShopState;
+        cart: CartState;
+        profile: ProfileState;
+      }>
+    | undefined,
+  action: AnyAction,
+) => {
+  if (action.type === 'LOGOUT_SUCCEEDED') {
+    AsyncStorage.removeItem('persist:root');
+    return appReducer(undefined, action);
+  }
+  return appReducer(state, action);
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

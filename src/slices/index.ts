@@ -5,11 +5,11 @@ import shopSlice from './ShopSlice';
 import cartSlice from './CartSlice';
 import profileSlice from './ProfileSlice';
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   useAuth: AuthReducer,
   useShop: shopSlice.reducer,
   cart: cartSlice.reducer,
   profile: profileSlice.reducer,
 });
 
-export default rootReducer;
+export default appReducer;

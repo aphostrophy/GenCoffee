@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { signIn, signOut } from '@action-creators/AuthActionCreator';
+import { signIn } from '@action-creators/AuthActionCreator';
 
 export interface AuthState {
   userToken: null | string;
@@ -11,13 +11,9 @@ const initialState: AuthState = {
 };
 
 const authReducer = createReducer(initialState, builder => {
-  builder
-    .addCase(signIn, (state, action) => {
-      state.userToken = action.payload;
-    })
-    .addCase(signOut, state => {
-      state.userToken = null;
-    });
+  builder.addCase(signIn, (state, action) => {
+    state.userToken = action.payload;
+  });
 });
 
 export default authReducer;

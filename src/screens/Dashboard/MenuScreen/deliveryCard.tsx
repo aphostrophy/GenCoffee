@@ -56,10 +56,14 @@ const MiniCard = ({ fullAddress, district, onChangePress }: MiniCardProps): JSX.
       </View>
       <View style={[styles.row, styles.miniCardBottom]}>
         <View style={styles.column}>
-          <Text style={styles.miniCardBottomLabel}>
-            {fullAddress ? limitString(fullAddress, 18) : ''}
-          </Text>
-          <Text style={styles.miniCardBottomSmallLabel}>{district}</Text>
+          {fullAddress && district ? (
+            <>
+              <Text style={styles.miniCardBottomLabel}>{limitString(fullAddress, 18)}</Text>
+              <Text style={styles.miniCardBottomSmallLabel}>{district}</Text>
+            </>
+          ) : (
+            <Text style={styles.miniCardRedLabel}>Belum dipasang</Text>
+          )}
         </View>
         <TouchableOpacity style={styles.miniCardBottomButton} onPress={() => onChangePress()}>
           <Text style={styles.miniCardBottomButtonText}>Ganti</Text>

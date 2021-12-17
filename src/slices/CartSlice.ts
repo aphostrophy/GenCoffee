@@ -37,7 +37,7 @@ interface UniqueProductPayload {
   selectedOptions: Record<string, string>;
 }
 
-interface CartState {
+export interface CartState {
   items: Record<string, ProductTypeData>;
   itemCount: number;
 }

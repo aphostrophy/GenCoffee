@@ -72,6 +72,15 @@ const styles = StyleSheet.create({
     padding: 0,
     height: 40,
   },
+  checkoutDisabled: {
+    backgroundColor: GRAY,
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+    padding: 0,
+    height: 40,
+  },
   checkoutText: {
     fontFamily: PoppinsBold,
     color: WHITE,
@@ -114,6 +123,10 @@ const deliveryCardStyles = StyleSheet.create({
   },
   district: {
     fontFamily: Montserrat,
+  },
+  alert: {
+    fontFamily: MontserratSemiBold,
+    color: RED,
   },
 });
 
