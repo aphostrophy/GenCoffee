@@ -30,7 +30,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
 
   const onPhoneButtonPress = async () => {
     try {
-      await navigation.navigate('SignIn');
+      navigation.navigate('SignIn');
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.log('Error during phone auth', err.message);
