@@ -57,7 +57,7 @@ const FancyButton: React.FC<FancyButtonProps> = ({ children, containerStyle, onP
       onPress={() => handlePress()}
     >
       {isLoading ? (
-        <ActivityIndicator />
+        <ActivityIndicator color="#FFFFFF" />
       ) : (
         React.Children.map(children, child => {
           if (React.isValidElement(child)) {

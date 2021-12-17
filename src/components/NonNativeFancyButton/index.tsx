@@ -60,7 +60,7 @@ const NonNativeFancyButton = ({
       onPress={() => handlePress()}
     >
       {isLoading ? (
-        <ActivityIndicator />
+        <ActivityIndicator color="#FFFFFF" />
       ) : (
         React.Children.map(children, child => {
           if (React.isValidElement(child)) {
