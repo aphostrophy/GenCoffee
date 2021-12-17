@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppTabParamList, AppStackParamList } from '@types';
 import { ChooseDistrictScreen } from '@screens';
-
+import PushNotification from 'react-native-push-notification';
 import MenuStack from './menuStack';
 import OrderStack from './orderStack';
 import ProfileStack from './profileStack';
@@ -40,6 +40,13 @@ const AppTabNavigator: React.FC = () => {
 };
 
 const AppStackNavigator = (): JSX.Element => {
+  PushNotification.createChannel(
+    {
+      channelId: 'gen-coffee', // (required)
+      channelName: 'gen-coffee', // (required)
+    },
+    created => console.log(`CreateChannel returned '${created}'`),
+  );
   return (
     <AppStack.Navigator screenOptions={{ headerShown: false }}>
       <AppStack.Screen name="AppTab" component={AppTabNavigator} />
