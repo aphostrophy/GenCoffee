@@ -3,7 +3,9 @@ import WelcomeScreen from './Auth/WelcomeScreen';
 import MenuScreen from './Dashboard/MenuScreen';
 import ProfileScreen from './Dashboard/ProfileScreen';
 import EditProfileScreen from './Dashboard/EditProfileScreen';
-import OrderScreen from './Dashboard/OrderScreen';
+import OrderOngoingScreen from './Dashboard/OrderScreen/OrderOngoing';
+import OrderHistoryScreen from './Dashboard/OrderScreen/OrderHistory';
+import OngoingOrderDetail from './Dashboard/OrderScreen/OngoingOrderDetail';
 import ChooseDistrictScreen from './Dashboard/ChooseDistrictScreen';
 import CartScreen from './Dashboard/CartScreen';
 
@@ -12,7 +14,9 @@ export {
   MenuScreen,
   ProfileScreen,
   EditProfileScreen,
-  OrderScreen,
+  OrderOngoingScreen,
+  OrderHistoryScreen,
+  OngoingOrderDetail,
   WelcomeScreen,
   ChooseDistrictScreen,
   CartScreen,

@@ -35,4 +35,20 @@ export class OrderDBContext {
     const body = { ...req, status: 'pending' };
     return this.collectionReference('order_ongoing').add(body);
   }
+
+  public async getOngoingOrder(userId: string) {
+    return this.collectionQuery('order_ongoing')
+      .where('customerId', '==', userId)
+      .orderBy('createdAt', 'desc')
+      .limit(25)
+      .get();
+  }
+
+  public async getHistoryOrder(userId: string) {
+    return this.collectionQuery('order_history')
+      .where('customerId', '==', userId)
+      .orderBy('createdAt', 'desc')
+      .limit(25)
+      .get();
+  }
 }

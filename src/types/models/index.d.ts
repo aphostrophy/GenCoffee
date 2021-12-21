@@ -29,14 +29,14 @@ export interface Product extends FirebaseFirestoreTypes.DocumentData {
 export interface OrderHistory {
   orderId: string;
   customerId: string;
+  customerPaymentCredential: string;
   status: ORDER_STATUS;
   totalCost: number;
-  createdAt: string;
+  createdAt: firebase.firestore.Timestamp;
   completedAt: string;
   shipping: {
     origin: {
-      shopId: string;
-      shopAddress: string;
+      name: string;
     };
     address: {
       city: string;
