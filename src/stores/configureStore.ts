@@ -18,6 +18,7 @@ import { AuthState } from '@slices/AuthReducer';
 import { ProfileState } from '@slices/ProfileSlice';
 import { ShopState } from '@slices/ShopSlice';
 import { CartState } from '@slices/CartSlice';
+import { OrderState } from '@slices/OrderSlice';
 
 const persistConfig = {
   key: 'root',
@@ -40,6 +41,7 @@ const rootReducer = (
     | CombinedState<{
         useAuth: AuthState;
         useShop: ShopState;
+        useOrder: OrderState;
         cart: CartState;
         profile: ProfileState;
       }>
