@@ -13,9 +13,9 @@ const OrderHistoryCard = ({ orderHistoryData }: DeliveryCardProps): JSX.Element 
   return (
     <View style={[OrderHistoryCardStyle.container]}>
       <View style={{ flex: 1 }}>
-        <Text style={OrderHistoryCardStyle.dateText}>
-          {orderHistoryData.createdAt.toDate().toDateString()}
-        </Text>
+        {/* <Text style={OrderHistoryCardStyle.dateText}>
+          {orderHistoryData.createdAt && orderHistoryData.createdAt.toDate().toDateString()}
+        </Text> */}
         <Text style={OrderHistoryCardStyle.idText}>ID 1234</Text>
       </View>
       <View style={{ flex: 1 }}>

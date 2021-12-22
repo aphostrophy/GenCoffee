@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector, useFirebaseDataSource } from '@hooks';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { restartItemsBatch } from '@slices/OrderOngoingSlice';
+import { restartItemsBatch, restartTrigger } from '@slices/OrderSlice';
 import { AppStackParamList, AppTabParamList, OrderHistory, OrderStackParamList } from '@types';
 import { OrderMainStyle } from './styles';
 
@@ -23,17 +23,25 @@ type NavigationProps = CompositeScreenProps<
 
 const OrderScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const userToken = useAppSelector(state => state.useAuth.userToken as string);
+  const { restart } = useAppSelector(state => state.useOrder);
+  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
 
   const fetchOngoingOrder = useCallback(() => {
-    return OrderDBContext.current.getOngoingOrder(userToken);
-  }, [userToken]);
+    return OrderDBContext.current.getOngoingOrder(userToken, restart);
+  }, [userToken, restart]);
 
   const items = useFirebaseDataSource<OrderHistory>(fetchOngoingOrder);
 
   // useEffect(() => {
+  //   console.log('janis');
   //   if (items) {
-  //     dispatch(restartItemsBatch(items));
+  //     const itemsClone = [...items];
+  //     itemsClone.map(item => {
+  //       if (item.completedAt) item.completedAt = item.completedAt?.toDate().toDateString();
+  //       if (item.createdAt) item.createdAt = item.createdAt?.toDate().toDateString();
+  //     });
+  //     dispatch(restartItemsBatch(itemsClone));
   //   }
   // }, [items, dispatch]);
 
@@ -60,7 +68,11 @@ const OrderScreen = ({ navigation }: NavigationProps): JSX.Element => {
           numColumns={1}
           showsVerticalScrollIndicator={false}
           extraData={items}
-          refreshing={true}
+          refreshing={loading}
+          onRefresh={() => {
+            dispatch(restartTrigger(!restart));
+            setLoading(false);
+          }}
         />
       </View>
     </Container>

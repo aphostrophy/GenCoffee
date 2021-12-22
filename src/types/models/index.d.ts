@@ -32,8 +32,8 @@ export interface OrderHistory {
   customerPaymentCredential: string;
   status: ORDER_STATUS;
   totalCost: number;
-  createdAt: firebase.firestore.Timestamp;
-  completedAt: string;
+  createdAt: any;
+  completedAt: any;
   shipping: {
     origin: {
       name: string;

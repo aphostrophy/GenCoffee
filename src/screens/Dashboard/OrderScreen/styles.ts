@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { WHITE, YELLOW, GRAY, BLUE, RED } from '@styles/colors';
+import { PoppinsBold, Poppins, MontserratBold, MontserratSemiBold } from '@styles/fonts';
 
 const OrderOngoingCardStyle = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 3,
+    borderWidth: 1,
     borderColor: 'black',
     marginHorizontal: 10,
     marginVertical: 5,
@@ -16,6 +17,7 @@ const OrderOngoingCardStyle = StyleSheet.create({
     fontSize: 19,
     marginBottom: 2,
     fontWeight: '600',
+    fontFamily: Poppins,
   },
   textBackgroundColor: {
     color: 'white',
@@ -34,7 +36,7 @@ const OrderOngoingCardStyle = StyleSheet.create({
 const OrderHistoryCardStyle = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 3,
+    borderWidth: 1,
     borderColor: 'black',
     marginHorizontal: 10,
     marginVertical: 5,

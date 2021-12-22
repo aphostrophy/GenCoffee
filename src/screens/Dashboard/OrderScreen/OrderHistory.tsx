@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 
 import { OrderDBContext } from '@api';
@@ -6,23 +6,19 @@ import { Container, Spacer } from '@components';
 import { useAppDispatch, useAppSelector, useFirebaseDataSource } from '@hooks';
 import { OrderHistory } from '@types';
 import { OrderHistoryCard } from './HistoryOrderCard';
-import { restartItemsBatch } from '@slices/OrderOngoingSlice';
+import { restartTrigger } from '@slices/OrderSlice';
 
 const OrderHistoryScreen = (): JSX.Element => {
   const userToken = useAppSelector(state => state.useAuth.userToken as string);
+  const { restart } = useAppSelector(state => state.useOrder);
+  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
 
   const fetchOngoingOrder = useCallback(() => {
-    return OrderDBContext.current.getHistoryOrder(userToken);
-  }, [userToken]);
+    return OrderDBContext.current.getHistoryOrder(userToken, restart);
+  }, [userToken, restart]);
 
   const items = useFirebaseDataSource<OrderHistory>(fetchOngoingOrder);
-
-  //   useEffect(() => {
-  //     if (items) {
-  //       dispatch(restartItemsBatch(items));
-  //     }
-  //   }, [items, dispatch]);
 
   return (
     <Container statusBarStyle="dark-content">
@@ -49,7 +45,11 @@ const OrderHistoryScreen = (): JSX.Element => {
             numColumns={1}
             showsVerticalScrollIndicator={false}
             extraData={items}
-            refreshing={true}
+            refreshing={loading}
+            onRefresh={() => {
+              dispatch(restartTrigger(!restart));
+              setLoading(false);
+            }}
           />
         </View>
       </View>

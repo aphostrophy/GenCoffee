@@ -36,7 +36,8 @@ export class OrderDBContext {
     return this.collectionReference('order_ongoing').add(body);
   }
 
-  public async getOngoingOrder(userId: string) {
+  public async getOngoingOrder(userId: string, restart: boolean) {
+    console.log(restart);
     return this.collectionQuery('order_ongoing')
       .where('customerId', '==', userId)
       .orderBy('createdAt', 'desc')
@@ -44,7 +45,8 @@ export class OrderDBContext {
       .get();
   }
 
-  public async getHistoryOrder(userId: string) {
+  public async getHistoryOrder(userId: string, restart: boolean) {
+    console.log(restart);
     return this.collectionQuery('order_history')
       .where('customerId', '==', userId)
       .orderBy('createdAt', 'desc')
