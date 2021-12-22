@@ -22,37 +22,29 @@ const OrderHistoryScreen = (): JSX.Element => {
 
   return (
     <Container statusBarStyle="dark-content">
-      <View>
-        <View>
-          <FlatList
-            data={items}
-            renderItem={({ item, index }) => (
-              <OrderHistoryCard
-                orderHistoryData={item}
-                key={`${index}-${item.customerPaymentCredential}`}
-              />
-            )}
-            ListHeaderComponent={
-              <>
-                <Text
-                  style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 10, marginBottom: 10 }}
-                >
-                  Lampau
-                </Text>
-              </>
-            }
-            ListFooterComponent={<Spacer height={40} />}
-            numColumns={1}
-            showsVerticalScrollIndicator={false}
-            extraData={items}
-            refreshing={loading}
-            onRefresh={() => {
-              dispatch(restartTrigger(!restart));
-              setLoading(false);
-            }}
+      <FlatList
+        data={items}
+        renderItem={({ item, index }) => (
+          <OrderHistoryCard
+            orderHistoryData={item}
+            key={`${index}-${item.customerPaymentCredential}`}
           />
-        </View>
-      </View>
+        )}
+        ListHeaderComponent={
+          <Text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 10, marginBottom: 10 }}>
+            Lampau
+          </Text>
+        }
+        ListFooterComponent={<Spacer height={40} />}
+        numColumns={1}
+        showsVerticalScrollIndicator={false}
+        extraData={items}
+        refreshing={loading}
+        onRefresh={() => {
+          dispatch(restartTrigger(!restart));
+          setLoading(false);
+        }}
+      />
     </Container>
   );
 };

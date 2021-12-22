@@ -4,9 +4,10 @@ import { Spacer, DashedLine, Header, Container } from '@components';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useAppSelector } from '@hooks/hooks';
+import { useAppDispatch, useAppSelector } from '@hooks/hooks';
 import { selectNormalizedCartItems, selectTotalCartPrice } from '@selectors/cart';
 import { ProfileStateLoaded } from '@slices/ProfileSlice';
+import { clearCart } from '@slices/CartSlice';
 import { PlacesDBContext, OrderDBContext } from '@api';
 import { formatRupiah } from '@utils';
 import { MenuStackParamList, AppTabParamList, AppStackParamList } from '@types';
@@ -27,6 +28,7 @@ type NavigationProps = CompositeScreenProps<
 const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const user = useAppSelector(state => state.profile);
   const userToken = useAppSelector(state => state.useAuth.userToken as string);
+  const dispatch = useAppDispatch();
   const memoizedSelectNormalizedCartItems = useMemo(() => selectNormalizedCartItems, []);
   const memoizedSelectTotalCartPrice = useMemo(() => selectTotalCartPrice, []);
   const cartItems = useAppSelector(memoizedSelectNormalizedCartItems);
@@ -37,6 +39,7 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const [gopayNumber, setGopayNumber] = useState<string>('');
 
   const handleSubmit = async () => {
+    console.log('CCCC');
     try {
       if (user.district === null || user.fullAddress === null) {
         throw new Error('Pemesanan tidak bisa diproses');
@@ -70,7 +73,16 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
         totalCost: totalCost,
       };
       await OrderDBContext.current.createOrder(body);
+      console.log('BBBB');
       setIsVisible(false);
+      dispatch(clearCart());
+      console.log('AAAA');
+      if (navigation.canGoBack()) {
+        navigation.goBack();
+      } else {
+        console.log('HMM');
+        navigation.navigate('Menu');
+      }
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.log(err.message);
