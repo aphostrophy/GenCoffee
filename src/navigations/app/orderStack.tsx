@@ -1,27 +1,16 @@
 import React from 'react';
 
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { OrderHistoryScreen, OrderOngoingScreen, OngoingOrderDetail } from '@screens';
+import { OrderScreen, OngoingOrderDetail } from '@screens';
 import { OrderStackParamList } from '@types';
 
-const OrderStack = createMaterialTopTabNavigator();
-const OrderStackOuter = createStackNavigator<OrderStackParamList>();
-
-const OngoingOrderNavigator: React.FC = () => {
-  return (
-    <OrderStackOuter.Navigator screenOptions={{ headerShown: false }}>
-      <OrderStack.Screen name="OngoingOrder" component={OrderOngoingScreen} />
-      <OrderStack.Screen name="Detail" component={OngoingOrderDetail} />
-    </OrderStackOuter.Navigator>
-  );
-};
+const OrderStack = createStackNavigator<OrderStackParamList>();
 
 const OrderStackNavigator: React.FC = () => {
   return (
-    <OrderStack.Navigator initialRouteName="Berlangsung">
-      <OrderStack.Screen name="Berlangsung" component={OngoingOrderNavigator} />
-      <OrderStack.Screen name="Lampau" component={OrderHistoryScreen} />
+    <OrderStack.Navigator screenOptions={{ headerShown: false }}>
+      <OrderStack.Screen name="Order" component={OrderScreen} />
+      <OrderStack.Screen name="Detail" component={OngoingOrderDetail} />
     </OrderStack.Navigator>
   );
 };

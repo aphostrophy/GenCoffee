@@ -29,6 +29,7 @@ export type MenuStackParamList = {
 
 export type OrderStackParamList = {
   Order: undefined;
+  Detail: undefined;
 };
 
 export type ProfileStackParamList = {

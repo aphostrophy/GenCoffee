@@ -2,25 +2,25 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { OrderHistory } from '@types';
 
 export interface OrderState {
-  ongoing_order_items: OrderHistory[];
-  restart: boolean;
+  ongoing_orders: OrderHistory[];
+  history_orders: OrderHistory[];
 }
 
-const orderInitialState = { ongoing_order_items: [], restart: false };
+const orderInitialState = { ongoing_orders: [], history_orders: [] };
 
 const orderSlice = createSlice({
-  name: 'order_ongoing',
+  name: 'order',
   initialState: orderInitialState as OrderState,
   reducers: {
-    restartItemsBatch: (state, action: PayloadAction<OrderHistory[]>) => {
-      state.ongoing_order_items = action.payload;
+    restartOngoingBatch: (state, action: PayloadAction<OrderHistory[]>) => {
+      state.ongoing_orders = action.payload;
     },
-    restartTrigger: (state, action: PayloadAction<boolean>) => {
-      state.restart = action.payload;
+    restartHistoryBatch: (state, action: PayloadAction<OrderHistory[]>) => {
+      state.history_orders = action.payload;
     },
   },
 });
 
-export const { restartItemsBatch, restartTrigger } = orderSlice.actions;
+export const { restartOngoingBatch, restartHistoryBatch } = orderSlice.actions;
 
 export default orderSlice;
