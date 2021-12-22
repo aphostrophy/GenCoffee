@@ -18,6 +18,7 @@ const useSignIn = (): useSignInReturnInterface => {
   const [confirm, setConfirm] = useState<null | FirebaseAuthTypes.ConfirmationResult>(null);
 
   async function googleSignIn() {
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     const { idToken } = await GoogleSignin.signIn();
 
     // Create a Google credential with the token

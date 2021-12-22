@@ -4,9 +4,10 @@ import { Spacer, DashedLine, Header, Container } from '@components';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useAppSelector } from '@hooks/hooks';
+import { useAppDispatch, useAppSelector } from '@hooks/hooks';
 import { selectNormalizedCartItems, selectTotalCartPrice } from '@selectors/cart';
 import { ProfileStateLoaded } from '@slices/ProfileSlice';
+import { clearCart } from '@slices/CartSlice';
 import { PlacesDBContext, OrderDBContext } from '@api';
 import { formatRupiah } from '@utils';
 import { MenuStackParamList, AppTabParamList, AppStackParamList } from '@types';
@@ -27,6 +28,7 @@ type NavigationProps = CompositeScreenProps<
 const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const user = useAppSelector(state => state.profile);
   const userToken = useAppSelector(state => state.useAuth.userToken as string);
+  const dispatch = useAppDispatch();
   const memoizedSelectNormalizedCartItems = useMemo(() => selectNormalizedCartItems, []);
   const memoizedSelectTotalCartPrice = useMemo(() => selectTotalCartPrice, []);
   const cartItems = useAppSelector(memoizedSelectNormalizedCartItems);
@@ -71,6 +73,12 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
       };
       await OrderDBContext.current.createOrder(body);
       setIsVisible(false);
+      dispatch(clearCart());
+      if (navigation.canGoBack()) {
+        navigation.goBack();
+      } else {
+        navigation.navigate('Menu');
+      }
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.log(err.message);
