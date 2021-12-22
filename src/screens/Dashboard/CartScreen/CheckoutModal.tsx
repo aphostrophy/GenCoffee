@@ -30,7 +30,6 @@ const CheckoutModal = ({
       await handleSubmit();
     } else {
       setErrorVisible(true);
-      console.log('Mohon isi nomor gopay');
     }
   };
   return (
