@@ -9,7 +9,9 @@ import { MenuStackParamList, AppTabParamList, AppStackParamList } from '@types';
 
 import { Spacer } from '@components';
 import { limitString } from '@utils/text';
+import { changeMethod } from '@slices/ShopSlice';
 import { deliveryCardStyles as styles } from './styles';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 type NavigationProps = CompositeScreenProps<
   StackScreenProps<MenuStackParamList, 'Menu'>,
@@ -31,6 +33,8 @@ interface MiniCardProps {
 }
 
 const DeliveryCard = ({ fullAddress, district, onChangePress }: DeliveryCardProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const method = useAppSelector(state => state.useShop.method);
   return (
     <LinearGradient colors={['#458FFF', '#AACCFF']} style={styles.container}>
       <View style={[styles.row, styles.topSection]}>
@@ -38,7 +42,17 @@ const DeliveryCard = ({ fullAddress, district, onChangePress }: DeliveryCardProp
         <Spacer width={10} />
         <Text style={styles.title}>Diantar</Text>
         <Spacer width={10} />
-        {/* <Text style={styles.subtitle}>{`ganti ke 'Ambil Sendiri'`}</Text> */}
+        <TouchableOpacity
+          onPress={() => {
+            method === 'delivery'
+              ? dispatch(changeMethod('takeout'))
+              : dispatch(changeMethod('delivery'));
+          }}
+        >
+          <Text style={styles.subtitle}>
+            {method === 'delivery' ? `ganti ke 'Ambil Sendiri'` : `ganti ke 'Diantar'`}
+          </Text>
+        </TouchableOpacity>
       </View>
       <Spacer height={15} />
       <View style={styles.bottomSection}>
