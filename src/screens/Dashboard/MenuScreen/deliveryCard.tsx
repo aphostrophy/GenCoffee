@@ -40,7 +40,7 @@ const DeliveryCard = ({ fullAddress, district, onChangePress }: DeliveryCardProp
       <View style={[styles.row, styles.topSection]}>
         <Image source={require('@assets/icons/motorcycle.png')} style={styles.icon} />
         <Spacer width={10} />
-        <Text style={styles.title}>Diantar</Text>
+        <Text style={styles.title}>{method === 'delivery' ? 'Diantar' : 'Ambil Sendiri'}</Text>
         <Spacer width={10} />
         <TouchableOpacity
           onPress={() => {

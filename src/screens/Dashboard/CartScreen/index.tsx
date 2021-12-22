@@ -28,6 +28,7 @@ type NavigationProps = CompositeScreenProps<
 const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const user = useAppSelector(state => state.profile);
   const userToken = useAppSelector(state => state.useAuth.userToken as string);
+  const method = useAppSelector(state => state.useShop.method);
   const dispatch = useAppDispatch();
   const memoizedSelectNormalizedCartItems = useMemo(() => selectNormalizedCartItems, []);
   const memoizedSelectTotalCartPrice = useMemo(() => selectTotalCartPrice, []);
@@ -48,6 +49,7 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
         createdAt: now,
         customerId: userToken,
         customerPaymentCredential: gopayNumber,
+        method: method,
         products: cartItems.map(item => {
           return {
             id: item.id,
