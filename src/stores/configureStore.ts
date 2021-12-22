@@ -24,7 +24,7 @@ const persistConfig = {
   key: 'root',
   keyPrefix: appName,
   storage: AsyncStorage,
-  whitelist: ['useAuth', 'cart'],
+  whitelist: ['useAuth', 'cart', 'profile'],
 };
 const middlewares: Middleware<Record<string, unknown>, any, Dispatch<AnyAction>>[] = [];
 

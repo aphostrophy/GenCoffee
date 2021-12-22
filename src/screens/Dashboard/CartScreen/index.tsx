@@ -39,7 +39,6 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const [gopayNumber, setGopayNumber] = useState<string>('');
 
   const handleSubmit = async () => {
-    console.log('CCCC');
     try {
       if (user.district === null || user.fullAddress === null) {
         throw new Error('Pemesanan tidak bisa diproses');
@@ -73,14 +72,11 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
         totalCost: totalCost,
       };
       await OrderDBContext.current.createOrder(body);
-      console.log('BBBB');
       setIsVisible(false);
       dispatch(clearCart());
-      console.log('AAAA');
       if (navigation.canGoBack()) {
         navigation.goBack();
       } else {
-        console.log('HMM');
         navigation.navigate('Menu');
       }
     } catch (err: unknown) {
