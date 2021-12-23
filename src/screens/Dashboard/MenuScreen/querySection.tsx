@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { useDebouncedSearch, useAppSelector, useAppDispatch } from '@hooks';
+import { useDebouncedSearch, useAppDispatch } from '@hooks';
 import { Spacer, SearchBar } from '@components';
 import { changeQuery } from '@slices/ShopSlice';
-import { PRODUCT_CATEGORY, Product } from '@types';
+import { PRODUCT_CATEGORY } from '@types';
 import { querySectionStyles as styles } from './styles';
 interface QuerySectionProps {
   category: PRODUCT_CATEGORY;
@@ -40,7 +40,7 @@ const QuerySection = ({ category, setCategory }: QuerySectionProps): JSX.Element
   );
   const [pickerOpen, setPickerOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<string>(category);
-  const { inputText, setInputText, searchResults } = useSearchProduct(handleDispatch);
+  const { inputText, setInputText } = useSearchProduct(handleDispatch);
   const [categories] = useState([
     {
       label: 'Semua',

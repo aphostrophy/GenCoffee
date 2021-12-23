@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppTabParamList, AppStackParamList } from '@types';
-import { ChooseDistrictScreen } from '@screens';
+import { ChooseDistrictScreen, ChooseStoreScreen } from '@screens';
 import PushNotification from 'react-native-push-notification';
 import MenuStack from './menuStack';
 import OrderStack from './orderStack';
@@ -51,6 +51,7 @@ const AppStackNavigator = (): JSX.Element => {
     <AppStack.Navigator screenOptions={{ headerShown: false }}>
       <AppStack.Screen name="AppTab" component={AppTabNavigator} />
       <AppStack.Screen name="ChooseDistrict" component={ChooseDistrictScreen} />
+      <AppStack.Screen name="ChooseStore" component={ChooseStoreScreen} />
     </AppStack.Navigator>
   );
 };

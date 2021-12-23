@@ -18,14 +18,23 @@ const ProductCard = ({ product, index, onOrderButtonClick }: ProductCardProps): 
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image source={{ uri: product.imagePath }} style={styles.image} />
+        {!product.availableForOrder && (
+          <Image source={{ uri: product.imagePath }} style={styles.disabledProductOverlay} />
+        )}
       </View>
       <View style={styles.contentContainer}>
         <View>
           <Text style={styles.name}>{limitString(product.name, 17)}</Text>
-          <Text style={styles.description}>{limitString(product.description, 17)}</Text>
+          <Text style={product.availableForOrder ? styles.description : styles.alertDesription}>
+            {product.availableForOrder ? limitString(product.description, 17) : 'stok habis'}
+          </Text>
           <Text style={styles.price}>{formatRupiah(product.price)}</Text>
         </View>
-        <TouchableOpacity style={styles.orderButton} onPress={() => onOrderButtonClick(index)}>
+        <TouchableOpacity
+          style={[styles.orderButton, !product.availableForOrder && styles.disabledOrderButton]}
+          disabled={!product.availableForOrder}
+          onPress={() => onOrderButtonClick(index)}
+        >
           <View style={styles.textContainer}>
             <Text style={styles.buttonText}>+</Text>
             <Spacer width={4} />

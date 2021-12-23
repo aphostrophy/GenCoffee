@@ -24,6 +24,7 @@ export interface Product extends FirebaseFirestoreTypes.DocumentData {
   availableForOrder: boolean;
   options: Record<string, Array<string>>;
   imagePath: string;
+  availableForOrder: boolean;
 }
 
 export interface OrderHistory {
@@ -55,8 +56,7 @@ export interface OrderHistory {
 }
 
 export interface Shop {
-  shopId: string;
-  createdAt: string;
+  district: string;
   name: string;
   address: string;
   isOpen: boolean;
