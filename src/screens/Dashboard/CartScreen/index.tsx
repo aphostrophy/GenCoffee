@@ -181,7 +181,7 @@ const CartFooter = ({
     <View>
       <View style={styles.center}>
         <View style={styles.breadcrumb}>
-          <Text style={styles.breadcrumbText}>{store.name}</Text>
+          <Text style={styles.breadcrumbText}>{store?.name}</Text>
         </View>
       </View>
       <View style={styles.row}>

@@ -24,6 +24,7 @@ export interface Product extends FirebaseFirestoreTypes.DocumentData {
   availableForOrder: boolean;
   options: Record<string, Array<string>>;
   imagePath: string;
+  availableForOrder: boolean;
 }
 
 export interface OrderHistory {
