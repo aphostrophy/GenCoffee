@@ -55,8 +55,7 @@ export interface OrderHistory {
 }
 
 export interface Shop {
-  shopId: string;
-  createdAt: string;
+  district: string;
   name: string;
   address: string;
   isOpen: boolean;

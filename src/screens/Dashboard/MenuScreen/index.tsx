@@ -4,12 +4,12 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
 
-import { ProductDBContext } from '@api';
+import { PlacesDBContext, ProductDBContext } from '@api';
 import { useAppSelector, useAppDispatch, useFirebaseDataSource } from '@hooks';
-import { changeCategory, restartProductsBatch } from '@slices/ShopSlice';
+import { changeCategory, restartProductsBatch, saveShopList } from '@slices/ShopSlice';
 import { Container, Spacer, ProductCard } from '@components';
 import { selectFilteredShopItems } from '@selectors';
-import { MenuStackParamList, AppTabParamList, Product, AppStackParamList } from '@types';
+import { MenuStackParamList, AppTabParamList, Product, AppStackParamList, Shop } from '@types';
 
 import { QuerySection } from './QuerySection';
 import { DeliveryCard } from './DeliveryCard';
@@ -38,6 +38,10 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
     return ProductDBContext.current.getProducts({ category });
   }, [category]);
 
+  const fetchShops = useCallback(() => {
+    return PlacesDBContext.current.getStores();
+  }, []);
+
   const onOrderButtonClick = (index: number) => {
     setProduct(items[index]);
     setIsVisible(true);
@@ -54,6 +58,15 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
       dispatch(restartProductsBatch(products));
     }
   }, [products, dispatch]);
+
+  useEffect(() => {
+    (async () => {
+      const shops = await fetchShops();
+      if (shops) {
+        dispatch(saveShopList(shops.data()?.value));
+      }
+    })();
+  }, [dispatch, fetchShops]);
 
   return (
     <Container statusBarStyle="dark-content" containerStyle={styles.container}>

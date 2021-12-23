@@ -5,7 +5,7 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useAppDispatch, useAppSelector } from '@hooks/hooks';
-import { selectNormalizedCartItems, selectTotalCartPrice } from '@selectors/cart';
+import { selectNormalizedCartItems, selectTotalCartPrice, selectStoreDetails } from '@selectors';
 import { ProfileStateLoaded } from '@slices/ProfileSlice';
 import { clearCart } from '@slices/CartSlice';
 import { PlacesDBContext, OrderDBContext } from '@api';
@@ -32,8 +32,10 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const memoizedSelectNormalizedCartItems = useMemo(() => selectNormalizedCartItems, []);
   const memoizedSelectTotalCartPrice = useMemo(() => selectTotalCartPrice, []);
+  const memoizedSelectStoreDetails = useMemo(() => selectStoreDetails, []);
   const cartItems = useAppSelector(memoizedSelectNormalizedCartItems);
   const totalCartCost = useAppSelector(memoizedSelectTotalCartPrice);
+  const store = useAppSelector(memoizedSelectStoreDetails);
   const [deliveryCost, setDeliveryCost] = useState<number>(0);
   const [totalCost, setTotalCost] = useState<number>(0);
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -126,6 +128,7 @@ const CartScreen = ({ navigation }: NavigationProps): JSX.Element => {
                 gopayNumber={gopayNumber}
                 setGopayNumber={setGopayNumber}
                 handleSubmit={handleSubmit}
+                store={store}
               />
             }
           />
@@ -154,6 +157,7 @@ const CartFooter = ({
   gopayNumber,
   setGopayNumber,
   handleSubmit,
+  store,
 }: {
   enableCheckout: boolean;
   deliveryCost: number;
@@ -163,19 +167,50 @@ const CartFooter = ({
   gopayNumber: string;
   setGopayNumber: React.Dispatch<React.SetStateAction<string>>;
   handleSubmit: () => Promise<void>;
+  store:
+    | {
+        district: string;
+        name: string;
+        address: string;
+        isOpen: boolean;
+      }
+    | undefined;
 }): JSX.Element => {
+  const method = useAppSelector(state => state.useShop.method);
   return (
     <View>
       <View style={styles.center}>
         <View style={styles.breadcrumb}>
-          <Text style={styles.breadcrumbText}>Pengiriman</Text>
+          <Text style={styles.breadcrumbText}>{store.name}</Text>
+        </View>
+      </View>
+      <View style={styles.row}>
+        <Spacer width={20} />
+        <View>
+          <Text style={styles.costLabel}>{store?.district}</Text>
+          <Text style={styles.cost}>{store?.address}</Text>
+        </View>
+        <Spacer width={20} />
+      </View>
+      <Spacer height={20} />
+      <DashedLine dashGap={5} dashLength={8} dashThickness={1.5} dashColor={GRAY} />
+      <Spacer height={20} />
+      <View style={styles.center}>
+        <View style={styles.breadcrumb}>
+          <Text style={styles.breadcrumbText}>
+            {method === 'delivery' ? 'Pengiriman' : 'Pengambilan'}
+          </Text>
         </View>
       </View>
       <View style={styles.row}>
         <Spacer width={20} />
         <View>
           <Text style={styles.costLabel}>Ongkos Kirim</Text>
-          <Text style={styles.cost}>{formatRupiah(deliveryCost)}</Text>
+          <Text style={styles.cost}>
+            {method === 'delivery'
+              ? formatRupiah(deliveryCost)
+              : `${formatRupiah(0)} (ambil sendiri)`}
+          </Text>
         </View>
         <Spacer width={20} />
       </View>
