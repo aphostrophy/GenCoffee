@@ -20,6 +20,7 @@ export type AppTabParamList = {
 export type AppStackParamList = {
   AppTab: NavigatorScreenParams<AppTabParamList>;
   ChooseDistrict: undefined;
+  ChooseStore: undefined;
 };
 
 export type MenuStackParamList = {

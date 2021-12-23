@@ -65,7 +65,13 @@ const ChangeAddressModal = ({
             <Text style={styles.district}>{store?.district}</Text>
           </View>
           <Spacer width={20} />
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              closeModal();
+              navigation.navigate('ChooseStore');
+            }}
+          >
             <View style={styles.buttonTextContainer}>
               <Text style={styles.buttonText}>{`Ganti Cabang`}</Text>
               <Spacer width={10} />
@@ -90,7 +96,10 @@ const ChangeAddressModal = ({
           <Spacer width={20} />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('ProfileStack', { screen: 'EditProfile' })}
+            onPress={() => {
+              closeModal();
+              navigation.navigate('ProfileStack', { screen: 'EditProfile' });
+            }}
           >
             <View style={styles.buttonTextContainer}>
               <Text style={styles.buttonText}>{`Pilih Alamat`}</Text>
