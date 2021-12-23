@@ -27,7 +27,6 @@ type NavigationProps = CompositeScreenProps<
 const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const { category } = useAppSelector(state => state.useShop);
   const items = useAppSelector(selectFilteredShopItems);
-  const { fullAddress, district } = useAppSelector(state => state.profile);
   const itemCount = useAppSelector(state => state.cart.itemCount);
   const dispatch = useAppDispatch();
 
@@ -79,8 +78,6 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
           <View style={styles.headerContainer}>
             <View style={styles.deliveryCardWrapper}>
               <DeliveryCard
-                fullAddress={fullAddress}
-                district={district}
                 onChangePress={() => navigation.navigate('ProfileStack', { screen: 'EditProfile' })}
               />
             </View>

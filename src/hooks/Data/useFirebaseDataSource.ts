@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 import { Observable, Subscription } from 'rxjs';
 

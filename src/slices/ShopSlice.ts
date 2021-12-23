@@ -11,7 +11,7 @@ export interface ShopState {
 }
 
 const ShopInitialState = {
-  shop: 'lengkong',
+  shop: 'Lengkong',
   storelist: [],
   method: 'delivery',
   category: 'all',

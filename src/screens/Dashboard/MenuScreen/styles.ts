@@ -7,6 +7,7 @@ import {
   PoppinsSemiBold,
 } from '@styles/fonts';
 import { WHITE, YELLOW, GRAY, BLUE, RED } from '@styles/colors';
+import { RFValue } from 'react-native-responsive-fontsize';
 const { width, height } = Dimensions.get('window');
 
 const deliveryCardStyles = StyleSheet.create({
@@ -46,7 +47,7 @@ const deliveryCardStyles = StyleSheet.create({
   },
   miniCardContainer: {
     flex: 1,
-    width: '70%',
+    width: '100%',
     justifyContent: 'center',
   },
   miniCardTop: {
@@ -79,7 +80,7 @@ const deliveryCardStyles = StyleSheet.create({
     fontFamily: PoppinsBold,
     includeFontPadding: false,
     padding: 0,
-    fontSize: 14,
+    fontSize: RFValue(12),
   },
   miniCardBottomSmallLabel: {
     fontFamily: Poppins,
