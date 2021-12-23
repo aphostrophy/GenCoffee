@@ -177,6 +177,10 @@ const productCardStyles = StyleSheet.create({
 });
 
 const modalStyles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   modal: {
     margin: 0,
     justifyContent: 'flex-end',
@@ -198,6 +202,12 @@ const modalStyles = StyleSheet.create({
     fontSize: 24,
     color: GRAY,
     alignSelf: 'flex-end',
+  },
+  copyIcon: {
+    fontSize: RFValue(16),
+    color: GRAY,
+    includeFontPadding: false,
+    padding: 0,
   },
   hintContainer: {
     width: '80%',
@@ -235,6 +245,11 @@ const modalStyles = StyleSheet.create({
   label: {
     fontFamily: MontserratSemiBold,
     fontSize: RFValue(12),
+  },
+  labelHint: {
+    fontFamily: MontserratSemiBold,
+    fontSize: RFValue(12),
+    color: GRAY,
   },
   visible: {
     display: 'flex',
