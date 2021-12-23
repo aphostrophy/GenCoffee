@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { BLUE, GRAY, WHITE } from '@styles/colors';
-import { MontserratSemiBold } from '@styles/fonts';
+import { MontserratSemiBold, Poppins } from '@styles/fonts';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 const styles = StyleSheet.create({
@@ -24,9 +24,14 @@ const styles = StyleSheet.create({
     backgroundColor: WHITE,
     minHeight: '100%',
   },
-  district: {
+  heading: {
     fontFamily: MontserratSemiBold,
     fontSize: RFValue(16),
+  },
+  content: {
+    fontFamily: Poppins,
+    fontSize: RFValue(14),
+    color: GRAY,
   },
 });
 

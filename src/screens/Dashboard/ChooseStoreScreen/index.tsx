@@ -1,10 +1,11 @@
 import React from 'react';
 import { FlatList, TouchableOpacity, Text, View } from 'react-native';
-import { Container, Header } from '@components';
+import { Container, Header, Spacer } from '@components';
 import { StackScreenProps } from '@react-navigation/stack';
 import { changeShop } from '@slices/ShopSlice';
 import { AppStackParamList } from '@types';
 import { WHITE } from '@styles/colors';
+import { Shop } from '@types';
 import { styles } from './styles';
 import { useAppDispatch, useAppSelector } from '@hooks';
 
@@ -14,7 +15,7 @@ const ChooseStoreScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const stores = useAppSelector(state => state.useShop.storelist);
   const dispatch = useAppDispatch();
 
-  const _handleChooseStore = (district: string) => {
+  const handleChooseStore = (district: string) => {
     dispatch(changeShop(district));
     navigation.goBack();
   };
@@ -30,9 +31,9 @@ const ChooseStoreScreen = ({ navigation }: NavigationProps): JSX.Element => {
       <View style={styles.listWrapper}>
         <FlatList
           renderItem={({ item }) => (
-            <TouchableOpacity style={styles.row} onPress={() => _handleChooseStore(item.district)}>
-              <Text style={styles.district}>{item.district}</Text>
-            </TouchableOpacity>
+            <>
+              <StoreCard item={item} handleChooseStore={handleChooseStore} />
+            </>
           )}
           data={stores}
         />
@@ -40,5 +41,21 @@ const ChooseStoreScreen = ({ navigation }: NavigationProps): JSX.Element => {
     </Container>
   );
 };
+
+const StoreCard = ({
+  item,
+  handleChooseStore,
+}: {
+  item: Shop;
+  handleChooseStore: (district: string) => void;
+}): JSX.Element => (
+  <TouchableOpacity style={styles.row} onPress={() => handleChooseStore(item.district)}>
+    <Text style={styles.heading}>{item.name}</Text>
+    <Spacer height={10} />
+    <Text style={styles.content}>{item.address}</Text>
+    <Spacer height={10} />
+    <Text style={styles.content}>Kecamatan : {item.district}</Text>
+  </TouchableOpacity>
+);
 
 export default ChooseStoreScreen;
