@@ -9,12 +9,13 @@ import { useAppSelector, useAppDispatch, useFirebaseDataSource } from '@hooks';
 import { changeCategory, restartProductsBatch, saveShopList } from '@slices/ShopSlice';
 import { Container, Spacer, ProductCard } from '@components';
 import { selectFilteredShopItems } from '@selectors';
-import { MenuStackParamList, AppTabParamList, Product, AppStackParamList, Shop } from '@types';
+import { MenuStackParamList, AppTabParamList, Product, AppStackParamList } from '@types';
 
 import { QuerySection } from './QuerySection';
 import { DeliveryCard } from './DeliveryCard';
 import { AddOrderModal } from './AddOrderModal';
 import { CartBarButton } from './CartBarButton';
+import { ChangeAddressModal } from './ChangeAddressModal';
 
 type NavigationProps = CompositeScreenProps<
   StackScreenProps<MenuStackParamList, 'Menu'>,
@@ -31,6 +32,7 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isChangeAddressModalVisible, setIsChangeAddressModalVisible] = useState<boolean>(false);
   const [product, setProduct] = useState<null | Product>(null);
 
   const fetchProduct = useCallback(() => {
@@ -77,9 +79,7 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
         ListHeaderComponent={
           <View style={styles.headerContainer}>
             <View style={styles.deliveryCardWrapper}>
-              <DeliveryCard
-                onChangePress={() => navigation.navigate('ProfileStack', { screen: 'EditProfile' })}
-              />
+              <DeliveryCard onChangePress={() => setIsChangeAddressModalVisible(true)} />
             </View>
             <Spacer height={20} />
             <View style={styles.querySectionWrapper}>
@@ -106,6 +106,11 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
       />
       <CartBarButton itemCount={itemCount} onPress={onCartButtonPress} />
       <AddOrderModal isVisible={isVisible} setIsVisible={setIsVisible} product={product} />
+      <ChangeAddressModal
+        isVisible={isChangeAddressModalVisible}
+        setIsVisible={setIsChangeAddressModalVisible}
+        navigation={navigation}
+      />
     </Container>
   );
 };

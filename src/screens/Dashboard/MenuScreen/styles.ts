@@ -225,6 +225,77 @@ const modalStyles = StyleSheet.create({
   },
 });
 
+const changeAddressModalStyles = StyleSheet.create({
+  modal: {
+    margin: 0,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  modalBody: {
+    backgroundColor: WHITE,
+    borderTopLeftRadius: width * 0.05,
+    borderTopRightRadius: width * 0.05,
+    width: width,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  modalTitle: {
+    fontFamily: PoppinsBold,
+    fontSize: RFValue(20),
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  alignCenter: {
+    justifyContent: 'center',
+  },
+  closeIcon: {
+    fontSize: RFValue(24),
+    color: GRAY,
+    alignSelf: 'flex-end',
+  },
+  label: {
+    fontSize: RFValue(14),
+    fontFamily: MontserratSemiBold,
+  },
+  district: {
+    fontSize: RFValue(16),
+    fontFamily: PoppinsBold,
+  },
+  button: {
+    backgroundColor: YELLOW,
+    borderRadius: 5,
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+  },
+  buttonTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  buttonText: {
+    fontFamily: PoppinsBold,
+    color: WHITE,
+    fontSize: RFValue(12),
+    includeFontPadding: false,
+    padding: 0,
+  },
+  icon: {
+    fontSize: RFValue(20),
+    color: WHITE,
+    includeFontPadding: false,
+    padding: 0,
+  },
+  iconWrapper: {
+    backgroundColor: BLUE,
+    borderRadius: 15,
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
 const cartBarButtonStyles = StyleSheet.create({
   container: {
     position: 'absolute',
@@ -268,4 +339,5 @@ export {
   menuSectionStyles,
   modalStyles,
   cartBarButtonStyles,
+  changeAddressModalStyles,
 };
