@@ -11,6 +11,7 @@ import { AppStackParamList, AppTabParamList, OrderHistory, OrderStackParamList }
 import { OrderMainStyle } from './styles';
 
 import { OrderOngoingCard } from './OngoingOrderCard';
+import { restartOngoingBatch, restartHistoryBatch, changeOrderScreen } from '@slices/OrderSlice';
 
 type NavigationProps = CompositeScreenProps<
   StackScreenProps<OrderStackParamList, 'Order'>,
@@ -20,10 +21,26 @@ type NavigationProps = CompositeScreenProps<
   >
 >;
 
-const OrderScreen = ({ navigation }: NavigationProps): JSX.Element => {
-  const userToken = useAppSelector(state => state.useAuth.userToken as string);
+interface IOrderOngoingProps {
+  navigation: NavigationProps['navigation'];
+  userToken: string;
+  ongoingOrders: OrderHistory[];
+}
+
+interface IOrderHistoryProps {
+  navigation: NavigationProps['navigation'];
+  userToken: string;
+  historyOrders: OrderHistory[];
+}
+
+const OrderOngoingList = ({
+  navigation,
+  userToken,
+  ongoingOrders,
+}: IOrderOngoingProps): JSX.Element => {
   const [trigger, toggleTrigger] = useToggle(false);
   const [refresh, setRefresh] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const fetchOngoingOrder = useCallback(() => {
@@ -32,43 +49,123 @@ const OrderScreen = ({ navigation }: NavigationProps): JSX.Element => {
 
   const items = useFirebaseDataSource<OrderHistory>(fetchOngoingOrder);
 
+  useEffect(() => {
+    if (items) {
+      dispatch(restartOngoingBatch(items));
+    }
+  }, [dispatch, items]);
+
+  return (
+    <FlatList
+      data={ongoingOrders}
+      renderItem={({ item, index }) => (
+        <OrderOngoingCard
+          orderOngoingData={item}
+          key={`${index}-${item.customerPaymentCredential}`}
+          navigation={navigation}
+        />
+      )}
+      ListFooterComponent={<Spacer height={40} />}
+      numColumns={1}
+      showsVerticalScrollIndicator={false}
+      extraData={items}
+      refreshing={refresh}
+      onRefresh={() => {
+        toggleTrigger();
+        setRefresh(false);
+      }}
+    />
+  );
+};
+
+const OrderHistoryList = ({
+  navigation,
+  userToken,
+  historyOrders,
+}: IOrderHistoryProps): JSX.Element => {
+  const [trigger, toggleTrigger] = useToggle(false);
+  const [refresh, setRefresh] = useState(false);
+
+  const dispatch = useAppDispatch();
+
+  const fetchOngoingOrder = useCallback(() => {
+    return OrderDBContext.current.getOngoingOrder(userToken, trigger);
+  }, [userToken, trigger]);
+
+  const items = useFirebaseDataSource<OrderHistory>(fetchOngoingOrder);
+
+  useEffect(() => {
+    if (items) dispatch(restartHistoryBatch(items));
+  }, [dispatch, items]);
+
+  return (
+    <FlatList
+      data={historyOrders}
+      renderItem={({ item, index }) => (
+        <OrderOngoingCard
+          orderOngoingData={item}
+          key={`${index}-${item.customerPaymentCredential}`}
+          navigation={navigation}
+        />
+      )}
+      ListFooterComponent={<Spacer height={40} />}
+      numColumns={1}
+      showsVerticalScrollIndicator={false}
+      extraData={items}
+      refreshing={refresh}
+      onRefresh={() => {
+        toggleTrigger();
+        setRefresh(false);
+      }}
+    />
+  );
+};
+
+const OrderScreen = ({ navigation }: NavigationProps): JSX.Element => {
+  const userToken = useAppSelector(state => state.useAuth.userToken as string);
+  const ongoingOrders = useAppSelector(state => state.useOrder.ongoing_orders);
+  const historyOrders = useAppSelector(state => state.useOrder.history_orders);
+  const currentOrderScreenName = useAppSelector(state => state.useOrder.current_screen_name);
+
+  const dispatch = useAppDispatch();
+
   return (
     <Container statusBarStyle="dark-content">
-      <View>
-        <FlatList
-          data={items}
-          renderItem={({ item, index }) => (
-            <OrderOngoingCard
-              orderOngoingData={item}
-              key={`${index}-${item.customerPaymentCredential}`}
-              navigation={navigation}
-            />
-          )}
-          ListHeaderComponent={
-            <>
-              <View style={OrderMainStyle.navigation}>
-                <Text style={[OrderMainStyle.textNavigation, OrderMainStyle.textNavgationActive]}>
-                  Berlangsung
-                </Text>
+      <View style={OrderMainStyle.navigation}>
+        <Text
+          style={[
+            OrderMainStyle.textNavigation,
+            currentOrderScreenName === 'ongoingOrder' && OrderMainStyle.textNavgationActive,
+          ]}
+          onPress={() => dispatch(changeOrderScreen('ongoingOrder'))}
+        >
+          Berlangsung
+        </Text>
 
-                <Text style={[OrderMainStyle.textNavigation]}>Lampau</Text>
-              </View>
-              <Text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 10, marginBottom: 10 }}>
-                Sedang Berlangsung
-              </Text>
-            </>
-          }
-          ListFooterComponent={<Spacer height={40} />}
-          numColumns={1}
-          showsVerticalScrollIndicator={false}
-          extraData={items}
-          refreshing={refresh}
-          onRefresh={() => {
-            toggleTrigger();
-            setRefresh(false);
-          }}
-        />
+        <Text
+          style={[
+            OrderMainStyle.textNavigation,
+            currentOrderScreenName === 'historyOrder' && OrderMainStyle.textNavgationActive,
+          ]}
+          onPress={() => dispatch(changeOrderScreen('historyOrder'))}
+        >
+          Lampau
+        </Text>
       </View>
+
+      {currentOrderScreenName === 'ongoingOrder' ? (
+        <OrderOngoingList
+          navigation={navigation}
+          userToken={userToken}
+          ongoingOrders={ongoingOrders}
+        />
+      ) : (
+        <OrderHistoryList
+          navigation={navigation}
+          userToken={userToken}
+          historyOrders={historyOrders}
+        />
+      )}
     </Container>
   );
 };

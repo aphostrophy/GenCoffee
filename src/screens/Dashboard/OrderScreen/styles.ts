@@ -64,7 +64,6 @@ const OrderMainStyle = StyleSheet.create({
   navigation: {
     borderWidth: 3,
     borderColor: YELLOW,
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginHorizontal: 30,
