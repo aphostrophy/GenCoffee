@@ -1,20 +1,53 @@
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
+import { IconFactory } from '@components';
+import firestore from '@react-native-firebase/firestore';
 import { OrderHistory } from '@types';
+import { formatRupiah } from '@utils';
 
 import { OrderOngoingCardStyle } from './styles';
 
 interface DeliveryCardProps {
   orderOngoingData: OrderHistory;
   navigation: any;
+  toggleTrigger: () => void;
 }
 
-const OrderOngoingCard = ({ orderOngoingData, navigation }: DeliveryCardProps): JSX.Element => {
+const OrderOngoingCard = ({
+  orderOngoingData,
+  navigation,
+  toggleTrigger,
+}: DeliveryCardProps): JSX.Element => {
+  const handleCancelOrder = async () => {
+    await firestore().collection('order_ongoing').doc(orderOngoingData.id).delete();
+    toggleTrigger();
+  };
+
   return (
     <View style={[OrderOngoingCardStyle.container]}>
-      <Text style={[OrderOngoingCardStyle.infoTitle]}>Status</Text>
-      <Text style={[OrderOngoingCardStyle.textBackgroundColor]}>{orderOngoingData.status}</Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View>
+          <Text style={[OrderOngoingCardStyle.infoTitle]}>Status</Text>
+          <Text
+            style={[
+              OrderOngoingCardStyle.textBackgroundColor,
+              OrderOngoingCardStyle.backgroundBlue,
+            ]}
+          >
+            {orderOngoingData.status}
+          </Text>
+        </View>
+        {orderOngoingData.status === 'pending' && (
+          <TouchableOpacity onPress={handleCancelOrder}>
+            <IconFactory
+              type="FontAwesome5"
+              name="times"
+              style={OrderOngoingCardStyle.cancelIcon}
+            />
+          </TouchableOpacity>
+        )}
+      </View>
       <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
         <View style={{ flex: 1 }}>
           <View style={{ margin: 2 }}>
@@ -33,7 +66,7 @@ const OrderOngoingCard = ({ orderOngoingData, navigation }: DeliveryCardProps): 
 
         <View
           style={{
-            borderWidth: 0.8,
+            borderWidth: 1,
             borderColor: '#C8C8C8',
             borderStyle: 'dashed',
             marginHorizontal: 35,
@@ -43,15 +76,21 @@ const OrderOngoingCard = ({ orderOngoingData, navigation }: DeliveryCardProps): 
         <View style={{ flex: 1 }}>
           <View style={{ marginBottom: 10 }}>
             <Text style={[OrderOngoingCardStyle.infoTitle]}>Total</Text>
-            <Text style={OrderOngoingCardStyle.textValue}>{orderOngoingData.totalCost}</Text>
+            <Text style={OrderOngoingCardStyle.textValue}>
+              {formatRupiah(orderOngoingData.totalCost)}
+            </Text>
           </View>
-          <Button
+          <Text
+            style={[
+              OrderOngoingCardStyle.textBackgroundColor,
+              OrderOngoingCardStyle.backgroundYellow,
+            ]}
             onPress={() => {
-              navigation.navigate('Detail');
+              navigation.navigate('Detail', { id: orderOngoingData.id });
             }}
-            title="Lihat Detail"
-            color="#F6B700"
-          />
+          >
+            Lihat Detail
+          </Text>
         </View>
       </View>
     </View>

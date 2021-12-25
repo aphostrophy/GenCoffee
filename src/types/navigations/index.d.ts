@@ -30,7 +30,7 @@ export type MenuStackParamList = {
 
 export type OrderStackParamList = {
   Order: undefined;
-  Detail: undefined;
+  Detail: { id: string };
 };
 
 export type ProfileStackParamList = {

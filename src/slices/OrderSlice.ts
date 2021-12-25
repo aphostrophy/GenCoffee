@@ -20,13 +20,8 @@ const orderSlice = createSlice({
   initialState: orderInitialState as OrderState,
   reducers: {
     restartOngoingBatch: (state, action: PayloadAction<OrderHistory[]>) => {
-      let ongoingOrdersClone = [...action.payload];
+      const ongoingOrdersClone = [...action.payload];
 
-      ongoingOrdersClone = ongoingOrdersClone.map(item => {
-        return { ...item, completedAt: 'a', createdAt: 'a' };
-      });
-
-      console.log(ongoingOrdersClone);
       state.ongoing_orders = ongoingOrdersClone;
     },
     restartHistoryBatch: (state, action: PayloadAction<OrderHistory[]>) => {

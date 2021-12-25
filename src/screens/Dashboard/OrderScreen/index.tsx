@@ -12,6 +12,7 @@ import { OrderMainStyle } from './styles';
 
 import { OrderOngoingCard } from './OngoingOrderCard';
 import { restartOngoingBatch, restartHistoryBatch, changeOrderScreen } from '@slices/OrderSlice';
+import { OrderHistoryCard } from './HistoryOrderCard';
 
 type NavigationProps = CompositeScreenProps<
   StackScreenProps<OrderStackParamList, 'Order'>,
@@ -28,7 +29,6 @@ interface IOrderOngoingProps {
 }
 
 interface IOrderHistoryProps {
-  navigation: NavigationProps['navigation'];
   userToken: string;
   historyOrders: OrderHistory[];
 }
@@ -63,8 +63,12 @@ const OrderOngoingList = ({
           orderOngoingData={item}
           key={`${index}-${item.customerPaymentCredential}`}
           navigation={navigation}
+          toggleTrigger={toggleTrigger}
         />
       )}
+      ListHeaderComponent={
+        <Text style={OrderMainStyle.flatlistHeaderText}>Sedang berlangsung</Text>
+      }
       ListFooterComponent={<Spacer height={40} />}
       numColumns={1}
       showsVerticalScrollIndicator={false}
@@ -78,21 +82,17 @@ const OrderOngoingList = ({
   );
 };
 
-const OrderHistoryList = ({
-  navigation,
-  userToken,
-  historyOrders,
-}: IOrderHistoryProps): JSX.Element => {
+const OrderHistoryList = ({ userToken, historyOrders }: IOrderHistoryProps): JSX.Element => {
   const [trigger, toggleTrigger] = useToggle(false);
   const [refresh, setRefresh] = useState(false);
 
   const dispatch = useAppDispatch();
 
-  const fetchOngoingOrder = useCallback(() => {
-    return OrderDBContext.current.getOngoingOrder(userToken, trigger);
+  const fetchHistoryOrder = useCallback(() => {
+    return OrderDBContext.current.getHistoryOrder(userToken, trigger);
   }, [userToken, trigger]);
 
-  const items = useFirebaseDataSource<OrderHistory>(fetchOngoingOrder);
+  const items = useFirebaseDataSource<OrderHistory>(fetchHistoryOrder);
 
   useEffect(() => {
     if (items) dispatch(restartHistoryBatch(items));
@@ -102,12 +102,12 @@ const OrderHistoryList = ({
     <FlatList
       data={historyOrders}
       renderItem={({ item, index }) => (
-        <OrderOngoingCard
-          orderOngoingData={item}
-          key={`${index}-${item.customerPaymentCredential}`}
-          navigation={navigation}
+        <OrderHistoryCard
+          orderHistoryData={item}
+          key={`history-${index}-${item.customerPaymentCredential}`}
         />
       )}
+      ListHeaderComponent={<Text style={OrderMainStyle.flatlistHeaderText}>Lampau</Text>}
       ListFooterComponent={<Spacer height={40} />}
       numColumns={1}
       showsVerticalScrollIndicator={false}
@@ -160,11 +160,7 @@ const OrderScreen = ({ navigation }: NavigationProps): JSX.Element => {
           ongoingOrders={ongoingOrders}
         />
       ) : (
-        <OrderHistoryList
-          navigation={navigation}
-          userToken={userToken}
-          historyOrders={historyOrders}
-        />
+        <OrderHistoryList userToken={userToken} historyOrders={historyOrders} />
       )}
     </Container>
   );

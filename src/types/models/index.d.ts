@@ -49,9 +49,13 @@ export interface OrderHistory extends FirebaseFirestoreTypes.DocumentData {
   };
   products: Array<{
     productId: string;
-    productName: string;
+    name: string;
     price: number;
     quantity: number;
+    options: {
+      esBatu: string;
+      gula: string;
+    };
   }>;
 }
 

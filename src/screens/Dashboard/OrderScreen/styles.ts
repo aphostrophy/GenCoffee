@@ -1,6 +1,13 @@
 import { StyleSheet } from 'react-native';
-import { WHITE, YELLOW, GRAY, BLUE, RED } from '@styles/colors';
-import { PoppinsBold, Poppins, MontserratBold, MontserratSemiBold } from '@styles/fonts';
+import { BLUE, GRAY, RED, WHITE, YELLOW } from '@styles/colors';
+import {
+  Poppins,
+  MontserratSemiBold,
+  MontserratBold,
+  PoppinsBold,
+  Montserrat,
+} from '@styles/fonts';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const OrderOngoingCardStyle = StyleSheet.create({
   container: {
@@ -14,23 +21,36 @@ const OrderOngoingCardStyle = StyleSheet.create({
     borderRadius: 10,
   },
   infoTitle: {
-    fontSize: 19,
+    fontSize: 14,
     marginBottom: 2,
     fontWeight: '600',
-    fontFamily: Poppins,
+    fontFamily: MontserratSemiBold,
   },
   textBackgroundColor: {
     color: 'white',
     fontWeight: 'bold',
-    backgroundColor: '#458FFF',
     alignSelf: 'flex-start',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    fontSize: 21,
+    paddingHorizontal: 20,
+    paddingVertical: 6,
+    fontSize: 17,
     textTransform: 'capitalize',
-    borderRadius: 10,
+    borderRadius: 4,
+    fontFamily: Poppins,
   },
-  textValue: { fontSize: 16, fontWeight: '900' },
+  backgroundYellow: {
+    backgroundColor: YELLOW,
+  },
+  backgroundBlue: {
+    backgroundColor: BLUE,
+  },
+  textValue: {
+    fontFamily: PoppinsBold,
+    fontSize: 16,
+  },
+  cancelIcon: {
+    fontSize: RFValue(22),
+    color: RED,
+  },
 });
 
 const OrderHistoryCardStyle = StyleSheet.create({
@@ -47,16 +67,36 @@ const OrderHistoryCardStyle = StyleSheet.create({
     alignItems: 'center',
   },
   dateText: {
-    fontSize: 17,
-    fontWeight: '600',
-  },
-  idText: {
-    fontSize: 20,
-    fontWeight: '900',
+    fontSize: 14,
+    fontFamily: MontserratBold,
+    marginBottom: 10,
   },
   priceText: {
     fontSize: 22,
-    fontWeight: '700',
+    fontFamily: MontserratBold,
+  },
+  textBackgroundColor: {
+    color: 'white',
+    fontWeight: 'bold',
+    alignSelf: 'flex-start',
+    paddingHorizontal: 20,
+    paddingVertical: 6,
+    fontSize: 17,
+    textTransform: 'capitalize',
+    borderRadius: 4,
+    fontFamily: Poppins,
+  },
+  backgroundYellow: {
+    backgroundColor: YELLOW,
+  },
+  backgroundBlue: {
+    backgroundColor: BLUE,
+  },
+  backgroundRed: {
+    backgroundColor: RED,
+  },
+  backgroundGreen: {
+    backgroundColor: '#3E8E7E',
   },
 });
 
@@ -68,13 +108,15 @@ const OrderMainStyle = StyleSheet.create({
     justifyContent: 'space-around',
     marginHorizontal: 30,
     marginBottom: 10,
+    marginTop: 20,
     padding: 8,
     borderRadius: 8,
   },
   textNavigation: {
     color: YELLOW,
     flex: 1,
-    fontSize: 17,
+    fontSize: 16,
+    fontFamily: PoppinsBold,
     textAlign: 'center',
     marginHorizontal: 5,
     borderRadius: 4,
@@ -84,6 +126,86 @@ const OrderMainStyle = StyleSheet.create({
     backgroundColor: YELLOW,
     color: WHITE,
   },
+  flatlistHeaderText: {
+    color: '#0E0E0E',
+    fontFamily: PoppinsBold,
+    fontSize: 22,
+    marginHorizontal: 10,
+    marginVertical: 5,
+  },
 });
 
-export { OrderOngoingCardStyle, OrderMainStyle, OrderHistoryCardStyle };
+const OrderDetailStyle = StyleSheet.create({
+  orderInfoTitle: {
+    fontFamily: MontserratSemiBold,
+    fontSize: 14,
+  },
+  orderInfoDescription: {
+    fontFamily: PoppinsBold,
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  orderInfoPriceContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+    paddingHorizontal: 30,
+    paddingTop: 15,
+  },
+  orderInfoPriceName: {
+    fontFamily: PoppinsBold,
+    fontSize: 18,
+  },
+  orderInfoPriceValue: {
+    fontFamily: Poppins,
+    fontSize: 18,
+  },
+  summaryOrderTitle: {
+    fontFamily: MontserratSemiBold,
+    fontSize: 18,
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  summaryOrderContainer: {
+    paddingHorizontal: 30,
+  },
+  summaryOrderProductContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  summaryOrderProductInfoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  summaryOrderProductPrice: {
+    fontFamily: Poppins,
+    fontSize: 20,
+  },
+  summaryOrderProductQty: {
+    fontSize: 20,
+    fontFamily: MontserratSemiBold,
+    marginRight: 10,
+  },
+  summaryOrderProductName: {
+    fontFamily: PoppinsBold,
+    fontSize: 13,
+  },
+  summaryOrderProducOptions: {
+    fontFamily: Poppins,
+    fontSize: 13,
+    color: '#AEAEAE',
+    textTransform: 'capitalize',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    fontFamily: MontserratBold,
+    fontSize: 35,
+  },
+});
+
+export { OrderOngoingCardStyle, OrderMainStyle, OrderHistoryCardStyle, OrderDetailStyle };

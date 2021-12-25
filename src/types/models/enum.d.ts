@@ -1,4 +1,4 @@
-export type ORDER_STATUS = 'pending' | 'ongoing' | 'completed' | 'failed';
+export type ORDER_STATUS = 'pending' | 'ongoing' | 'completed' | 'failed' | 'done';
 
 export type ROLES = 'admin' | 'customer';
 

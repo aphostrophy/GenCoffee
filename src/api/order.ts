@@ -53,4 +53,8 @@ export class OrderDBContext {
       .limit(25)
       .get();
   }
+
+  public async getSpesificOrderOngoing(orderId: string) {
+    return this.collectionReference('order_ongoing').doc(orderId).get();
+  }
 }
