@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Toast from 'react-native-toast-message';
 import { useAppSelector } from '@hooks/hooks';
 import { RootStackParamList } from '@types';
 
@@ -40,6 +41,7 @@ const RootNavigator: React.FC = () => {
   return (
     <NavigationContainer>
       <RootStackNavigator userToken={userToken} />
+      <Toast position="bottom" bottomOffset={20} />
     </NavigationContainer>
   );
 };

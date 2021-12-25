@@ -4,6 +4,8 @@ export type ROLES = 'admin' | 'customer';
 
 export type PRODUCT_CATEGORY = 'all' | 'coffee' | 'non-coffee';
 
+export type ORDER_METHOD = 'delivery' | 'takeout';
+
 // export enum ORDER_STATUS {
 //   PENDING = 'PENDING', // Belum dibayar
 //   ONGOING = 'ONGOING', // Paid and confirmed by shop

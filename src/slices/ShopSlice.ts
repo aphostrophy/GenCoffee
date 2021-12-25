@@ -1,15 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Product, PRODUCT_CATEGORY } from '@types';
+import { Product, PRODUCT_CATEGORY, ORDER_METHOD, Shop } from '@types';
 
 export interface ShopState {
-  shop: string | null;
+  shop: string;
+  storelist: Shop[];
+  method: ORDER_METHOD;
   category: PRODUCT_CATEGORY;
   items: Product[];
   query: string;
 }
 
 const ShopInitialState = {
-  shop: null,
+  shop: 'Lengkong',
+  storelist: [],
+  method: 'delivery',
   category: 'all',
   items: [],
   query: '',
@@ -34,10 +38,23 @@ const shopSlice = createSlice({
     changeQuery: (state, action: PayloadAction<string>) => {
       state.query = action.payload;
     },
+    changeMethod: (state, action: PayloadAction<ORDER_METHOD>) => {
+      state.method = action.payload;
+    },
+    saveShopList: (state, action: PayloadAction<Shop[]>) => {
+      state.storelist = action.payload;
+    },
   },
 });
 
-export const { changeCategory, changeShop, addProducts, restartProductsBatch, changeQuery } =
-  shopSlice.actions;
+export const {
+  changeCategory,
+  changeShop,
+  addProducts,
+  restartProductsBatch,
+  changeQuery,
+  changeMethod,
+  saveShopList,
+} = shopSlice.actions;
 
 export default shopSlice;

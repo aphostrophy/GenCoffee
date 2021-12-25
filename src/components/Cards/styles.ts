@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import { PoppinsBold, Poppins, MontserratBold, MontserratSemiBold } from '@styles/fonts';
-import { WHITE, YELLOW, GRAY, BLACK } from '@styles/colors';
+import { WHITE, YELLOW, GRAY, BLACK, RED } from '@styles/colors';
 
 const { width } = Dimensions.get('window');
 
@@ -24,6 +24,15 @@ const productCardStyles = StyleSheet.create({
     width: '100%',
     aspectRatio: 1,
     resizeMode: 'cover',
+    position: 'absolute',
+  },
+  disabledProductOverlay: {
+    width: '100%',
+    aspectRatio: 1,
+    resizeMode: 'cover',
+    tintColor: GRAY,
+    opacity: 0.5,
+    position: 'absolute',
   },
   imageContainer: {
     flex: 7,
@@ -47,6 +56,10 @@ const productCardStyles = StyleSheet.create({
     fontFamily: Poppins,
     color: GRAY,
   },
+  alertDesription: {
+    fontFamily: Poppins,
+    color: RED,
+  },
   price: {
     fontFamily: Poppins,
   },
@@ -55,6 +68,9 @@ const productCardStyles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
     paddingVertical: 3,
+  },
+  disabledOrderButton: {
+    backgroundColor: GRAY,
   },
   buttonText: {
     fontFamily: PoppinsBold,

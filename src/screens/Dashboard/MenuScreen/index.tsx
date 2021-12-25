@@ -4,9 +4,9 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
 
-import { ProductDBContext } from '@api';
+import { PlacesDBContext, ProductDBContext } from '@api';
 import { useAppSelector, useAppDispatch, useFirebaseDataSource } from '@hooks';
-import { changeCategory, restartProductsBatch } from '@slices/ShopSlice';
+import { changeCategory, restartProductsBatch, saveShopList } from '@slices/ShopSlice';
 import { Container, Spacer, ProductCard } from '@components';
 import { selectFilteredShopItems } from '@selectors';
 import { MenuStackParamList, AppTabParamList, Product, AppStackParamList } from '@types';
@@ -15,6 +15,7 @@ import { QuerySection } from './QuerySection';
 import { DeliveryCard } from './DeliveryCard';
 import { AddOrderModal } from './AddOrderModal';
 import { CartBarButton } from './CartBarButton';
+import { ChangeAddressModal } from './ChangeAddressModal';
 
 type NavigationProps = CompositeScreenProps<
   StackScreenProps<MenuStackParamList, 'Menu'>,
@@ -27,16 +28,20 @@ type NavigationProps = CompositeScreenProps<
 const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
   const { category } = useAppSelector(state => state.useShop);
   const items = useAppSelector(selectFilteredShopItems);
-  const { fullAddress, district } = useAppSelector(state => state.profile);
   const itemCount = useAppSelector(state => state.cart.itemCount);
   const dispatch = useAppDispatch();
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isChangeAddressModalVisible, setIsChangeAddressModalVisible] = useState<boolean>(false);
   const [product, setProduct] = useState<null | Product>(null);
 
   const fetchProduct = useCallback(() => {
     return ProductDBContext.current.getProducts({ category });
   }, [category]);
+
+  const fetchShops = useCallback(() => {
+    return PlacesDBContext.current.getStores();
+  }, []);
 
   const onOrderButtonClick = (index: number) => {
     setProduct(items[index]);
@@ -55,6 +60,15 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
     }
   }, [products, dispatch]);
 
+  useEffect(() => {
+    (async () => {
+      const shops = await fetchShops();
+      if (shops) {
+        dispatch(saveShopList(shops.data()?.value));
+      }
+    })();
+  }, [dispatch, fetchShops]);
+
   return (
     <Container statusBarStyle="dark-content" containerStyle={styles.container}>
       <FlatList
@@ -65,11 +79,7 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
         ListHeaderComponent={
           <View style={styles.headerContainer}>
             <View style={styles.deliveryCardWrapper}>
-              <DeliveryCard
-                fullAddress={fullAddress}
-                district={district}
-                onChangePress={() => navigation.navigate('ProfileStack', { screen: 'EditProfile' })}
-              />
+              <DeliveryCard onChangePress={() => setIsChangeAddressModalVisible(true)} />
             </View>
             <Spacer height={20} />
             <View style={styles.querySectionWrapper}>
@@ -96,6 +106,11 @@ const MenuScreen = ({ navigation }: NavigationProps): JSX.Element => {
       />
       <CartBarButton itemCount={itemCount} onPress={onCartButtonPress} />
       <AddOrderModal isVisible={isVisible} setIsVisible={setIsVisible} product={product} />
+      <ChangeAddressModal
+        isVisible={isChangeAddressModalVisible}
+        setIsVisible={setIsChangeAddressModalVisible}
+        navigation={navigation}
+      />
     </Container>
   );
 };

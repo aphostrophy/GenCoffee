@@ -6,6 +6,7 @@ import EditProfileScreen from './Dashboard/EditProfileScreen';
 import OrderScreen from './Dashboard/OrderScreen';
 import OngoingOrderDetail from './Dashboard/OrderScreen/OngoingOrderDetail';
 import ChooseDistrictScreen from './Dashboard/ChooseDistrictScreen';
+import ChooseStoreScreen from './Dashboard/ChooseStoreScreen';
 import CartScreen from './Dashboard/CartScreen';
 
 export {
@@ -17,5 +18,6 @@ export {
   OngoingOrderDetail,
   WelcomeScreen,
   ChooseDistrictScreen,
+  ChooseStoreScreen,
   CartScreen,
 };
