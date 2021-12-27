@@ -42,4 +42,13 @@ export default StyleSheet.create({
     height: height * 0.04,
     resizeMode: 'contain',
   },
+  backgroundImageWrapper: {
+    ...StyleSheet.absoluteFillObject,
+    flex: 1,
+    alignItems: 'center',
+  },
+  backgroundImage: {
+    resizeMode: 'cover',
+    top: height * 0.1,
+  },
 });

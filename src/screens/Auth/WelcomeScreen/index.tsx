@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Image } from 'react-native';
+import { Text, Image, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSignIn } from '@hooks';
@@ -40,6 +40,13 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.backgroundImageWrapper}>
+        <Image
+          source={require('@assets/background-image/splash_icon.png')}
+          style={styles.backgroundImage}
+        />
+      </View>
+
       <FancyButton
         onPress={() => onGoogleButtonPress()}
         loadingColor={BLUE}
