@@ -28,12 +28,12 @@ export default StyleSheet.create({
     backgroundColor: BLUE,
   },
   googleButtonText: {
-    fontSize: RFValue(16),
+    fontSize: RFValue(15),
     color: BLACK,
     fontWeight: 'bold',
   },
   phoneButtonText: {
-    fontSize: RFValue(16),
+    fontSize: RFValue(15),
     color: WHITE,
     fontWeight: 'bold',
   },

@@ -63,7 +63,9 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
       >
         <Image style={styles.icon} source={require('@assets/icons/mail.png')} />
         <Spacer width={10} />
-        <Text style={styles.phoneButtonText}>Masuk dengan No. Ponsel</Text>
+        <Text adjustsFontSizeToFit style={styles.phoneButtonText}>
+          Masuk dengan No. Ponsel
+        </Text>
       </FancyButton>
     </SafeAreaView>
   );
