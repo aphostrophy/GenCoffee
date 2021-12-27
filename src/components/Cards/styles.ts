@@ -19,7 +19,7 @@ const productCardStyles = StyleSheet.create({
     shadowRadius: 3.84,
 
     elevation: 5,
-    height: width * 0.7,
+    height: width * 0.72,
   },
   image: {
     width: '100%',
@@ -36,7 +36,7 @@ const productCardStyles = StyleSheet.create({
     position: 'absolute',
   },
   imageContainer: {
-    flex: 7,
+    flex: 6,
     width: '100%',
     padding: 0,
     margin: 0,
@@ -47,15 +47,15 @@ const productCardStyles = StyleSheet.create({
     backgroundColor: WHITE,
     paddingHorizontal: 8,
     paddingVertical: 8,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
   },
   name: {
     fontFamily: PoppinsBold,
-    fontSize: RFValue(15),
+    fontSize: RFValue(14),
   },
   description: {
     fontFamily: Poppins,
-    fontSize: RFValue(14),
+    fontSize: RFValue(13),
     color: GRAY,
   },
   alertDesription: {
@@ -69,7 +69,7 @@ const productCardStyles = StyleSheet.create({
     backgroundColor: YELLOW,
     alignItems: 'center',
     borderRadius: 5,
-    paddingVertical: 3,
+    paddingVertical: width * 0.007,
   },
   disabledOrderButton: {
     backgroundColor: GRAY,
@@ -78,7 +78,7 @@ const productCardStyles = StyleSheet.create({
     fontFamily: PoppinsBold,
     textAlign: 'center',
     color: WHITE,
-    fontSize: RFValue(width * 0.04),
+    fontSize: RFValue(13),
   },
   textContainer: {
     flexDirection: 'row',
