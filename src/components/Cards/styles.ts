@@ -51,10 +51,11 @@ const productCardStyles = StyleSheet.create({
   },
   name: {
     fontFamily: PoppinsBold,
-    fontSize: RFValue(14),
+    fontSize: RFValue(width * 0.04),
   },
   description: {
     fontFamily: Poppins,
+    fontSize: RFValue(width * 0.037),
     color: GRAY,
   },
   alertDesription: {
@@ -77,7 +78,7 @@ const productCardStyles = StyleSheet.create({
     fontFamily: PoppinsBold,
     textAlign: 'center',
     color: WHITE,
-    fontSize: RFValue(15),
+    fontSize: RFValue(width * 0.04),
   },
   textContainer: {
     flexDirection: 'row',
