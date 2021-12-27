@@ -21,7 +21,7 @@ const OrderOngoingCardStyle = StyleSheet.create({
     borderRadius: 10,
   },
   infoTitle: {
-    fontSize: 14,
+    fontSize: RFValue(14),
     marginBottom: 2,
     fontWeight: '600',
     fontFamily: MontserratSemiBold,
@@ -32,7 +32,7 @@ const OrderOngoingCardStyle = StyleSheet.create({
     alignSelf: 'flex-start',
     paddingHorizontal: 20,
     paddingVertical: 6,
-    fontSize: 17,
+    fontSize: RFValue(17),
     textTransform: 'capitalize',
     borderRadius: 4,
     fontFamily: Poppins,
@@ -45,7 +45,7 @@ const OrderOngoingCardStyle = StyleSheet.create({
   },
   textValue: {
     fontFamily: PoppinsBold,
-    fontSize: 16,
+    fontSize: RFValue(16),
   },
   cancelIcon: {
     fontSize: RFValue(22),
@@ -67,12 +67,12 @@ const OrderHistoryCardStyle = StyleSheet.create({
     alignItems: 'center',
   },
   dateText: {
-    fontSize: 14,
+    fontSize: RFValue(14),
     fontFamily: MontserratBold,
     marginBottom: 10,
   },
   priceText: {
-    fontSize: 22,
+    fontSize: RFValue(22),
     fontFamily: MontserratBold,
   },
   textBackgroundColor: {
@@ -81,7 +81,7 @@ const OrderHistoryCardStyle = StyleSheet.create({
     alignSelf: 'flex-start',
     paddingHorizontal: 20,
     paddingVertical: 6,
-    fontSize: 17,
+    fontSize: RFValue(17),
     textTransform: 'capitalize',
     borderRadius: 4,
     fontFamily: Poppins,
@@ -115,7 +115,7 @@ const OrderMainStyle = StyleSheet.create({
   textNavigation: {
     color: YELLOW,
     flex: 1,
-    fontSize: 16,
+    fontSize: RFValue(16),
     fontFamily: PoppinsBold,
     textAlign: 'center',
     marginHorizontal: 5,
@@ -129,7 +129,7 @@ const OrderMainStyle = StyleSheet.create({
   flatlistHeaderText: {
     color: '#0E0E0E',
     fontFamily: PoppinsBold,
-    fontSize: 22,
+    fontSize: RFValue(22),
     marginHorizontal: 10,
     marginVertical: 5,
   },
@@ -138,11 +138,11 @@ const OrderMainStyle = StyleSheet.create({
 const OrderDetailStyle = StyleSheet.create({
   orderInfoTitle: {
     fontFamily: MontserratSemiBold,
-    fontSize: 14,
+    fontSize: RFValue(14),
   },
   orderInfoDescription: {
     fontFamily: PoppinsBold,
-    fontSize: 18,
+    fontSize: RFValue(18),
     textAlign: 'center',
   },
   orderInfoPriceContainer: {
@@ -154,15 +154,15 @@ const OrderDetailStyle = StyleSheet.create({
   },
   orderInfoPriceName: {
     fontFamily: PoppinsBold,
-    fontSize: 18,
+    fontSize: RFValue(18),
   },
   orderInfoPriceValue: {
     fontFamily: Poppins,
-    fontSize: 18,
+    fontSize: RFValue(18),
   },
   summaryOrderTitle: {
     fontFamily: MontserratSemiBold,
-    fontSize: 18,
+    fontSize: RFValue(18),
     marginTop: 10,
     marginBottom: 20,
   },
@@ -180,20 +180,20 @@ const OrderDetailStyle = StyleSheet.create({
   },
   summaryOrderProductPrice: {
     fontFamily: Poppins,
-    fontSize: 20,
+    fontSize: RFValue(20),
   },
   summaryOrderProductQty: {
-    fontSize: 20,
+    fontSize: RFValue(20),
     fontFamily: MontserratSemiBold,
     marginRight: 10,
   },
   summaryOrderProductName: {
     fontFamily: PoppinsBold,
-    fontSize: 13,
+    fontSize: RFValue(13),
   },
   summaryOrderProducOptions: {
     fontFamily: Poppins,
-    fontSize: 13,
+    fontSize: RFValue(13),
     color: '#AEAEAE',
     textTransform: 'capitalize',
   },
@@ -204,7 +204,7 @@ const OrderDetailStyle = StyleSheet.create({
   },
   loadingText: {
     fontFamily: MontserratBold,
-    fontSize: 35,
+    fontSize: RFValue(35),
   },
 });
 

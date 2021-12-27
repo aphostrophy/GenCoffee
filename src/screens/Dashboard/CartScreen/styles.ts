@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     fontFamily: MontserratSemiBold,
     textAlign: 'center',
     includeFontPadding: false,
-    fontSize: 12,
+    fontSize: RFValue(12),
     padding: 0,
     color: WHITE,
   },
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   checkoutText: {
     fontFamily: PoppinsBold,
     color: WHITE,
-    fontSize: 16,
+    fontSize: RFValue(16),
   },
   totalLabel: {
     fontFamily: PoppinsSemiBold,
@@ -150,7 +150,7 @@ const productCardStyles = StyleSheet.create({
     borderRadius: 8,
   },
   plusMinusIcon: {
-    fontSize: 24,
+    fontSize: RFValue(24),
     color: YELLOW,
     textAlign: 'center',
     includeFontPadding: false,
@@ -172,7 +172,7 @@ const productCardStyles = StyleSheet.create({
   options: {
     fontFamily: Poppins,
     color: GRAY,
-    fontSize: 12,
+    fontSize: RFValue(12),
   },
 });
 
@@ -199,7 +199,7 @@ const modalStyles = StyleSheet.create({
     justifyContent: 'center',
   },
   closeIcon: {
-    fontSize: 24,
+    fontSize: RFValue(24),
     color: GRAY,
     alignSelf: 'flex-end',
   },

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   editProfileText: {
     fontFamily: PoppinsBold,
     color: WHITE,
-    fontSize: 16,
+    fontSize: RFValue(16),
   },
 });
 

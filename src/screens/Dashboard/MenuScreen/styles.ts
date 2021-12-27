@@ -34,12 +34,12 @@ const deliveryCardStyles = StyleSheet.create({
   title: {
     fontFamily: MontserratBold,
     color: WHITE,
-    fontSize: 20,
+    fontSize: RFValue(20),
   },
   subtitle: {
     fontFamily: MontserratSemiBold,
     color: WHITE,
-    fontSize: 14,
+    fontSize: RFValue(14),
   },
   icon: {
     width: 25,
@@ -73,7 +73,7 @@ const deliveryCardStyles = StyleSheet.create({
   miniCardTopTitle: {
     color: WHITE,
     fontFamily: PoppinsBold,
-    fontSize: 12,
+    fontSize: RFValue(12),
   },
 
   miniCardBottomLabel: {
@@ -86,7 +86,7 @@ const deliveryCardStyles = StyleSheet.create({
     fontFamily: Poppins,
     includeFontPadding: false,
     padding: 0,
-    fontSize: 12,
+    fontSize: RFValue(12),
   },
   miniCardBottomButton: {
     backgroundColor: YELLOW,
@@ -97,11 +97,11 @@ const deliveryCardStyles = StyleSheet.create({
   miniCardBottomButtonText: {
     fontFamily: PoppinsBold,
     color: WHITE,
-    fontSize: 12,
+    fontSize: RFValue(12),
   },
   miniCardRedLabel: {
     color: RED,
-    fontSize: 12,
+    fontSize: RFValue(12),
     fontFamily: PoppinsSemiBold,
   },
 });
@@ -129,7 +129,7 @@ const querySectionStyles = StyleSheet.create({
   },
   headerText: {
     fontFamily: PoppinsBold,
-    fontSize: 16,
+    fontSize: RFValue(16),
   },
 });
 
@@ -166,7 +166,7 @@ const modalStyles = StyleSheet.create({
     alignItems: 'center',
   },
   closeIcon: {
-    fontSize: 24,
+    fontSize: RFValue(24),
     color: GRAY,
     alignSelf: 'flex-end',
   },
@@ -183,7 +183,7 @@ const modalStyles = StyleSheet.create({
     justifyContent: 'center',
   },
   plusMinusIcon: {
-    fontSize: 24,
+    fontSize: RFValue(24),
     color: YELLOW,
     textAlign: 'center',
     includeFontPadding: false,
@@ -191,12 +191,12 @@ const modalStyles = StyleSheet.create({
   },
   name: {
     fontFamily: PoppinsBold,
-    fontSize: 16,
+    fontSize: RFValue(16),
   },
   description: {
     fontFamily: Poppins,
     color: GRAY,
-    fontSize: 12,
+    fontSize: RFValue(12),
   },
   headerLabel: {
     fontFamily: PoppinsBold,
@@ -322,14 +322,14 @@ const cartBarButtonStyles = StyleSheet.create({
     color: WHITE,
     includeFontPadding: false,
     padding: 0,
-    fontSize: 14,
+    fontSize: RFValue(14),
   },
   label: {
     fontFamily: Poppins,
     color: WHITE,
     includeFontPadding: false,
     padding: 0,
-    fontSize: 12,
+    fontSize: RFValue(12),
   },
 });
 

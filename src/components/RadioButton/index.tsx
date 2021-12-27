@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Spacer } from '@components';
 import { capitalize } from '@utils/text';
-import { MontserratSemiBold, MontserratBold } from '@styles/fonts';
+import { MontserratSemiBold } from '@styles/fonts';
+import { RFValue } from 'react-native-responsive-fontsize';
 import { YELLOW } from '@styles/colors';
 
 type Props = {
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   },
   radioText: {
     fontFamily: MontserratSemiBold,
-    fontSize: 14,
+    fontSize: RFValue(14),
     color: '#000',
   },
   radioCircle: {

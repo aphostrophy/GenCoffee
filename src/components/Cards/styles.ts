@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
-import { PoppinsBold, Poppins, MontserratBold, MontserratSemiBold } from '@styles/fonts';
+import { PoppinsBold, Poppins, MontserratSemiBold } from '@styles/fonts';
+import { RFValue } from 'react-native-responsive-fontsize';
 import { WHITE, YELLOW, GRAY, BLACK, RED } from '@styles/colors';
 
 const { width } = Dimensions.get('window');
@@ -50,7 +51,7 @@ const productCardStyles = StyleSheet.create({
   },
   name: {
     fontFamily: PoppinsBold,
-    fontSize: 14,
+    fontSize: RFValue(14),
   },
   description: {
     fontFamily: Poppins,
@@ -76,7 +77,7 @@ const productCardStyles = StyleSheet.create({
     fontFamily: PoppinsBold,
     textAlign: 'center',
     color: WHITE,
-    fontSize: 15,
+    fontSize: RFValue(15),
   },
   textContainer: {
     flexDirection: 'row',
@@ -121,11 +122,11 @@ const memberCardStyles = StyleSheet.create({
   },
   name: {
     fontFamily: PoppinsBold,
-    fontSize: 25,
+    fontSize: RFValue(25),
   },
   points: {
     fontFamily: MontserratSemiBold,
-    fontSize: 20,
+    fontSize: RFValue(20),
   },
 });
 
