@@ -70,14 +70,14 @@ const MiniCard = ({ onChangePress }: MiniCardProps): JSX.Element => {
       </View>
       <View style={[styles.row, styles.miniCardBottom]}>
         <View style={styles.column}>
-          <Text style={styles.miniCardBottomLabel}>{limitString(store ? store.name : '', 18)}</Text>
+          <Text style={styles.miniCardBottomLabel}>{limitString(store ? store.name : '', 15)}</Text>
           <Text style={styles.miniCardBottomSmallLabel}>{store?.district}</Text>
         </View>
         <IconFactory type="FontAwesome" name="long-arrow-right" />
         <View style={styles.column}>
           {fullAddress && district ? (
             <>
-              <Text style={styles.miniCardBottomLabel}>{limitString(fullAddress, 18)}</Text>
+              <Text style={styles.miniCardBottomLabel}>{limitString(fullAddress, 15)}</Text>
               <Text style={styles.miniCardBottomSmallLabel}>{district}</Text>
             </>
           ) : (

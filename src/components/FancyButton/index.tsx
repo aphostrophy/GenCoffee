@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ActivityIndicator, StyleProp, ViewStyle } from 'react-native';
+import { ActivityIndicator, StyleProp, ViewStyle, ColorValue } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Observable, Subscription } from 'rxjs';
 import { useToggle } from '@hooks';
@@ -10,9 +10,15 @@ interface FancyButtonProps {
   children: React.ReactNode;
   containerStyle?: StyleProp<ViewStyle>;
   onPress: () => Promise<void>;
+  loadingColor?: ColorValue;
 }
 
-const FancyButton: React.FC<FancyButtonProps> = ({ children, containerStyle, onPress }) => {
+const FancyButton: React.FC<FancyButtonProps> = ({
+  children,
+  containerStyle,
+  onPress,
+  loadingColor,
+}) => {
   let subscription: Subscription | null = null;
   const [isLoading, toggleLoading] = useToggle(false);
 
@@ -57,7 +63,7 @@ const FancyButton: React.FC<FancyButtonProps> = ({ children, containerStyle, onP
       onPress={() => handlePress()}
     >
       {isLoading ? (
-        <ActivityIndicator color="#FFFFFF" />
+        <ActivityIndicator color={loadingColor || '#FFFFFF'} />
       ) : (
         React.Children.map(children, child => {
           if (React.isValidElement(child)) {

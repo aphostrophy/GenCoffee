@@ -2,10 +2,10 @@ import React from 'react';
 import { Text, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
-
+import { useSignIn } from '@hooks';
 import { FancyButton, Spacer } from '@components';
 import { AuthStackParamList } from '@types';
-import { useSignIn } from '@hooks';
+import { BLUE } from '@styles/colors';
 
 import styles from './styles';
 
@@ -42,6 +42,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <FancyButton
         onPress={() => onGoogleButtonPress()}
+        loadingColor={BLUE}
         containerStyle={[styles.buttonContainer, styles.googleButtonContainer]}
       >
         <Image style={styles.icon} source={require('@assets/icons/google.png')} />
