@@ -32,7 +32,7 @@ const OrderOngoingCardStyle = StyleSheet.create({
     alignSelf: 'flex-start',
     paddingHorizontal: 20,
     paddingVertical: 6,
-    fontSize: RFValue(17),
+    fontSize: RFValue(15),
     textTransform: 'capitalize',
     borderRadius: 4,
     fontFamily: Poppins,
@@ -45,7 +45,7 @@ const OrderOngoingCardStyle = StyleSheet.create({
   },
   textValue: {
     fontFamily: PoppinsBold,
-    fontSize: RFValue(16),
+    fontSize: RFValue(15),
   },
   cancelIcon: {
     fontSize: RFValue(22),
