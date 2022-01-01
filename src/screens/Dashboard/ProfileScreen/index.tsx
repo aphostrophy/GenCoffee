@@ -23,7 +23,7 @@ const ProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
     <Container statusBarStyle="dark-content" containerStyle={styles.container}>
       {user.loading === false && (
         <>
-          <MemberCard points={user.points} name="Jesson Yo" />
+          <MemberCard points={user.points} name={user.name} />
           <Spacer height={25} />
           <DashedLine dashGap={5} dashLength={8} dashThickness={1.5} dashColor={GRAY} />
           <Spacer height={25} />

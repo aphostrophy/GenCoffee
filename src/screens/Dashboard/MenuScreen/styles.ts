@@ -34,7 +34,7 @@ const deliveryCardStyles = StyleSheet.create({
   title: {
     fontFamily: MontserratBold,
     color: WHITE,
-    fontSize: RFValue(20),
+    fontSize: RFValue(16),
   },
   subtitle: {
     fontFamily: MontserratSemiBold,
