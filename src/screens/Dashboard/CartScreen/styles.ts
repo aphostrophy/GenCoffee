@@ -135,7 +135,7 @@ const productCardStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: '100%',
-    width: '100%',
+    width: '95%',
   },
   row: {
     flexDirection: 'row',
@@ -150,7 +150,7 @@ const productCardStyles = StyleSheet.create({
     borderRadius: 8,
   },
   plusMinusIcon: {
-    fontSize: RFValue(24),
+    fontSize: RFValue(20),
     color: YELLOW,
     textAlign: 'center',
     includeFontPadding: false,
