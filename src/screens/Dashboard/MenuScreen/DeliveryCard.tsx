@@ -40,6 +40,7 @@ const DeliveryCard = ({ onChangePress }: DeliveryCardProps): JSX.Element => {
         <Text style={styles.title}>{method === 'delivery' ? 'Diantar' : 'Ambil Sendiri'}</Text>
         <Spacer width={10} />
         <TouchableOpacity
+          style={styles.changeMethodButton}
           onPress={() => {
             method === 'delivery'
               ? dispatch(changeMethod('takeout'))

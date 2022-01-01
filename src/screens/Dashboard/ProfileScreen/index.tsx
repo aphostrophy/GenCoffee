@@ -33,8 +33,12 @@ const ProfileScreen = ({ navigation }: NavigationProps): JSX.Element => {
           <Text style={styles.header}>Alamat Lengkap</Text>
           <UserInfoText data={user.fullAddress} />
           <Spacer height={25} />
-          <Text style={styles.header}>No. Handphone</Text>
-          <UserInfoText data={user.phoneNumber} />
+          {user.phoneNumber && (
+            <>
+              <Text style={styles.header}>No. Handphone</Text>
+              <UserInfoText data={user.phoneNumber} />
+            </>
+          )}
           <Spacer height={50} />
           <View style={styles.buttonsContainer}>
             <FancyButton

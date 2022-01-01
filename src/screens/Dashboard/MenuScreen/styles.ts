@@ -45,6 +45,12 @@ const deliveryCardStyles = StyleSheet.create({
     width: 25,
     height: 25,
   },
+  changeMethodButton: {
+    backgroundColor: YELLOW,
+    borderRadius: 4,
+    paddingVertical: 2,
+    paddingHorizontal: 4,
+  },
   miniCardContainer: {
     flex: 1,
     width: '100%',
