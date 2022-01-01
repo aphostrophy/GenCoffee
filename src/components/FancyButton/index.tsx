@@ -11,6 +11,7 @@ interface FancyButtonProps {
   containerStyle?: StyleProp<ViewStyle>;
   onPress: () => Promise<void>;
   loadingColor?: ColorValue;
+  disabled?: boolean;
 }
 
 const FancyButton: React.FC<FancyButtonProps> = ({
@@ -18,6 +19,7 @@ const FancyButton: React.FC<FancyButtonProps> = ({
   containerStyle,
   onPress,
   loadingColor,
+  disabled,
 }) => {
   let subscription: Subscription | null = null;
   const [isLoading, toggleLoading] = useToggle(false);
@@ -58,7 +60,7 @@ const FancyButton: React.FC<FancyButtonProps> = ({
 
   return (
     <TouchableOpacity
-      disabled={isLoading}
+      disabled={isLoading || disabled}
       style={[styles.row, containerStyle]}
       onPress={() => handlePress()}
     >

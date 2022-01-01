@@ -1,6 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
-import { Spacer, DashedLine, Header, Container } from '@components';
+import firestore from '@react-native-firebase/firestore';
+import {
+  Spacer,
+  DashedLine,
+  Header,
+  Container,
+  NonNativeFancyButton,
+  FancyButton,
+} from '@components';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -177,6 +185,8 @@ const CartFooter = ({
     | undefined;
 }): JSX.Element => {
   const method = useAppSelector(state => state.useShop.method);
+  const [paymentAccounts, setPaymentAccounts] = useState<Record<string, string>>({});
+
   return (
     <View>
       <View style={styles.center}>
@@ -223,18 +233,32 @@ const CartFooter = ({
           <Text style={styles.totalLabel}>Total</Text>
           <Text style={styles.totalPrice}>{formatRupiah(totalCost)}</Text>
         </View>
-        <TouchableOpacity
+        <NonNativeFancyButton
           disabled={!enableCheckout}
-          style={[styles.column, enableCheckout ? styles.checkout : styles.checkoutDisabled]}
-          onPress={() => setIsVisible(true)}
+          containerStyle={[
+            styles.column,
+            enableCheckout ? styles.checkout : styles.checkoutDisabled,
+          ]}
+          onPress={async () => {
+            const accountNumbers = await firestore()
+              .collection('admin')
+              .doc('account_number')
+              .get();
+            const paymentAccounts = accountNumbers.data();
+            if (paymentAccounts) {
+              setPaymentAccounts(paymentAccounts);
+              setIsVisible(true);
+            }
+          }}
         >
           <Text style={styles.checkoutText}>Checkout</Text>
-        </TouchableOpacity>
+        </NonNativeFancyButton>
         <Spacer width={20} />
       </View>
       <CheckoutModal
         isVisible={isVisible}
         setIsVisible={setIsVisible}
+        paymentAccounts={paymentAccounts}
         gopayNumber={gopayNumber}
         setGopayNumber={setGopayNumber}
         handleSubmit={() => handleSubmit()}

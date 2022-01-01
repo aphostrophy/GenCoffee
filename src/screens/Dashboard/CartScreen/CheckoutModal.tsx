@@ -12,6 +12,7 @@ interface CheckoutModalProps {
   gopayNumber: string;
   setGopayNumber: React.Dispatch<React.SetStateAction<string>>;
   handleSubmit: () => Promise<void>;
+  paymentAccounts: Record<string, string>;
 }
 
 const CheckoutModal = ({
@@ -20,6 +21,7 @@ const CheckoutModal = ({
   gopayNumber,
   setGopayNumber,
   handleSubmit,
+  paymentAccounts,
 }: CheckoutModalProps): JSX.Element => {
   const [errorVisible, setErrorVisible] = useState<boolean>(false);
   const closeModal = () => {
@@ -58,30 +60,25 @@ const CheckoutModal = ({
         <View style={styles.section}>
           <Text style={styles.genCoffee}>Gen Coffee</Text>
           <Spacer height={4} />
-          <TouchableOpacity
-            onPress={() => {
-              Clipboard.setString('GP081234567891');
-              Toast.show({
-                type: 'info',
-                text1: 'message copied to clipboard',
-              });
-            }}
-            style={styles.row}
-          >
-            <Text style={styles.genCoffeeNumber}>GOPAY : GP081234567891</Text>
-            <Spacer width={10} />
-            <IconFactory type="Feather" name="copy" style={styles.copyIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              Clipboard.setString('777222271712');
-            }}
-            style={styles.row}
-          >
-            <Text style={styles.genCoffeeNumber}>BCA : 777222271712</Text>
-            <Spacer width={10} />
-            <IconFactory type="Feather" name="copy" style={styles.copyIcon} />
-          </TouchableOpacity>
+          {Object.keys(paymentAccounts).map(key => (
+            <TouchableOpacity
+              key={'payment-' + key}
+              onPress={() => {
+                Clipboard.setString(paymentAccounts[key]);
+                Toast.show({
+                  type: 'info',
+                  text1: 'pesan sukses disalin',
+                });
+              }}
+              style={styles.row}
+            >
+              <Text style={styles.genCoffeeNumber}>
+                {key.toUpperCase()} : {paymentAccounts[key]}
+              </Text>
+              <Spacer width={10} />
+              <IconFactory type="Feather" name="copy" style={styles.copyIcon} />
+            </TouchableOpacity>
+          ))}
         </View>
         <Spacer height={20} />
         <View style={styles.section}>
