@@ -303,17 +303,22 @@ const changeAddressModalStyles = StyleSheet.create({
 });
 
 const cartBarButtonStyles = StyleSheet.create({
-  container: {
+  touchableContainer: {
     position: 'absolute',
     bottom: 40,
+    alignSelf: 'center',
+    width: '95%',
+  },
+  container: {
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '95%',
+    width: '100%',
     paddingHorizontal: 15,
     paddingVertical: 5,
     borderRadius: 8,
+    backgroundColor: BLUE,
   },
   hide: {
     display: 'none',

@@ -10,9 +10,12 @@ interface CartButtonProps {
 }
 
 const CartBarButton = ({ onPress, itemCount }: CartButtonProps): JSX.Element => {
-  const { debounce } = useDebounce();
+  const { debounce } = useDebounce(250);
   return (
-    <TouchableOpacity onPress={() => debounce(onPress)} style={itemCount > 0 ? {} : styles.hide}>
+    <TouchableOpacity
+      onPress={() => debounce(onPress)}
+      style={[itemCount > 0 ? {} : styles.hide, styles.touchableContainer]}
+    >
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}

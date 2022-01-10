@@ -33,17 +33,19 @@ export function useDebouncedSearch(searchFunction: (query: string) => Promise<an
 
 const BOUNCE_RATE = 2000;
 
-export function useDebounce() {
+export function useDebounce(bounceRate: number = BOUNCE_RATE) {
   const busy = useRef(false);
 
   const debounce = async (callback: () => any | Promise<any>) => {
     setTimeout(() => {
       busy.current = false;
-    }, BOUNCE_RATE);
+    }, bounceRate);
 
     if (!busy.current) {
       busy.current = true;
       callback();
+    } else {
+      console.log('Event is debounced!');
     }
   };
 
