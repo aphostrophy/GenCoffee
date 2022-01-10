@@ -224,6 +224,12 @@ const modalStyles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 32,
   },
+  submitDisabled: {
+    backgroundColor: GRAY,
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 32,
+  },
   submitText: {
     fontFamily: PoppinsSemiBold,
     fontSize: RFValue(16),

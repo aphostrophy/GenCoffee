@@ -3,7 +3,9 @@ import { TouchableOpacity, View, Text } from 'react-native';
 import Modal from 'react-native-modal';
 import Toast from 'react-native-toast-message';
 import Clipboard from '@react-native-community/clipboard';
+import CheckBox from '@react-native-community/checkbox';
 import { IconFactory, Input, Spacer, NonNativeFancyButton } from '@components';
+import { BLUE } from '@styles/colors';
 import { modalStyles as styles } from './styles';
 
 interface CheckoutModalProps {
@@ -24,6 +26,7 @@ const CheckoutModal = ({
   paymentAccounts,
 }: CheckoutModalProps): JSX.Element => {
   const [errorVisible, setErrorVisible] = useState<boolean>(false);
+  const [userInputConfirmed, setUserInputConfirmed] = useState<boolean>(false);
   const closeModal = () => {
     setErrorVisible(false);
     setIsVisible(false);
@@ -94,11 +97,26 @@ const CheckoutModal = ({
               onChangeText={val => setGopayNumber(val)}
               containerStyle={{ width: '100%', height: 30 }}
             />
+            <View style={styles.row}>
+              <CheckBox
+                disabled={false}
+                value={userInputConfirmed}
+                onValueChange={newValue => setUserInputConfirmed(newValue)}
+                tintColors={{ true: BLUE }}
+              />
+              <Text style={styles.label}>
+                Saya sudah memasukkan dan mengecek informasi nomor rekening saya
+              </Text>
+            </View>
           </View>
         </View>
         <Spacer height={20} />
         <View style={styles.section}>
-          <NonNativeFancyButton containerStyle={styles.submit} onPress={validateAndSubmit}>
+          <NonNativeFancyButton
+            containerStyle={userInputConfirmed ? styles.submit : styles.submitDisabled}
+            onPress={validateAndSubmit}
+            disabled={!userInputConfirmed}
+          >
             <Text style={styles.submitText}>Lakukan Pembayaran</Text>
           </NonNativeFancyButton>
         </View>
