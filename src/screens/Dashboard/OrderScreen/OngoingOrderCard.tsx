@@ -1,10 +1,12 @@
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { Text, TouchableOpacity, View, Modal } from 'react-native';
 
 import { IconFactory } from '@components';
 import firestore from '@react-native-firebase/firestore';
 import { OrderHistory } from '@types';
 import { formatRupiah } from '@utils';
+
+import ModalContent from '@components/Modal';
 
 import { OrderOngoingCardStyle } from './styles';
 
@@ -19,6 +21,8 @@ const OrderOngoingCard = ({
   navigation,
   toggleTrigger,
 }: DeliveryCardProps): JSX.Element => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const handleCancelOrder = async () => {
     await firestore().collection('order_ongoing').doc(orderOngoingData.id).delete();
     toggleTrigger();
@@ -39,13 +43,32 @@ const OrderOngoingCard = ({
           </Text>
         </View>
         {orderOngoingData.status === 'pending' && (
-          <TouchableOpacity onPress={handleCancelOrder}>
-            <IconFactory
-              type="FontAwesome5"
-              name="times"
-              style={OrderOngoingCardStyle.cancelIcon}
-            />
-          </TouchableOpacity>
+          <>
+            <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+              <IconFactory
+                type="FontAwesome5"
+                name="times"
+                style={OrderOngoingCardStyle.cancelIcon}
+              />
+            </TouchableOpacity>
+
+            <Modal
+              transparent={true}
+              animationType="fade"
+              visible={isModalVisible}
+              onRequestClose={() => setIsModalVisible(false)}
+            >
+              <ModalContent
+                header="Pembatalan Order"
+                content="Apakah kamu yakin ingin membatalkan order ?"
+                onOk={() => {
+                  setIsModalVisible(false);
+                  handleCancelOrder();
+                }}
+                onCancel={() => setIsModalVisible(false)}
+              />
+            </Modal>
+          </>
         )}
       </View>
       <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>

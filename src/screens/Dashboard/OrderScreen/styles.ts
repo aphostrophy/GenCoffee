@@ -1,12 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { BLUE, GRAY, RED, WHITE, YELLOW } from '@styles/colors';
-import {
-  Poppins,
-  MontserratSemiBold,
-  MontserratBold,
-  PoppinsBold,
-  Montserrat,
-} from '@styles/fonts';
+import { BLUE, RED, WHITE, YELLOW } from '@styles/colors';
+import { Poppins, MontserratSemiBold, MontserratBold, PoppinsBold } from '@styles/fonts';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 const OrderOngoingCardStyle = StyleSheet.create({
