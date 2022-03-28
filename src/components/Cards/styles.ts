@@ -123,7 +123,7 @@ const memberCardStyles = StyleSheet.create({
   },
   name: {
     fontFamily: PoppinsBold,
-    fontSize: RFValue(25),
+    fontSize: RFValue(23),
   },
   points: {
     fontFamily: MontserratSemiBold,
